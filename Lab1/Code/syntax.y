@@ -72,6 +72,9 @@ ExtDef :
         insertNon($$, $2);
         insertNon($$, $3);
     }
+    | Specifier error{
+        printf("Error Type B at Line %d: Expected \";\" after struct.\n", @1.last_line);
+    }
     ;
 ExtDecList : 
     VarDec{
@@ -83,6 +86,9 @@ ExtDecList :
         insertNon($$, $1);
         insertTerm($$, "COMMA", @2.first_line);
         insertNon($$, $3);
+    }
+    | ExtDecList error ExtDecList{
+        printf("Error Type B at Line %d: Missing \",\" in high-level declaration list.\n", @1.first_line);
     }
     ;
 
@@ -161,6 +167,9 @@ VarList :
         $$ = createMultiTree("VarList");
         insertNon($$, $1);
     }
+    | VarList error VarList {
+        printf("Error Type B at Line %d: Missing \",\" in variant list.\n", @1.first_line);
+    }
     ;
 FunDec : 
     ID LP VarList RP{
@@ -186,12 +195,8 @@ CompSt :
         insertNon($$, $3);
         insertTerm($$, "RC", @4.first_line);
     }
-    | LC error RC
-    {
-        // char c = input();  
-        // while (c != '\n') 
-        //     c = input(); 
-        printf("skip; in CompSt\n");
+    | LC error RC{
+        printf("Error Type B at Line %d: Unexpected DefList after StmtList.\n", @2.first_line);
     }
     ;
 StmtList : 
@@ -203,6 +208,9 @@ StmtList :
     | %empty{
         $$ = createMultiTree(EMPTY);
         // insertTerm($$, EMPTY, @$.first_line);
+    }
+    | Stmt error{
+        printf("Error Type B at Line %d: Something wrong among statements.\n", @1.last_line);
     }
     ;
 Stmt : 
@@ -254,11 +262,15 @@ Stmt :
     }
     | Exp error
     {
-        printf("Error Type B : Miss ; in Line %d\n", @1.first_line);
+        printf("Error Type B at Line %d: Missing \";\".\n", @1.first_line);
+    }
+    | RETURN error
+    {
+        printf("Error Type B at Line %d: Missing return expression.\n", @1.first_line);
     }
     | RETURN Exp error
     {
-        printf("Error Type B : Miss ; in Line %d\n", @1.first_line);
+        printf("Error Type B at Line %d: Missing \";\".\n", @1.first_line);
     }
     ;
 
@@ -286,7 +298,11 @@ Def :
     }
     | Specifier DecList error
     {
-        printf("Error Type B : Miss ; in Line %d\n", @1.first_line);
+        printf("Error Type B at Line %d: Missing \";\".\n", @1.first_line);
+    }
+    | Specifier error
+    {
+        printf("Error Type B at Line %d: Missing \",\".\n", @1.first_line);
     }    
     ;
 DecList : 
@@ -302,6 +318,8 @@ DecList :
         insertTerm($$, "COMMA", yylineno);
         insertNon($$, $3);
     }
+    
+    
     ;
 Dec : 
     VarDec{
@@ -315,6 +333,14 @@ Dec :
         insertTerm($$, "ASSIGNOP", yylineno);
         insertNon($$, $3);
     }
+    | VarDec ASSIGNOP error
+    {
+        printf("Error Type B at Line %d: Expected expression.\n", @1.first_line);
+    }
+    | error ASSIGNOP Exp
+    {
+        printf("Error Type B at Line %d: Expected identifier.\n", @1.first_line);
+    }
     ;
 
 Exp : 
@@ -324,6 +350,11 @@ Exp :
         insertTerm($$, "ASSIGNOP", @2.first_line);
         insertNon($$, $3);
     }
+    | Exp ASSIGNOP error
+    {
+        printf("Error Type B at Line %d: Expected expression.\n", @1.first_line);
+    }
+    
     | Exp AND Exp
     {
         $$ = createMultiTree("Exp");
@@ -452,6 +483,10 @@ Args :
     {
         $$ = createMultiTree("Args");
         insertNon($$, $1);
+    }
+    | Args error Args
+    {
+        printf("Error Type B at Line %d: Missing \",\" in argument list.\n", @1.first_line);
     }
     ;
 
