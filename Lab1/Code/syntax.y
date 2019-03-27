@@ -51,6 +51,7 @@ ExtDefList :
     }
     | %empty {
         $$ = createMultiTree(EMPTY);
+        // insertTerm($$, EMPTY, @$.first_line);
     }
     ;
 ExtDef : 
@@ -70,9 +71,6 @@ ExtDef :
         insertNon($$, $1);
         insertNon($$, $2);
         insertNon($$, $3);
-    }
-    | error SEMI{
-         ;
     }
     ;
 ExtDecList : 
@@ -122,6 +120,7 @@ OptTag :
     | %empty
     {
         $$ = createMultiTree(EMPTY);
+        // insertTerm($$, EMPTY, @$.first_line);
     }
     ;
 Tag : 
@@ -142,9 +141,6 @@ VarDec :
         insertTerm($$, "LB", @2.first_line);
         insertTermAttr($$, "INT", yylval.sval, @3.first_line);
         insertTerm($$, "RB", @4.first_line);
-    }
-    | error RB{
-         ;
     }
     ;
 ParamDec : 
@@ -180,10 +176,6 @@ FunDec :
         insertTerm($$, "LP", @2.first_line);
         insertTerm($$, "RP", @3.first_line);
     }
-    | error RP
-    {
-         ;
-    }
     ;
 
 CompSt : 
@@ -194,9 +186,12 @@ CompSt :
         insertNon($$, $3);
         insertTerm($$, "RC", @4.first_line);
     }
-    | error RC
+    | LC error RC
     {
-         ;
+        // char c = input();  
+        // while (c != '\n') 
+        //     c = input(); 
+        printf("skip; in CompSt\n");
     }
     ;
 StmtList : 
@@ -207,6 +202,7 @@ StmtList :
     }
     | %empty{
         $$ = createMultiTree(EMPTY);
+        // insertTerm($$, EMPTY, @$.first_line);
     }
     ;
 Stmt : 
@@ -256,13 +252,13 @@ Stmt :
         insertTerm($$, "RP", @4.first_line);
         insertNon($$, $5);
     }
-    | error SEMI
+    | Exp error
     {
-         ;
+        printf("Error Type B : Miss ; in Line %d\n", @1.first_line);
     }
-    | error RP
+    | RETURN Exp error
     {
-         ;
+        printf("Error Type B : Miss ; in Line %d\n", @1.first_line);
     }
     ;
 
@@ -276,7 +272,9 @@ DefList :
     | %empty
     {
         $$ = createMultiTree(EMPTY);
+        // insertTerm($$, EMPTY, @$.first_line);
     }
+    
     ;
 Def : 
     Specifier DecList SEMI
@@ -286,6 +284,10 @@ Def :
         insertNon($$, $2);
         insertTerm($$, "SEMI", @3.first_line);
     }
+    | Specifier DecList error
+    {
+        printf("Error Type B : Miss ; in Line %d\n", @1.first_line);
+    }    
     ;
 DecList : 
     Dec
@@ -455,5 +457,5 @@ Args :
 
 %%
 void yyerror(char* msg) {
-    fprintf(stderr, "error: %s\n", msg);
+    // fprintf(stderr, "error: %s; %s %d\n", msg, yytext, yylineno);
 }

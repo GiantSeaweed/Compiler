@@ -1,0 +1,11 @@
+struct A{};
+
+struct A a;
+
+int fun(){}
+
+int main()
+{
+	int ttt=123;
+	a =ttt*fun(1, 2, 3);
+}

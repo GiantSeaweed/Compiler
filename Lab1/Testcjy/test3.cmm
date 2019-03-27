@@ -1,0 +1,9 @@
+int i;
+int fun()
+{
+	/*	comment		*/
+	a = 4*a;
+	/*	comment		*/
+
+}
+// this file is to check: weather the code(Line 8) between two block comments will be ignored by the program?

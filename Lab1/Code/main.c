@@ -6,7 +6,7 @@
 extern int yylex();
 extern void yyrestart();
 extern void yyparse();
-
+extern int yydebug;
 // int main(int argc, char **argv){
 //     if (argc > 1){
 //         if (!(yyin = fopen(argv[1], "r"))){
@@ -28,6 +28,8 @@ int main(int argc, char **argv)
         return 1;
     }
     yyrestart(f);
+
+    // yydebug = 1;
     yyparse();
     return 0;
 }

@@ -1,0 +1,11 @@
+struct A
+{
+	int m;
+	int n;
+}		//without ';'
+struct A a;
+int main()
+{
+	a.m=1;
+	a.n=a.m+1;
+};		//useless ';'

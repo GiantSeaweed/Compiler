@@ -1,0 +1,10 @@
+int a=1;	//wrong!
+
+int main()
+{
+	int ttt=123;
+	a =ttt*fun(1, 2, 3);
+
+	int m=10;	//wrong!
+}
+//全局变量不能初始化;语句块中定义，执行顺序不能颠倒

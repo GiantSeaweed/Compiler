@@ -1,0 +1,8 @@
+int main()
+{
+	int a, 1b, c=0, d=0x11, e=0123, f=-5, g=-0xf;
+		//'1b' is illegal id
+	float v=.0, w=1.23, x=.1e2, y=2.E-3, z=1.23e0;
+		//'.0' is illegal float
+	a=a.b.c+3*5+0.33;
+}

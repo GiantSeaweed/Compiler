@@ -45,8 +45,9 @@ int|float {  yylval.sval = strdup(yytext); return TYPE; }
 "else" { return ELSE; }
 "while" { return WHILE; }
 {id} { yylval.sval = strdup(yytext); return ID; }
-\n { yycolumn = 1; }
-" " { }
+\n|\r { yycolumn = 1; }
+" "|\t { }
 . { printf("Error type A at Line %d: Mysterious characters \'%s\'\n",
-            yylineno, yytext); }
+            yylineno, yytext);
+    }
 %%
