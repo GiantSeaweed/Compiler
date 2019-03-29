@@ -1013,7 +1013,7 @@ YY_RULE_SETUP
 case 30:
 YY_RULE_SETUP
 #line 50 "./lexical.l"
-{ printf("Error type A at Line %d: Mysterious characters \'%s\'.\n",
+{ printf("Error Type A at Line %d: Mysterious characters \'%s\'.\n",
             yylineno, yytext);
     }
 	YY_BREAK

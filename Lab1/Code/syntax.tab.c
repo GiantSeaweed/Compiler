@@ -66,10 +66,11 @@
  
 #include "lex.yy.c"
 #include "tree.h"
+#include "error.h"
 void yyerror(char* msg);
 
 
-#line 73 "./syntax.tab.c" /* yacc.c:339  */
+#line 74 "./syntax.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -140,14 +141,14 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 9 "./syntax.y" /* yacc.c:355  */
+#line 10 "./syntax.y" /* yacc.c:355  */
 
     int ival;
     float fval;
     char* sval;
     struct MultiNode *m_node;
 
-#line 151 "./syntax.tab.c" /* yacc.c:355  */
+#line 152 "./syntax.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -178,7 +179,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 182 "./syntax.tab.c" /* yacc.c:358  */
+#line 183 "./syntax.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -420,18 +421,18 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  11
+#define YYFINAL  12
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   310
+#define YYLAST   293
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  31
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  22
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  73
+#define YYNRULES  77
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  131
+#define YYNSTATES  135
 
 /* YYTRANSLATE[YYX] -- Symbol number corresponding to YYX as returned
    by yylex, with out-of-bounds checking.  */
@@ -480,14 +481,14 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    39,    39,    47,    52,    58,    64,    69,    75,    80,
-      84,    90,    96,   100,   106,   114,   121,   126,   133,   140,
-     144,   153,   160,   166,   170,   175,   182,   191,   198,   203,
-     208,   212,   217,   222,   227,   234,   243,   254,   263,   267,
-     271,   278,   284,   292,   299,   303,   309,   314,   325,   329,
-     336,   340,   347,   353,   358,   365,   372,   379,   386,   393,
-     400,   407,   414,   421,   427,   435,   442,   450,   457,   462,
-     467,   474,   482,   487
+       0,    40,    40,    49,    54,    60,    66,    71,    79,    83,
+      89,    96,   100,   106,   114,   119,   123,   129,   134,   141,
+     148,   152,   159,   163,   169,   176,   182,   186,   192,   199,
+     208,   215,   220,   225,   232,   237,   240,   245,   252,   261,
+     272,   281,   286,   294,   300,   308,   315,   320,   327,   332,
+     341,   345,   352,   360,   366,   372,   379,   386,   393,   400,
+     407,   414,   421,   428,   432,   439,   445,   453,   457,   464,
+     472,   477,   484,   489,   494,   501,   509,   514
 };
 #endif
 
@@ -518,12 +519,12 @@ static const yytype_uint16 yytoknum[] =
 };
 # endif
 
-#define YYPACT_NINF -62
+#define YYPACT_NINF -68
 
 #define yypact_value_is_default(Yystate) \
-  (!!((Yystate) == (-62)))
+  (!!((Yystate) == (-68)))
 
-#define YYTABLE_NINF -74
+#define YYTABLE_NINF -78
 
 #define yytable_value_is_error(Yytable_value) \
   0
@@ -532,20 +533,20 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-      26,   -62,    45,    53,   -62,    26,    98,   -62,    40,    75,
-     -62,   -62,   -62,   -62,    86,   -62,    41,    22,    91,    26,
-      -5,   121,   -62,   121,   137,    55,   -62,    96,   103,    26,
-     -62,   121,   134,     5,   -62,    90,   124,   120,   138,    83,
-     155,    -3,   148,   166,   -62,   -62,   153,    26,    26,   -62,
-     -62,   -62,   -62,   -62,   158,   185,   185,   185,   142,   160,
-     163,   -62,   161,    66,   107,   185,   147,   -62,   -62,   106,
-       8,    18,   167,    36,   139,   227,   -62,   123,   185,   185,
-     -62,   -62,   -62,   -62,   -62,   164,   185,   185,   185,   185,
-     185,   185,   185,   192,   185,   269,   -62,   269,   155,   -62,
-     -62,   198,    20,   -62,   -62,   -62,   241,   255,   -62,   269,
-     289,    36,    36,   139,   139,   182,   282,   -62,   212,   185,
-     185,   -62,    83,    83,   -62,    21,    25,   171,   -62,    83,
-     -62
+     -10,   -68,    20,    72,   -68,   -10,    45,   -68,   -68,   -11,
+      -4,   -68,   -68,   -68,    64,   -68,    12,    37,    57,   -10,
+     122,    90,   -68,    90,    61,   -10,   -68,    69,    13,   -10,
+     -68,    90,   104,    19,   -68,    67,    93,   -68,     5,    52,
+     -68,    38,   109,   120,   -68,   -68,   -68,   118,   -10,   -10,
+     -68,   -68,   -68,   -68,   -68,   129,   176,   176,   176,   127,
+     137,   145,   -68,    16,    52,    76,   132,   164,   -68,    90,
+      25,    27,   158,   272,   151,    92,   168,   108,   176,   176,
+     -68,   -68,   -68,   -68,   -68,   149,   176,   176,   176,   176,
+     176,   176,   176,   171,   154,   -68,   246,   -68,   -68,   -68,
+     189,    40,   -68,   -68,   -68,   -68,   -68,   218,   232,   -68,
+     246,   266,   272,   272,   151,   151,   173,   259,   -68,   166,
+     203,   176,   176,   -68,    52,    52,   -68,   -68,    41,    47,
+     178,   -68,   176,    52,   -68
 };
 
   /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -553,36 +554,36 @@ static const yytype_int16 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       4,    12,    17,     0,     2,     4,     0,    13,    18,     0,
-      15,     1,     3,     8,    19,     6,     0,     9,     0,    42,
-       0,     0,     5,     0,     0,     0,     7,     0,     0,    42,
-      26,     0,    23,     0,    19,     0,     0,     0,     0,    30,
-      45,    48,     0,    46,    14,    41,    21,     0,     0,    25,
-      20,    28,    69,    70,    68,     0,     0,     0,     0,     0,
-       0,    33,     0,     0,     0,     0,     0,    44,    43,     0,
-       0,     0,     0,    62,    63,     0,    39,     0,     0,     0,
-      27,    31,    29,    38,    32,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,    51,    50,    49,     0,    47,
-      65,    72,     0,    61,    40,    34,     0,     0,    53,    52,
-      56,    57,    58,    59,    60,    54,    55,    67,     0,     0,
-       0,    64,     0,     0,    66,     0,     0,    35,    37,     0,
-      36
+       4,    11,     0,     0,     2,     4,     0,    12,    16,    19,
+       0,    14,     1,     3,    20,     6,     0,     8,     0,    44,
+       0,     0,     5,     0,     0,    44,     7,     0,     0,    44,
+      29,     0,    26,     0,    20,     0,     0,    22,     0,    33,
+      47,    50,     0,    48,    15,    13,    43,    24,     0,     0,
+      28,    23,    21,    73,    74,    72,     0,     0,     0,     0,
+       0,     0,    36,     0,    33,     0,     0,     0,    45,     0,
+       0,     0,     0,    64,    65,     0,     0,     0,     0,     0,
+      31,    30,    32,    35,    34,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,    52,    51,    46,    49,    68,
+      76,     0,    63,    62,    41,    42,    37,     0,     0,    54,
+      53,    57,    58,    59,    60,    61,    55,    56,    71,     0,
+       0,     0,    67,    66,     0,     0,    70,    69,     0,     0,
+      38,    40,     0,     0,    39
 };
 
   /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int16 yypgoto[] =
 {
-     -62,   -62,   195,   -62,    -7,     7,   -62,   -62,   -62,   -23,
-     -62,    28,   -62,   183,   152,   -61,   151,   -62,   149,   -62,
-     -55,    37
+     -68,   -68,   187,   -68,    75,     4,   -68,   -68,   -68,   -20,
+     -68,   142,   -68,   190,   143,     1,   116,   -68,   140,   -68,
+     -56,   -67
 };
 
   /* YYDEFGOTO[NTERM-NUM].  */
-static const yytype_int8 yydefgoto[] =
+static const yytype_int16 yydefgoto[] =
 {
-      -1,     3,     4,     5,    16,    27,     7,     9,    10,    17,
-      32,    33,    18,    61,    62,    63,    28,    29,    42,    43,
-      64,   102
+      -1,     3,     4,     5,    16,    27,     7,    10,    11,    17,
+      32,    33,    18,    62,    63,    64,    28,    29,    42,    43,
+      65,   129
 };
 
   /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -590,120 +591,116 @@ static const yytype_int8 yydefgoto[] =
      number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int16 yytable[] =
 {
-      73,    74,    75,    77,    41,    66,    48,     6,    46,    48,
-      95,    97,     6,     1,    35,    30,    36,   101,    24,    48,
-       2,   120,   120,   106,   107,    49,   120,    31,   -22,    23,
-     109,   110,   111,   112,   113,   114,   115,   116,   -24,   118,
-     121,   -71,    21,    24,     1,   -73,    41,    22,    89,    90,
-       8,     2,    93,    11,    31,    31,    38,    94,   -42,   -42,
-     -42,   127,   128,   -16,   101,   101,   -42,    81,   130,    52,
-      53,    54,   -42,     1,   -42,    70,    71,    55,   -42,   -42,
-       2,   -42,   -42,    56,   -42,    57,    52,    53,    54,    25,
-     -30,    21,    58,    59,    55,    60,   -11,    40,    19,    13,
-      56,    34,    57,    14,    15,    20,    25,    98,    83,    58,
-      59,    34,    60,    84,    25,    85,    86,    87,    88,    89,
-      90,    91,    92,    93,   104,    21,    34,    44,    94,   105,
-     -10,    85,    86,    87,    88,    89,    90,    91,    92,    93,
-      37,    47,    50,    76,    94,    52,    53,    54,    96,    67,
-      52,    53,    54,    55,    68,    93,   125,   126,    55,    56,
-      94,    57,    51,    65,    56,   108,    57,    52,    53,    54,
-      52,    53,    54,    69,    24,    55,    39,    72,    55,    78,
-      45,    56,    79,    57,    56,    80,    57,   100,    52,    53,
-      54,    86,    87,    88,    89,    90,    55,   117,    93,   129,
-      12,    26,    56,    94,    57,   119,    85,    86,    87,    88,
-      89,    90,    91,    92,    93,    82,     0,     0,    99,    94,
+      73,    74,    75,    77,     6,   101,    51,    41,     1,     6,
+      96,    47,   -17,    21,    44,     2,   100,    80,    22,    19,
+      49,     8,   107,   108,    31,     9,    49,    52,    49,   110,
+     111,   112,   113,   114,   115,   116,   117,    45,   120,    50,
+      81,   122,   132,   -18,    23,   -25,    66,   -27,   132,    41,
+      14,    15,    31,    31,   128,    53,    54,    55,    24,    24,
+     123,   -75,    37,    56,    38,   100,   100,   -77,    21,    57,
+      40,    58,    12,   -10,    34,    25,   100,    83,    59,    60,
+      25,    61,    84,    20,    85,    86,    87,    88,    89,    90,
+      91,    92,    93,   102,    21,    34,    35,    94,    36,    -9,
+      85,    86,    87,    88,    89,    90,    91,    92,    93,   105,
+      67,    48,   103,    94,   106,    68,    85,    86,    87,    88,
+      89,    90,    91,    92,    93,   130,   131,    69,    76,    94,
+      53,    54,    55,    95,   134,    53,    54,    55,    56,    24,
+       1,    39,    30,    56,    57,    46,    58,     2,    72,    57,
+     109,    58,    53,    54,    55,   119,    78,    53,    54,    55,
+      56,    53,    54,    55,    79,    56,    57,    93,    58,    56,
+      97,    57,    94,    58,   104,    57,   118,    58,    99,    53,
+      54,    55,    86,    87,    88,    89,    90,    56,   126,    93,
+      70,    71,    13,    57,    94,    58,   121,    85,    86,    87,
+      88,    89,    90,    91,    92,    93,   133,    82,    26,    98,
+      94,    85,    86,    87,    88,    89,    90,    91,    92,    93,
+       0,     0,     0,     0,    94,   127,    85,    86,    87,    88,
+      89,    90,    91,    92,    93,     0,     0,     0,   124,    94,
       85,    86,    87,    88,    89,    90,    91,    92,    93,     0,
-       0,     0,     0,    94,   124,    85,    86,    87,    88,    89,
-      90,    91,    92,    93,     0,     0,     0,   103,    94,    85,
-      86,    87,    88,    89,    90,    91,    92,    93,     0,     0,
-       0,   122,    94,    85,    86,    87,    88,    89,    90,    91,
-      92,    93,     0,     0,     0,   123,    94,    85,    86,    87,
-      88,    89,    90,    91,    92,    93,     0,     0,     0,     0,
-      94,    86,    87,    88,    89,    90,    91,     0,    93,    87,
-      88,    89,    90,    94,     0,    93,     0,     0,     0,     0,
-      94
+       0,     0,   125,    94,    85,    86,    87,    88,    89,    90,
+      91,    92,    93,     0,     0,     0,     0,    94,    86,    87,
+      88,    89,    90,    91,     0,    93,    87,    88,    89,    90,
+      94,     0,    93,     0,    89,    90,     0,    94,    93,     0,
+       0,     0,     0,    94
 };
 
 static const yytype_int16 yycheck[] =
 {
-      55,    56,    57,    58,    27,     8,     1,     0,    31,     1,
-      65,    66,     5,    18,    21,    20,    23,    72,    21,     1,
-      25,     1,     1,    78,    79,    20,     1,    20,    20,     7,
-      85,    86,    87,    88,    89,    90,    91,    92,    20,    94,
-      20,    20,     1,    21,    18,    20,    69,     6,    12,    13,
-       5,    25,    16,     0,    47,    48,     1,    21,     3,     4,
-       5,   122,   123,    23,   119,   120,    11,     1,   129,     3,
-       4,     5,    17,    18,    19,    47,    48,    11,    23,    24,
-      25,    26,    27,    17,    29,    19,     3,     4,     5,    23,
-      24,     1,    26,    27,    11,    29,     6,     1,    23,     1,
-      17,     5,    19,     5,     6,    19,    23,     1,     1,    26,
-      27,     5,    29,     6,    23,     8,     9,    10,    11,    12,
-      13,    14,    15,    16,     1,     1,     5,    24,    21,     6,
-       6,     8,     9,    10,    11,    12,    13,    14,    15,    16,
-       3,     7,    22,     1,    21,     3,     4,     5,     1,     1,
-       3,     4,     5,    11,     6,    16,   119,   120,    11,    17,
-      21,    19,    24,     8,    17,     1,    19,     3,     4,     5,
-       3,     4,     5,     7,    21,    11,    25,    19,    11,    19,
-      29,    17,    19,    19,    17,    24,    19,    20,     3,     4,
-       5,     9,    10,    11,    12,    13,    11,     5,    16,    28,
-       5,    18,    17,    21,    19,     7,     8,     9,    10,    11,
-      12,    13,    14,    15,    16,    63,    -1,    -1,    69,    21,
+      56,    57,    58,    59,     0,    72,     1,    27,    18,     5,
+      66,    31,    23,     1,     1,    25,    72,     1,     6,    23,
+       1,     1,    78,    79,    20,     5,     1,    22,     1,    85,
+      86,    87,    88,    89,    90,    91,    92,    24,    94,    20,
+      24,     1,     1,    23,     7,    20,     8,    20,     1,    69,
+       5,     6,    48,    49,   121,     3,     4,     5,    21,    21,
+      20,    20,     1,    11,     3,   121,   122,    20,     1,    17,
+       1,    19,     0,     6,     5,    23,   132,     1,    26,    27,
+      23,    29,     6,    19,     8,     9,    10,    11,    12,    13,
+      14,    15,    16,     1,     1,     5,    21,    21,    23,     6,
+       8,     9,    10,    11,    12,    13,    14,    15,    16,     1,
+       1,     7,    20,    21,     6,     6,     8,     9,    10,    11,
+      12,    13,    14,    15,    16,   124,   125,     7,     1,    21,
+       3,     4,     5,     1,   133,     3,     4,     5,    11,    21,
+      18,    25,    20,    11,    17,    29,    19,    25,    19,    17,
+       1,    19,     3,     4,     5,     1,    19,     3,     4,     5,
+      11,     3,     4,     5,    19,    11,    17,    16,    19,    11,
+       6,    17,    21,    19,     6,    17,     5,    19,    20,     3,
+       4,     5,     9,    10,    11,    12,    13,    11,    22,    16,
+      48,    49,     5,    17,    21,    19,     7,     8,     9,    10,
+      11,    12,    13,    14,    15,    16,    28,    64,    18,    69,
+      21,     8,     9,    10,    11,    12,    13,    14,    15,    16,
+      -1,    -1,    -1,    -1,    21,    22,     8,     9,    10,    11,
+      12,    13,    14,    15,    16,    -1,    -1,    -1,    20,    21,
        8,     9,    10,    11,    12,    13,    14,    15,    16,    -1,
-      -1,    -1,    -1,    21,    22,     8,     9,    10,    11,    12,
-      13,    14,    15,    16,    -1,    -1,    -1,    20,    21,     8,
-       9,    10,    11,    12,    13,    14,    15,    16,    -1,    -1,
-      -1,    20,    21,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    -1,    -1,    -1,    20,    21,     8,     9,    10,
-      11,    12,    13,    14,    15,    16,    -1,    -1,    -1,    -1,
-      21,     9,    10,    11,    12,    13,    14,    -1,    16,    10,
-      11,    12,    13,    21,    -1,    16,    -1,    -1,    -1,    -1,
-      21
+      -1,    -1,    20,    21,     8,     9,    10,    11,    12,    13,
+      14,    15,    16,    -1,    -1,    -1,    -1,    21,     9,    10,
+      11,    12,    13,    14,    -1,    16,    10,    11,    12,    13,
+      21,    -1,    16,    -1,    12,    13,    -1,    21,    16,    -1,
+      -1,    -1,    -1,    21
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
      symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,    18,    25,    32,    33,    34,    36,    37,     5,    38,
-      39,     0,    33,     1,     5,     6,    35,    40,    43,    23,
+       0,    18,    25,    32,    33,    34,    36,    37,     1,     5,
+      38,    39,     0,    33,     5,     6,    35,    40,    43,    23,
       19,     1,     6,     7,    21,    23,    44,    36,    47,    48,
-      20,    36,    41,    42,     5,    35,    35,     3,     1,    47,
-       1,    40,    49,    50,    24,    47,    40,     7,     1,    20,
-      22,    24,     3,     4,     5,    11,    17,    19,    26,    27,
-      29,    44,    45,    46,    51,     8,     8,     1,     6,     7,
+      20,    36,    41,    42,     5,    35,    35,     1,     3,    47,
+       1,    40,    49,    50,     1,    24,    47,    40,     7,     1,
+      20,     1,    22,     3,     4,     5,    11,    17,    19,    26,
+      27,    29,    44,    45,    46,    51,     8,     1,     6,     7,
       42,    42,    19,    51,    51,    51,     1,    51,    19,    19,
-      24,     1,    45,     1,     6,     8,     9,    10,    11,    12,
-      13,    14,    15,    16,    21,    51,     1,    51,     1,    49,
-      20,    51,    52,    20,     1,     6,    51,    51,     1,    51,
-      51,    51,    51,    51,    51,    51,    51,     5,    51,     7,
-       1,    20,    20,    20,    22,    52,    52,    46,    46,    28,
-      46
+       1,    24,    45,     1,     6,     8,     9,    10,    11,    12,
+      13,    14,    15,    16,    21,     1,    51,     6,    49,    20,
+      51,    52,     1,    20,     6,     1,     6,    51,    51,     1,
+      51,    51,    51,    51,    51,    51,    51,    51,     5,     1,
+      51,     7,     1,    20,    20,    20,    22,    22,    52,    52,
+      46,    46,     1,    28,    46
 };
 
   /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    31,    32,    33,    33,    34,    34,    34,    34,    35,
-      35,    35,    36,    36,    37,    37,    38,    38,    39,    40,
-      40,    41,    42,    42,    42,    43,    43,    44,    44,    45,
-      45,    45,    46,    46,    46,    46,    46,    46,    46,    46,
-      46,    47,    47,    48,    48,    48,    49,    49,    50,    50,
-      50,    50,    51,    51,    51,    51,    51,    51,    51,    51,
+       0,    31,    32,    33,    33,    34,    34,    34,    35,    35,
+      35,    36,    36,    37,    37,    37,    37,    38,    38,    39,
+      40,    40,    40,    40,    41,    42,    42,    42,    43,    43,
+      44,    44,    45,    45,    46,    46,    46,    46,    46,    46,
+      46,    46,    46,    47,    47,    48,    48,    48,    49,    49,
+      50,    50,    50,    51,    51,    51,    51,    51,    51,    51,
       51,    51,    51,    51,    51,    51,    51,    51,    51,    51,
-      51,    52,    52,    52
+      51,    51,    51,    51,    51,    52,    52,    52
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     1,     2,     0,     3,     2,     3,     2,     1,
-       3,     3,     1,     1,     5,     2,     1,     0,     1,     1,
-       4,     2,     3,     1,     3,     4,     3,     4,     3,     2,
-       0,     2,     2,     1,     3,     5,     7,     5,     2,     2,
-       3,     2,     0,     3,     3,     2,     1,     3,     1,     3,
-       3,     3,     3,     3,     3,     3,     3,     3,     3,     3,
-       3,     3,     2,     2,     4,     3,     4,     3,     1,     1,
-       1,     3,     1,     3
+       0,     2,     1,     2,     0,     3,     2,     3,     1,     3,
+       3,     1,     1,     5,     2,     5,     2,     1,     0,     1,
+       1,     4,     3,     4,     2,     3,     1,     3,     4,     3,
+       4,     4,     2,     0,     2,     2,     1,     3,     5,     7,
+       5,     3,     3,     2,     0,     3,     4,     2,     1,     3,
+       1,     3,     3,     3,     3,     3,     3,     3,     3,     3,
+       3,     3,     3,     3,     2,     2,     4,     4,     3,     4,
+       4,     3,     1,     1,     1,     3,     1,     3
 };
 
 
@@ -1473,122 +1470,116 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 39 "./syntax.y" /* yacc.c:1646  */
+#line 40 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Program");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
         // printf("%d %s\n",yylineno, $$->name);
-        printTree((yyval.m_node), 0);
+        if(HAS_ERROR == 0)
+            printTree((yyval.m_node), 0);
     }
-#line 1484 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1482 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 47 "./syntax.y" /* yacc.c:1646  */
+#line 49 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("ExtDefList");
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1494 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1492 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 52 "./syntax.y" /* yacc.c:1646  */
+#line 54 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree(EMPTY);
         // insertTerm($$, EMPTY, @$.first_line);
     }
-#line 1503 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1501 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 58 "./syntax.y" /* yacc.c:1646  */
+#line 60 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("ExtDef");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "SEMI", (yylsp[0]).first_line);
     }
-#line 1514 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1512 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 64 "./syntax.y" /* yacc.c:1646  */
+#line 66 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("ExtDef");
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "SEMI", (yylsp[0]).first_line);
     }
-#line 1524 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1522 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 69 "./syntax.y" /* yacc.c:1646  */
+#line 71 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("ExtDef");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1535 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1533 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 75 "./syntax.y" /* yacc.c:1646  */
-    {
-        printf("Error Type B at Line %d: Expected \";\" after struct.\n", (yylsp[-1]).last_line);
-    }
-#line 1543 "./syntax.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 9:
-#line 80 "./syntax.y" /* yacc.c:1646  */
+#line 79 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("ExtDecList");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1552 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1542 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 10:
-#line 84 "./syntax.y" /* yacc.c:1646  */
+  case 9:
+#line 83 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("ExtDecList");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "COMMA", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1563 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1553 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 10:
+#line 89 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_MISS_COMMA_HIGH, (yylsp[-2]).first_line);
+        // printf("Error Type B at Line %d: Missing \",\" in high-level declaration list.\n", @1.first_line);
+    }
+#line 1562 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 90 "./syntax.y" /* yacc.c:1646  */
-    {
-        printf("Error Type B at Line %d: Missing \",\" in high-level declaration list.\n", (yylsp[-2]).first_line);
-    }
-#line 1571 "./syntax.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 12:
 #line 96 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Specifier");
         insertTermAttr((yyval.m_node), "TYPE", yylval.sval, (yylsp[0]).first_line);
     }
-#line 1580 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1571 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 13:
+  case 12:
 #line 100 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Specifier");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1589 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1580 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 14:
+  case 13:
 #line 106 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("StructSpecifier");
@@ -1598,57 +1589,75 @@ yyreduce:
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "RC", yylineno);
     }
-#line 1602 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1593 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 15:
+  case 14:
 #line 114 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("StructSpecifier");
         insertTerm((yyval.m_node), "STRUCT", yylineno);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
+#line 1603 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 15:
+#line 119 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_MISS_RC, (yylsp[-1]).last_line+1);
+        // printf("Error Type B at Line %d: Missing \"}\".\n", @4.last_line+1);
+    }
 #line 1612 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 122 "./syntax.y" /* yacc.c:1646  */
+#line 123 "./syntax.y" /* yacc.c:1646  */
     {
-        (yyval.m_node) = createMultiTree("OptTag");
-        insertTermAttr((yyval.m_node), "ID", yylval.sval, (yylsp[0]).first_line);
+        errorReport(ERR_MISS_STRUCTTAG, (yylsp[-1]).last_line);
+        // printf("Error Type B at Line %d: Missing tag of struct.\n", @1.last_line);
     }
 #line 1621 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 127 "./syntax.y" /* yacc.c:1646  */
+#line 130 "./syntax.y" /* yacc.c:1646  */
     {
-        (yyval.m_node) = createMultiTree(EMPTY);
-        // insertTerm($$, EMPTY, @$.first_line);
+        (yyval.m_node) = createMultiTree("OptTag");
+        insertTermAttr((yyval.m_node), "ID", yylval.sval, (yylsp[0]).first_line);
     }
 #line 1630 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 133 "./syntax.y" /* yacc.c:1646  */
+#line 135 "./syntax.y" /* yacc.c:1646  */
     {
-        (yyval.m_node) = createMultiTree("Tag");
-        insertTermAttr((yyval.m_node), "ID", yylval.sval, (yylsp[0]).first_line);
+        (yyval.m_node) = createMultiTree(EMPTY);
+        // insertTerm($$, EMPTY, @$.first_line);
     }
 #line 1639 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 140 "./syntax.y" /* yacc.c:1646  */
+#line 141 "./syntax.y" /* yacc.c:1646  */
     {
-        (yyval.m_node) = createMultiTree("VarDec");
+        (yyval.m_node) = createMultiTree("Tag");
         insertTermAttr((yyval.m_node), "ID", yylval.sval, (yylsp[0]).first_line);
     }
 #line 1648 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 144 "./syntax.y" /* yacc.c:1646  */
+#line 148 "./syntax.y" /* yacc.c:1646  */
+    {
+        (yyval.m_node) = createMultiTree("VarDec");
+        insertTermAttr((yyval.m_node), "ID", yylval.sval, (yylsp[0]).first_line);
+    }
+#line 1657 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 21:
+#line 152 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("VarDec");
         insertNon((yyval.m_node), (yyvsp[-3].m_node));
@@ -1656,72 +1665,91 @@ yyreduce:
         insertTermAttr((yyval.m_node), "INT", yylval.sval, (yylsp[-1]).first_line);
         insertTerm((yyval.m_node), "RB", (yylsp[0]).first_line);
     }
-#line 1660 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1669 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 21:
-#line 153 "./syntax.y" /* yacc.c:1646  */
+  case 22:
+#line 159 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_VARDEC, (yylsp[-2]).first_line);
+        // printf("Error Type B at Line %d: Something wrong about the declaration after \"[\".\n", @1.first_line);
+    }
+#line 1678 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 23:
+#line 163 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_MISS_RB,(yylsp[-3]).first_line);
+        // printf("Error Type B at Line %d: Missing \"]\".\n", @1.first_line);
+    }
+#line 1687 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 24:
+#line 169 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("ParamDec");
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1670 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1697 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 22:
-#line 160 "./syntax.y" /* yacc.c:1646  */
+  case 25:
+#line 176 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("VarList");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "COMMA", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1681 "./syntax.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 23:
-#line 166 "./syntax.y" /* yacc.c:1646  */
-    {
-        (yyval.m_node) = createMultiTree("VarList");
-        insertNon((yyval.m_node), (yyvsp[0].m_node));
-    }
-#line 1690 "./syntax.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 24:
-#line 170 "./syntax.y" /* yacc.c:1646  */
-    {
-        printf("Error Type B at Line %d: Missing \",\" in variant list.\n", (yylsp[-2]).first_line);
-    }
-#line 1698 "./syntax.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 25:
-#line 175 "./syntax.y" /* yacc.c:1646  */
-    {
-        (yyval.m_node) = createMultiTree("FunDec");
-        insertTermAttr((yyval.m_node), "ID", yylval.sval, (yylsp[-3]).first_line);
-        insertTerm((yyval.m_node), "LP", (yylsp[-2]).first_line);
-        insertNon((yyval.m_node), (yyvsp[-1].m_node));
-        insertTerm((yyval.m_node), "RP", (yylsp[0]).first_line);
-    }
-#line 1710 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1708 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
 #line 182 "./syntax.y" /* yacc.c:1646  */
     {
-        (yyval.m_node) = createMultiTree("FunDec");
-        insertTermAttr((yyval.m_node), "ID", yylval.sval, (yylsp[-2]).first_line);
-        insertTerm((yyval.m_node), "LP", (yylsp[-1]).first_line);
-        insertTerm((yyval.m_node), "RP", (yylsp[0]).first_line);
+        (yyval.m_node) = createMultiTree("VarList");
+        insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1721 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1717 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 191 "./syntax.y" /* yacc.c:1646  */
+#line 186 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_MISS_COMMA_VARLIST, (yylsp[-2]).first_line);
+        // printf("Error Type B at Line %d: Missing \",\" in variant list.\n", @1.first_line);
+    }
+#line 1726 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 28:
+#line 192 "./syntax.y" /* yacc.c:1646  */
+    {
+        (yyval.m_node) = createMultiTree("FunDec");
+        insertTermAttr((yyval.m_node), "ID", (yyvsp[-3].m_node)->name, (yylsp[-3]).first_line);
+        insertTerm((yyval.m_node), "LP", (yylsp[-2]).first_line);
+        insertNon((yyval.m_node), (yyvsp[-1].m_node));
+        insertTerm((yyval.m_node), "RP", (yylsp[0]).first_line);
+    }
+#line 1738 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 29:
+#line 199 "./syntax.y" /* yacc.c:1646  */
+    {
+        (yyval.m_node) = createMultiTree("FunDec");
+        insertTermAttr((yyval.m_node), "ID", (yyvsp[-2].m_node)->name, (yylsp[-2]).first_line);
+        insertTerm((yyval.m_node), "LP", (yylsp[-1]).first_line);
+        insertTerm((yyval.m_node), "RP", (yylsp[0]).first_line);
+    }
+#line 1749 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 30:
+#line 208 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("CompSt");
         insertTerm((yyval.m_node), "LC", (yylsp[-3]).first_line);
@@ -1729,76 +1757,77 @@ yyreduce:
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "RC", (yylsp[0]).first_line);
     }
-#line 1733 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1761 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 28:
-#line 198 "./syntax.y" /* yacc.c:1646  */
+  case 31:
+#line 215 "./syntax.y" /* yacc.c:1646  */
     {
-        printf("Error Type B at Line %d: Unexpected DefList after StmtList.\n", (yylsp[-1]).first_line);
+        errorReport(ERR_MISS_RC, (yylsp[-1]).last_line+1);
+        // printf("Error Type B at Line %d: Missing \"}\".\n", @3.last_line+1);
     }
-#line 1741 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1770 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 29:
-#line 203 "./syntax.y" /* yacc.c:1646  */
+  case 32:
+#line 220 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("StmtList");
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1751 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1780 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 30:
-#line 208 "./syntax.y" /* yacc.c:1646  */
+  case 33:
+#line 225 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree(EMPTY);
         // insertTerm($$, EMPTY, @$.first_line);
     }
-#line 1760 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1789 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 31:
-#line 212 "./syntax.y" /* yacc.c:1646  */
-    {
-        printf("Error Type B at Line %d: Something wrong among statements.\n", (yylsp[-1]).last_line);
-    }
-#line 1768 "./syntax.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 32:
-#line 217 "./syntax.y" /* yacc.c:1646  */
+  case 34:
+#line 232 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Stmt");
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "SEMI", (yylsp[0]).first_line);
     }
-#line 1778 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1799 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 33:
-#line 223 "./syntax.y" /* yacc.c:1646  */
+  case 35:
+#line 237 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_MISS_SEMI, (yylsp[-1]).first_line);
+    }
+#line 1807 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 36:
+#line 241 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Stmt");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1787 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1816 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 34:
-#line 228 "./syntax.y" /* yacc.c:1646  */
+  case 37:
+#line 246 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Stmt");
         insertTerm((yyval.m_node), "RETURN", (yylsp[-2]).first_line);
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "SEMI", (yylsp[0]).first_line);
     }
-#line 1798 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1827 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 35:
-#line 235 "./syntax.y" /* yacc.c:1646  */
+  case 38:
+#line 253 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Stmt");
         insertTerm((yyval.m_node), "IF", (yylsp[-4]).first_line);
@@ -1807,11 +1836,11 @@ yyreduce:
         insertTerm((yyval.m_node), "RP", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1811 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1840 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 36:
-#line 244 "./syntax.y" /* yacc.c:1646  */
+  case 39:
+#line 262 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Stmt");
         insertTerm((yyval.m_node), "IF", (yylsp[-6]).first_line);
@@ -1822,11 +1851,11 @@ yyreduce:
         insertTerm((yyval.m_node), "ELSE", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1826 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1855 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 37:
-#line 255 "./syntax.y" /* yacc.c:1646  */
+  case 40:
+#line 273 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Stmt");
         insertTerm((yyval.m_node), "WHILE", (yylsp[-4]).first_line);
@@ -1835,288 +1864,294 @@ yyreduce:
         insertTerm((yyval.m_node), "RP", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1839 "./syntax.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 38:
-#line 264 "./syntax.y" /* yacc.c:1646  */
-    {
-        printf("Error Type B at Line %d: Missing \";\".\n", (yylsp[-1]).first_line);
-    }
-#line 1847 "./syntax.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 39:
-#line 268 "./syntax.y" /* yacc.c:1646  */
-    {
-        printf("Error Type B at Line %d: Missing return expression.\n", (yylsp[-1]).first_line);
-    }
-#line 1855 "./syntax.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 40:
-#line 272 "./syntax.y" /* yacc.c:1646  */
-    {
-        printf("Error Type B at Line %d: Missing \";\".\n", (yylsp[-2]).first_line);
-    }
-#line 1863 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1868 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 279 "./syntax.y" /* yacc.c:1646  */
+#line 282 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_MISS_RETURNEXP, (yylsp[-2]).first_line);
+        // printf("Error Type B at Line %d: Missing return expression.\n", @1.first_line);
+    }
+#line 1877 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 42:
+#line 287 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_MISS_SEMI_RETURN,(yylsp[-2]).first_line);
+        // printf("Error Type B at Line %d: Missing \";\" in return sentence.\n", @1.first_line);
+    }
+#line 1886 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 43:
+#line 295 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("DefList");
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1873 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1896 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 42:
-#line 285 "./syntax.y" /* yacc.c:1646  */
+  case 44:
+#line 301 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree(EMPTY);
         // insertTerm($$, EMPTY, @$.first_line);
     }
-#line 1882 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1905 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 43:
-#line 293 "./syntax.y" /* yacc.c:1646  */
+  case 45:
+#line 309 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Def");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "SEMI", (yylsp[0]).first_line);
     }
-#line 1893 "./syntax.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 44:
-#line 300 "./syntax.y" /* yacc.c:1646  */
-    {
-        printf("Error Type B at Line %d: Missing \";\".\n", (yylsp[-2]).first_line);
-    }
-#line 1901 "./syntax.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 45:
-#line 304 "./syntax.y" /* yacc.c:1646  */
-    {
-        printf("Error Type B at Line %d: Missing \",\".\n", (yylsp[-1]).first_line);
-    }
-#line 1909 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1916 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 310 "./syntax.y" /* yacc.c:1646  */
+#line 316 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_DEC, (yylsp[-3]).first_line);
+        // printf("Error Type B at Line %d: Missing \";\" after declaration.\n", @1.first_line);
+    }
+#line 1925 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 47:
+#line 321 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_DEC, (yylsp[-1]).first_line);
+        // printf("Error Type B at Line %d: Something wrong with declaration.\n", @1.last_line);
+    }
+#line 1934 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 48:
+#line 328 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("DecList");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1918 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1943 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 47:
-#line 315 "./syntax.y" /* yacc.c:1646  */
+  case 49:
+#line 333 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("DecList");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "COMMA", yylineno);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1929 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1954 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 48:
-#line 325 "./syntax.y" /* yacc.c:1646  */
+  case 50:
+#line 341 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Dec");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1938 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1963 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 49:
-#line 330 "./syntax.y" /* yacc.c:1646  */
+  case 51:
+#line 346 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Dec");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "ASSIGNOP", yylineno);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1949 "./syntax.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 50:
-#line 337 "./syntax.y" /* yacc.c:1646  */
-    {
-        printf("Error Type B at Line %d: Expected expression.\n", (yylsp[-2]).first_line);
-    }
-#line 1957 "./syntax.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 51:
-#line 341 "./syntax.y" /* yacc.c:1646  */
-    {
-        printf("Error Type B at Line %d: Expected identifier.\n", (yylsp[-2]).first_line);
-    }
-#line 1965 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1974 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 347 "./syntax.y" /* yacc.c:1646  */
+#line 353 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_EXPECT_EXP, (yylsp[-2]).first_line);
+        // printf("Error Type B at Line %d: Expected expression.\n", @1.first_line);
+    }
+#line 1983 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 53:
+#line 360 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "ASSIGNOP", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1976 "./syntax.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 53:
-#line 354 "./syntax.y" /* yacc.c:1646  */
-    {
-        printf("Error Type B at Line %d: Expected expression.\n", (yylsp[-2]).first_line);
-    }
-#line 1984 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1994 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 359 "./syntax.y" /* yacc.c:1646  */
+#line 367 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_EXPECT_EXP, (yylsp[-2]).first_line);
+        // printf("Error Type B at Line %d: Expected expression.\n", @1.first_line);
+    }
+#line 2003 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 55:
+#line 373 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "AND", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1995 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2014 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 55:
-#line 366 "./syntax.y" /* yacc.c:1646  */
+  case 56:
+#line 380 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "OR", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2006 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2025 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 56:
-#line 373 "./syntax.y" /* yacc.c:1646  */
+  case 57:
+#line 387 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "RELOP", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2017 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2036 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 57:
-#line 380 "./syntax.y" /* yacc.c:1646  */
+  case 58:
+#line 394 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "PLUS", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2028 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2047 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 58:
-#line 387 "./syntax.y" /* yacc.c:1646  */
+  case 59:
+#line 401 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "MINUS", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2039 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2058 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 59:
-#line 394 "./syntax.y" /* yacc.c:1646  */
+  case 60:
+#line 408 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "STAR", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2050 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2069 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 60:
-#line 401 "./syntax.y" /* yacc.c:1646  */
+  case 61:
+#line 415 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "DIV", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2061 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2080 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 61:
-#line 408 "./syntax.y" /* yacc.c:1646  */
+  case 62:
+#line 422 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertTerm((yyval.m_node), "LP", (yylsp[-2]).first_line);
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "RP", (yylsp[0]).first_line);
     }
-#line 2072 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2091 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 62:
-#line 415 "./syntax.y" /* yacc.c:1646  */
+  case 63:
+#line 429 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_MISS_RP, (yylsp[-1]).last_line);
+    }
+#line 2099 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 64:
+#line 433 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertTerm((yyval.m_node), "MINUS", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
         
     }
-#line 2083 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2110 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 63:
-#line 422 "./syntax.y" /* yacc.c:1646  */
+  case 65:
+#line 440 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertTerm((yyval.m_node), "NOT", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2093 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2120 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 64:
-#line 428 "./syntax.y" /* yacc.c:1646  */
+  case 66:
+#line 446 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
-        insertTermAttr((yyval.m_node), "ID", yylval.sval, (yylsp[-3]).first_line);
+        insertTermAttr((yyval.m_node), "ID", (yyvsp[-3].m_node)->name, (yylsp[-3]).first_line);
         insertTerm((yyval.m_node), "LP", (yylsp[-2]).first_line);
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "RP", (yylsp[0]).first_line);
     }
-#line 2105 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2132 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 65:
-#line 436 "./syntax.y" /* yacc.c:1646  */
+  case 67:
+#line 454 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_MISS_RP_FUNC, (yylsp[-1]).last_line);
+    }
+#line 2140 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 68:
+#line 458 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
-        insertTermAttr((yyval.m_node), "ID", yylval.sval, (yylsp[-2]).first_line);
+        insertTermAttr((yyval.m_node), "ID", (yyvsp[-2].m_node)->name, (yylsp[-2]).first_line);
         insertTerm((yyval.m_node), "LP", (yylsp[-1]).first_line);
         insertTerm((yyval.m_node), "RP", (yylsp[0]).first_line);
     }
-#line 2116 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2151 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 66:
-#line 443 "./syntax.y" /* yacc.c:1646  */
+  case 69:
+#line 465 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-3].m_node));
@@ -2124,49 +2159,58 @@ yyreduce:
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "RB", (yylsp[0]).first_line);
     }
-#line 2128 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2163 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 67:
-#line 451 "./syntax.y" /* yacc.c:1646  */
+  case 70:
+#line 473 "./syntax.y" /* yacc.c:1646  */
+    {
+        errorReport(ERR_INDEX, (yylsp[-3]).first_line);
+        // printf("Error Type B at Line %d: Something wrong with index.\n", @1.first_line);
+    }
+#line 2172 "./syntax.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 71:
+#line 478 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "DOT", (yylsp[-1]).first_line);
         insertTermAttr((yyval.m_node), "ID", yylval.sval, (yylsp[0]).first_line);
     }
-#line 2139 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2183 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 68:
-#line 458 "./syntax.y" /* yacc.c:1646  */
+  case 72:
+#line 485 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertTermAttr((yyval.m_node), "ID", yylval.sval, (yylsp[0]).first_line);
     }
-#line 2148 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2192 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 69:
-#line 463 "./syntax.y" /* yacc.c:1646  */
+  case 73:
+#line 490 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertTermAttr((yyval.m_node), "INT", yylval.sval, (yylsp[0]).first_line);
     }
-#line 2157 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2201 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 70:
-#line 468 "./syntax.y" /* yacc.c:1646  */
+  case 74:
+#line 495 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertTermAttr((yyval.m_node), "FLOAT", yylval.sval, (yylsp[0]).first_line);
     }
-#line 2166 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2210 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 71:
-#line 475 "./syntax.y" /* yacc.c:1646  */
+  case 75:
+#line 502 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Args");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
@@ -2174,28 +2218,29 @@ yyreduce:
         insertNon((yyval.m_node), (yyvsp[0].m_node));
 
     }
-#line 2178 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2222 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 72:
-#line 483 "./syntax.y" /* yacc.c:1646  */
+  case 76:
+#line 510 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Args");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2187 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2231 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
-  case 73:
-#line 488 "./syntax.y" /* yacc.c:1646  */
+  case 77:
+#line 515 "./syntax.y" /* yacc.c:1646  */
     {
-        printf("Error Type B at Line %d: Missing \",\" in argument list.\n", (yylsp[-2]).first_line);
+        errorReport(ERR_MISS_COMMA_ARGS, (yylsp[-2]).first_line);
+        // printf("Error Type B at Line %d: Missing \",\" in argument list.\n", @1.first_line);
     }
-#line 2195 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2240 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 2199 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2244 "./syntax.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2430,7 +2475,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 493 "./syntax.y" /* yacc.c:1906  */
+#line 521 "./syntax.y" /* yacc.c:1906  */
 
 void yyerror(char* msg) {
     // fprintf(stderr, "error: %s; %s %d\n", msg, yytext, yylineno);
