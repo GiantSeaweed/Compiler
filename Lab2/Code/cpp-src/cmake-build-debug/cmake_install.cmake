@@ -1,4 +1,4 @@
-# Install script for directory: /Users/fengshiwei/Compiler/Lab2/Code/cpp-src
+# Install script for directory: /Users/xxz/Library/Mobile Documents/com~apple~CloudDocs/Learning/computer-science/compiler/fsw/Compiler/Lab2/Code/cpp-src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/fengshiwei/Compiler/Lab2/Code/cpp-src/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/xxz/Library/Mobile Documents/com~apple~CloudDocs/Learning/computer-science/compiler/fsw/Compiler/Lab2/Code/cpp-src/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

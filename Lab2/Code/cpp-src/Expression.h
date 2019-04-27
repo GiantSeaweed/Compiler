@@ -6,10 +6,12 @@
 #define CPP_SRC_EXPRESSION_H
 
 #include "ASTNode.h"
+#include "Visitor.h"
 #include <string>
 #include <vector>
 
 using namespace std;
+
 enum InfixOperator{
     INFIX_ASSIGN = 0,
     INFIX_AND, INFIX_OR,
@@ -20,6 +22,7 @@ enum InfixOperator{
 enum PrefixOperator{
     PREFIX_MINUS = 0, PREFIX_NOT
 };
+
 struct Exp : ASTNode{
 
     void accept(Visitor &visitor) override {
@@ -27,7 +30,6 @@ struct Exp : ASTNode{
     }
     ~Exp() = default;
 };
-
 
 struct InfixExp : Exp {
     Exp* leftSide;
@@ -108,7 +110,6 @@ struct StructExp : Exp{
     }
 };
 
-
 struct IntExp: Exp{
     int value;
 
@@ -151,4 +152,5 @@ struct FunExp: Exp{
         delete this->args;
     }
 };
+
 #endif //CPP_SRC_EXPRESSION_H

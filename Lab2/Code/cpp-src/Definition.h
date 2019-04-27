@@ -76,4 +76,5 @@ struct Definition : ASTNode{
 
     }
 };
+
 #endif //CPP_SRC_DEFINITION_H

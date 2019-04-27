@@ -19,7 +19,6 @@ struct Specifier : ASTNode{
 
 };
 
-
 struct BasicSpecifier : Specifier{
     BasicType basicType;
 
@@ -65,4 +64,6 @@ struct DefStructSpecifier : StructSpecifier{
         }
     }
 };
+
 #endif //CPP_SRC_SPECIFIER_H
+

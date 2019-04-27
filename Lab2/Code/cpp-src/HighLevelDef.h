@@ -5,14 +5,13 @@
 #ifndef CPP_SRC_HIGHLEVELDEF_H
 #define CPP_SRC_HIGHLEVELDEF_H
 
-#include<vector>
+#include <vector>
 #include "ASTNode.h"
 #include "Specifier.h"
 #include "Statement.h"
+#include "Visitor.h"
 
 using namespace std;
-
-
 
 struct ExtDef : ASTNode{
     void accept(Visitor &visitor) override {
@@ -91,4 +90,5 @@ struct Program : ASTNode{
     }
 
 };
+
 #endif //CPP_SRC_HIGHLEVELDEF_H

@@ -10,4 +10,5 @@ add_executable(cpp_src main.cpp
                 Declarator.h
                 Statement.h
                 Expression.h
-                ASTNode.h)
+                ASTNode.h
+                Visitor.h)
