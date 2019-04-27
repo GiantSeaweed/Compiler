@@ -77,11 +77,11 @@ struct ParamDec : Declarator{
 };
 
 
-struct FuncDec : Declarator{
+struct FunDec : Declarator{
     IDExp* id;
     vector<ParamDec*> paramList;
 
-    FuncDec(IDExp *id, const vector<ParamDec *> &paramList) : id(id), paramList(paramList) {}
+    FunDec(IDExp *id, const vector<ParamDec *> &paramList) : id(id), paramList(paramList) {}
 
     void accept(Visitor &visitor) override {
         if (visitor.visit(*this)) {
@@ -93,7 +93,7 @@ struct FuncDec : Declarator{
     }
 
 
-    ~FuncDec() {
+    ~FunDec() {
         delete this->paramList;
     }
 

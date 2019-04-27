@@ -130,13 +130,13 @@ struct FloatExp : Exp{
 
 };
 
-struct FuncExp: Exp{
-    IDExp* funcID;
+struct FunExp: Exp{
+    IDExp* funID;
     vector<IDExp*> *args;
 
-    FuncExp(IDExp *funcId) : funcID(funcId) {}
+    FunExp(IDExp *funcId) : funID(funcId) {}
 
-    FuncExp(IDExp *funcId, vector<IDExp *> *args) : funcID(funcId), args(args) {}
+    FunExp(IDExp *funcId, vector<IDExp *> *args) : funcID(funcId), args(args) {}
 
     void accept(Visitor &visitor) override {
         if(visitor.visit(*this)){
@@ -147,7 +147,7 @@ struct FuncExp: Exp{
         }
     }
 
-    ~FuncExp() {
+    ~FunExp() {
         delete this->args;
     }
 };
