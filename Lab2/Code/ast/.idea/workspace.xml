@@ -33,7 +33,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="396ee58d-0b50-4527-91f4-7def38ccb5e2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Transform.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Code/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Code/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Code/parser" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Code/parser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Code/syntax.output" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Code/syntax.output" afterDir="false" />
@@ -42,6 +41,7 @@
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Code/tree.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Code/tree.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Test/test1.cmm" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Test/test1.cmm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Transform.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Transform.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/.idea/cpp-src.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
@@ -114,8 +114,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Transform.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="232" column="8" selection-start-line="232" selection-start-column="8" selection-end-line="232" selection-end-column="8" />
+            <state relative-caret-position="42">
+              <caret line="261" column="29" selection-start-line="261" selection-start-column="29" selection-end-line="261" selection-end-column="29" />
               <folding>
                 <element signature="e#180#410#0" />
                 <element signature="e#715#1530#0" />
@@ -129,6 +129,9 @@
                 <element signature="e#4284#4597#0" />
                 <element signature="e#4614#4694#0" />
                 <element signature="e#5135#5183#0" />
+                <element signature="e#5400#5457#0" />
+                <element signature="e#5689#5743#0" />
+                <element signature="e#6087#6766#0" />
               </folding>
             </state>
           </provider>
@@ -229,6 +232,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -269,12 +273,12 @@
       <updated>1556427289280</updated>
       <workItem from="1556427290442" duration="568000" />
       <workItem from="1556449463700" duration="1795000" />
-      <workItem from="1556451532570" duration="13492000" />
+      <workItem from="1556451532570" duration="14862000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15855000" />
+    <option name="totallyTimeSpent" value="17225000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="388" width="867" height="610" extended-state="0" />
@@ -283,7 +287,7 @@
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23272727" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="0" visible="true" weight="0.2046332" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.2046332" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" />
       <window_info anchor="bottom" id="Run" order="3" />
@@ -294,7 +298,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="TeamCity" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32818532" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="CMake" order="13" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -370,8 +374,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Transform.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="232" column="8" selection-start-line="232" selection-start-column="8" selection-end-line="232" selection-end-column="8" />
+        <state relative-caret-position="42">
+          <caret line="261" column="29" selection-start-line="261" selection-start-column="29" selection-end-line="261" selection-end-column="29" />
           <folding>
             <element signature="e#180#410#0" />
             <element signature="e#715#1530#0" />
@@ -385,6 +389,9 @@
             <element signature="e#4284#4597#0" />
             <element signature="e#4614#4694#0" />
             <element signature="e#5135#5183#0" />
+            <element signature="e#5400#5457#0" />
+            <element signature="e#5689#5743#0" />
+            <element signature="e#6087#6766#0" />
           </folding>
         </state>
       </provider>

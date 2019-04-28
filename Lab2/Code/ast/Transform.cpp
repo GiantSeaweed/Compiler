@@ -224,23 +224,57 @@ Stmt *transStmt(MultiNode *node){
         //RETURN Exp SEMI
         stmt = transRetStmt(node->childList[0]);
     }
-    else if(!strcmp(node->name, IF)){
+    else if(!strcmp(node->name, IF)) {
         //IF LP Exp RP Stmt
         // IF LP Exp RP Stmt ELSE Stmt
-
+        stmt = transIfElseStmt(node->childList[0]);
+    }
     else if(!strcmp(node->name, WHILE)){
         //WHILE LP Exp RP Stmt
-        stmt = transRetStmt(node->childList[0]);
+        stmt = transWhileStmt(node->childList[0]);
     }
+    else{
+        cout <<"Error in TransStmt()"<<endl;
+        exit(-1);
+    }
+    return stmt;
 }
 
-ExpStmt *transExpStmt(MultiNode *node);
+ExpStmt *transExpStmt(MultiNode *node){
+    //Exp SEMI
+    Exp* exp = transExp(node->childList[0]);
+    ExpStmt* expStmt = new ExpStmt(exp);
+    return expStmt;
+}
 
-ReturnStmt *transRetStmt(MultiNode *node);
+ReturnStmt *transRetStmt(MultiNode *node){
+    //RETURN Exp SEMI
+    Exp* exp = transExp(node->childList[1]);
+    ExpStmt* expStmt = new ReturnStmt(exp);
+    return expStmt;
+}
 
-IfElseStmt *transIfElseStmt(MultiNode *node);
+IfElseStmt *transIfElseStmt(MultiNode *node){
+    //IF LP Exp RP Stmt
+    //IF LP Exp RP Stmt ELSE Stmt
+    Exp* condition = transExp(node->childList[2]);
+    Stmt* thenBody = transStmt(node->childList[4]);
+    Stmt* elseBody = nullptr;
+    if(node->numChild == 7){
+        elseBody = transStmt(node->childList[6]);
+    }
 
-WhileStmt *transWhileStmt(MultiNode *node);
+    ExpStmt* expStmt = new IfElseStmt(condition,thenBody,elseBody);
+    return expStmt;
+}
+
+WhileStmt *transWhileStmt(MultiNode *node){
+    //WHILE LP Exp RP Stmt
+    Exp* condition = transExp(node->childList[2]);
+    Stmt* body = transStmt(node->childList[4]);
+    ExpStmt* expStmt = new WhileStmt(condition,body);
+    return expStmt;
+}
 
 //local definition
 vector<Definition *> *transDefList(MultiNode *node);
