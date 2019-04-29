@@ -2,15 +2,12 @@
 // Created by 冯诗伟 on 2019-04-27.
 //
 
-#ifndef CPP_SRC_DEFINITION_H
-#define CPP_SRC_DEFINITION_H
+#ifndef AST_DEFINITION_H
+#define AST_DEFINITION_H
 
-#include "ASTNode.h"
-#include "Declarator.h"
-#include "Expression.h"
-#include <vector>
+#include "ast.h"
 
-using namespace std;
+// using namespace std;
 
 struct Dec : ASTNode{
     void accept(Visitor &visitor) override {
@@ -45,7 +42,7 @@ struct InitializedDec : Dec{
     void accept(Visitor &visitor) override {
         if (visitor.visit(*this)) {
             ((ASTNode *) varDec)->accept(visitor);
-            ((ASTNode *) initiator)->accept(visitor);
+            ((ASTNode *)initialValue)->accept(visitor);
         }
 
     }
@@ -77,4 +74,4 @@ struct Definition : ASTNode{
     }
 };
 
-#endif //CPP_SRC_DEFINITION_H
+#endif //AST_DEFINITION_H

@@ -33,22 +33,79 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="396ee58d-0b50-4527-91f4-7def38ccb5e2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ast.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/type.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Code/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Code/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Code/parser" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Code/parser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Code/syntax.output" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Code/syntax.output" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Code/syntax.tab.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Code/syntax.tab.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Code/syntax.tab.o" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Code/syntax.tab.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Code/tree.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Code/tree.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Lab1/Code/tree.o" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Code/tree.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Test/test1.cmm" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Test/test1.cmm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/Lab2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ASTNode.h" beforeDir="false" afterPath="$PROJECT_DIR$/ASTNode.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Declarator.h" beforeDir="false" afterPath="$PROJECT_DIR$/Declarator.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Definition.h" beforeDir="false" afterPath="$PROJECT_DIR$/Definition.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Expression.h" beforeDir="false" afterPath="$PROJECT_DIR$/Expression.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HighLevelDef.h" beforeDir="false" afterPath="$PROJECT_DIR$/HighLevelDef.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Specifier.h" beforeDir="false" afterPath="$PROJECT_DIR$/Specifier.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Statement.h" beforeDir="false" afterPath="$PROJECT_DIR$/Statement.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Transform.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Transform.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Transform.h" beforeDir="false" afterPath="$PROJECT_DIR$/Transform.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Visitor.h" beforeDir="false" afterPath="$PROJECT_DIR$/Visitor.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.4/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.4/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.4/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.4/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.4/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.4/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.4/CompilerIdC/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.4/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.13.4/CompilerIdCXX/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progress/1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Progress/count.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ast.dir/CXX.includecache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ast.dir/DependInfo.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ast.dir/build.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ast.dir/cmake_clean.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ast.dir/depend.internal" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ast.dir/depend.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ast.dir/flags.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ast.dir/link.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ast.dir/progress.make" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/cmake.check_cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/feature_tests.cxx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/ast.cbp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/.idea/cpp-src.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/.idea/misc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cpp-src/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../cpp-src/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cpp-src/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/ASTNode.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/CMakeLists.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/Declarator.h" beforeDir="false" />
@@ -74,7 +131,7 @@
       <change beforePath="$PROJECT_DIR$/../cpp-src/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cpp-src/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../cpp-src/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../cpp-src/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/cmake-build-debug/CMakeFiles/cmake.check_cache" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/cmake-build-debug/CMakeFiles/cpp_src.dir/DependInfo.cmake" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/cmake-build-debug/CMakeFiles/cpp_src.dir/build.make" beforeDir="false" />
@@ -93,6 +150,7 @@
       <change beforePath="$PROJECT_DIR$/../cpp-src/cmake-build-debug/cpp_src.cbp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../cpp-src/main.cpp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../lexical.l" beforeDir="false" afterPath="$PROJECT_DIR$/../lexical.l" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../syntax.y" beforeDir="false" afterPath="$PROJECT_DIR$/../syntax.y" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tree.c" beforeDir="false" afterPath="$PROJECT_DIR$/../tree.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../tree.h" beforeDir="false" afterPath="$PROJECT_DIR$/../tree.h" afterDir="false" />
@@ -111,28 +169,50 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Transform.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="261" column="29" selection-start-line="261" selection-start-column="29" selection-end-line="261" selection-end-column="29" />
+            <state relative-caret-position="5042">
+              <caret line="448" column="14" selection-start-line="448" selection-start-column="14" selection-end-line="448" selection-end-column="14" />
               <folding>
                 <element signature="e#180#410#0" />
+                <element signature="e#370#428#0" />
                 <element signature="e#715#1530#0" />
-                <element signature="e#1532#1574#0" />
-                <element signature="e#2083#2133#0" />
-                <element signature="e#2398#2458#0" />
-                <element signature="e#2452#2514#0" />
-                <element signature="e#3427#3488#0" />
-                <element signature="e#3649#3689#0" />
-                <element signature="e#3798#3855#0" />
-                <element signature="e#4284#4597#0" />
-                <element signature="e#4614#4694#0" />
-                <element signature="e#5135#5183#0" />
-                <element signature="e#5400#5457#0" />
-                <element signature="e#5689#5743#0" />
-                <element signature="e#6087#6766#0" />
+                <element signature="e#11097#11141#0" />
+                <element signature="e#11136#11184#0" />
+                <element signature="e#11179#11231#0" />
+                <element signature="e#11224#11270#0" />
+                <element signature="e#11265#11315#0" />
+                <element signature="e#11310#11390#0" />
+                <element signature="e#12947#12996#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ast.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/type.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="156">
+              <caret line="45" selection-start-line="45" selection-end-line="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Expression.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2280">
+              <caret line="152" column="2" lean-forward="true" selection-start-line="152" selection-start-column="2" selection-end-line="152" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -140,8 +220,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Transform.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="39">
-              <caret line="49" column="15" selection-start-line="49" selection-start-column="15" selection-end-line="49" selection-end-column="15" />
+            <state relative-caret-position="263">
+              <caret line="96" selection-start-line="96" selection-end-line="96" />
             </state>
           </provider>
         </entry>
@@ -149,8 +229,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Specifier.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-322">
-              <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+            <state relative-caret-position="176">
+              <caret line="54" column="32" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -158,8 +238,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Visitor.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1350">
-              <caret line="95" column="24" selection-start-line="95" selection-start-column="24" selection-end-line="95" selection-end-column="24" />
+            <state relative-caret-position="210">
+              <caret line="14" selection-start-line="14" selection-end-line="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Statement.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="287">
+              <caret line="77" column="25" selection-start-line="77" selection-start-column="25" selection-end-line="77" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -168,10 +257,7 @@
         <entry file="file://$PROJECT_DIR$/HighLevelDef.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="101">
-              <caret line="61" column="20" lean-forward="true" selection-start-line="61" selection-start-column="20" selection-end-line="61" selection-end-column="20" />
-              <folding>
-                <element signature="e#103#120#0" expanded="true" />
-              </folding>
+              <caret line="54" column="20" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -200,10 +286,13 @@
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/HighLevelDef.h" />
         <option value="$PROJECT_DIR$/Statement.h" />
-        <option value="$PROJECT_DIR$/Visitor.h" />
-        <option value="$PROJECT_DIR$/Specifier.h" />
         <option value="$PROJECT_DIR$/Transform.h" />
         <option value="$PROJECT_DIR$/Transform.cpp" />
+        <option value="$PROJECT_DIR$/type.h" />
+        <option value="$PROJECT_DIR$/ast.h" />
+        <option value="$PROJECT_DIR$/Visitor.h" />
+        <option value="$PROJECT_DIR$/Specifier.h" />
+        <option value="$PROJECT_DIR$/Expression.h" />
       </list>
     </option>
   </component>
@@ -273,18 +362,27 @@
       <updated>1556427289280</updated>
       <workItem from="1556427290442" duration="568000" />
       <workItem from="1556449463700" duration="1795000" />
-      <workItem from="1556451532570" duration="14862000" />
+      <workItem from="1556451532570" duration="24660000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17225000" />
+    <option name="totallyTimeSpent" value="27023000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="388" width="867" height="610" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23272727" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23272727" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.2046332" />
@@ -294,11 +392,11 @@
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="7" />
+      <window_info anchor="bottom" id="TODO" order="7" visible="true" weight="0.057915058" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="TeamCity" order="10" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.32818532" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.23359074" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="CMake" order="13" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -331,68 +429,85 @@
     <entry file="file://$PROJECT_DIR$/Declarator.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Statement.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-          <folding>
-            <element signature="e#97#117#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Visitor.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
-          <caret line="95" column="24" selection-start-line="95" selection-start-column="24" selection-end-line="95" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/HighLevelDef.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="101">
-          <caret line="61" column="20" lean-forward="true" selection-start-line="61" selection-start-column="20" selection-end-line="61" selection-end-column="20" />
-          <folding>
-            <element signature="e#103#120#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Specifier.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-322">
-          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
+          <caret line="54" column="20" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Transform.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39">
-          <caret line="49" column="15" selection-start-line="49" selection-start-column="15" selection-end-line="49" selection-end-column="15" />
+        <state relative-caret-position="263">
+          <caret line="96" selection-start-line="96" selection-end-line="96" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Transform.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="261" column="29" selection-start-line="261" selection-start-column="29" selection-end-line="261" selection-end-column="29" />
+        <state relative-caret-position="5042">
+          <caret line="448" column="14" selection-start-line="448" selection-start-column="14" selection-end-line="448" selection-end-column="14" />
           <folding>
             <element signature="e#180#410#0" />
+            <element signature="e#370#428#0" />
             <element signature="e#715#1530#0" />
-            <element signature="e#1532#1574#0" />
-            <element signature="e#2083#2133#0" />
-            <element signature="e#2398#2458#0" />
-            <element signature="e#2452#2514#0" />
-            <element signature="e#3427#3488#0" />
-            <element signature="e#3649#3689#0" />
-            <element signature="e#3798#3855#0" />
-            <element signature="e#4284#4597#0" />
-            <element signature="e#4614#4694#0" />
-            <element signature="e#5135#5183#0" />
-            <element signature="e#5400#5457#0" />
-            <element signature="e#5689#5743#0" />
-            <element signature="e#6087#6766#0" />
+            <element signature="e#11097#11141#0" />
+            <element signature="e#11136#11184#0" />
+            <element signature="e#11179#11231#0" />
+            <element signature="e#11224#11270#0" />
+            <element signature="e#11265#11315#0" />
+            <element signature="e#11310#11390#0" />
+            <element signature="e#12947#12996#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/type.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ast.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Visitor.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Statement.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="77" column="25" selection-start-line="77" selection-start-column="25" selection-end-line="77" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Specifier.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="54" column="32" selection-start-line="54" selection-start-column="32" selection-end-line="54" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Expression.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2280">
+          <caret line="152" column="2" lean-forward="true" selection-start-line="152" selection-start-column="2" selection-end-line="152" selection-end-column="2" />
         </state>
       </provider>
     </entry>

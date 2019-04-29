@@ -1,12 +1,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>
+#include "tree.h"
+#include "error.h"
 // #include "lex.yy.c"
 // extern FILE* yyin;
 extern int yylex();
 extern void yyrestart();
 extern void yyparse();
 extern int yydebug;
+
+extern struct MultiNode* root;
+
 // int main(int argc, char **argv){
 //     if (argc > 1){
 //         if (!(yyin = fopen(argv[1], "r"))){
@@ -31,5 +36,10 @@ int main(int argc, char **argv)
 
     // yydebug = 1;
     yyparse();
+    if(!HAS_ERROR){
+        // YYSTYPEtoString(root, 0);
+        cppParser(root);
+    }
     return 0;
 }
+

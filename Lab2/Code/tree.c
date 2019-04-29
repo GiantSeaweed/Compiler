@@ -71,6 +71,7 @@ void insertTermAttr(MultiNode *parent, char *childName,
     MultiNode *node = malloc(sizeof(MultiNode));
     strcpy(node->name, childName);
     strcpy(node->attr, attribute);
+
     node->firstLine = lineno;
     node->numChild = 0;
 
@@ -109,7 +110,7 @@ void printTree(MultiNode *node, int depth){
         printf("%s: %d\n", node->name, atoi(node->attr));
     }
     else if (strcmp(node->name, "FLOAT") == 0){
-        printf("%s: %f\n", node->name, atof(node->attr));
+        printf("%s: %s\n", node->name, node->attr);
     }
     else if(node->numChild > 0){//Nonterminals
         printf("%s (%d)\n", node->name, node->firstLine);

@@ -2,9 +2,10 @@
 %{ 
 #include "lex.yy.c"
 #include "tree.h"
+#include "ast/ast.h"
 #include "error.h"
 void yyerror(char* msg);
-
+struct MultiNode *root;
 %}
 
 %union{
@@ -41,8 +42,12 @@ Program :
         $$ = createMultiTree("Program");
         insertNon($$, $1);
         // printf("%d %s\n",yylineno, $$->name);
-        if(HAS_ERROR == 0)
+        if(HAS_ERROR == 0){
             printTree($$, 0);
+            //transToAST($$);
+            root = &$$;
+        }
+            
     }
     ;
 ExtDefList : 
@@ -129,7 +134,7 @@ OptTag :
     ID
     {
         $$ = createMultiTree("OptTag");
-        insertTermAttr($$, "ID", yylval.sval, @1.first_line);
+        insertTermAttr($$, "ID", $1->name, @1.first_line);
     }
     | %empty
     {
@@ -140,7 +145,7 @@ OptTag :
 Tag : 
     ID{
         $$ = createMultiTree("Tag");
-        insertTermAttr($$, "ID", yylval.sval, @1.first_line);
+        insertTermAttr($$, "ID", $1->name, @1.first_line);
     }
     ;
 

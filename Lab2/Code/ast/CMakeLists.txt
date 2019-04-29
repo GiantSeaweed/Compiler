@@ -10,4 +10,4 @@ add_executable(ast Transform.cpp
         HighLevelDef.h
         Specifier.h
         Statement.h
-        Visitor.h Transform.h)
+        Visitor.h Transform.h ast.h type.h VisitorExpression.h)

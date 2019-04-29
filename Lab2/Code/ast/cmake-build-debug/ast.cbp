@@ -109,6 +109,15 @@
 		<Unit filename="/Users/fengshiwei/Compiler/Lab2/Code/ast/Visitor.h">
 			<Option target="ast"/>
 		</Unit>
+		<Unit filename="/Users/fengshiwei/Compiler/Lab2/Code/ast/VisitorExpression.h">
+			<Option target="ast"/>
+		</Unit>
+		<Unit filename="/Users/fengshiwei/Compiler/Lab2/Code/ast/ast.h">
+			<Option target="ast"/>
+		</Unit>
+		<Unit filename="/Users/fengshiwei/Compiler/Lab2/Code/ast/type.h">
+			<Option target="ast"/>
+		</Unit>
 		<Unit filename="/Users/fengshiwei/Compiler/Lab2/Code/ast/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

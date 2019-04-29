@@ -2,15 +2,11 @@
 // Created by 冯诗伟 on 2019-04-27.
 //
 
-#ifndef CPP_SRC_SPECIFIER_H
-#define CPP_SRC_SPECIFIER_H
+#ifndef AST_SPECIFIER_H
+#define AST_SPECIFIER_H
 
-#include "ASTNode.h"
-#include "Expression.h"
-#include "Definition.h"
-#include "Visitor.h"
-#include<vector>
-using namespace std;
+#include "ast.h"
+// using namespace std;
 
 enum BasicType{
     BASICTYPE_INT, BASICTYPE_FLOAT
@@ -28,13 +24,13 @@ struct BasicSpecifier : Specifier{
     BasicSpecifier(BasicType basicType) : basicType(basicType) {}
 
     void accept(Visitor &visitor) override {
-        visitor.visitor(*this);
+        visitor.visit(*this);
     }
 };
 
 struct StructSpecifier : Specifier{
     void accept(Visitor &visitor) override {
-        visitor.visitor(*this);
+        visitor.visit(*this);
     }
 };
 
@@ -52,9 +48,9 @@ struct NormalStructSpecifier : StructSpecifier{
 
 struct DefStructSpecifier : StructSpecifier{
     IDExp* optTag;
-    vector<Definition*> defList;
+    vector<Definition*> *defList;
 
-    DefStructSpecifier(IDExp *optTag, const vector<Definition *> &defList) : optTag(optTag), defList(defList) {}
+    DefStructSpecifier(IDExp *optTag, vector<Definition *> *defList) : optTag(optTag), defList(defList){}
 
     void accept(Visitor &visitor) override {
         if (visitor.visit(*this)) {
@@ -68,5 +64,5 @@ struct DefStructSpecifier : StructSpecifier{
     }
 };
 
-#endif //CPP_SRC_SPECIFIER_H
+#endif //AST_SPECIFIER_H
 

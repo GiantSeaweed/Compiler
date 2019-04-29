@@ -2,22 +2,21 @@
 // Created by 冯诗伟 on 2019-04-27.
 //
 
-#ifndef CPP_SRC_EXPRESSION_H
-#define CPP_SRC_EXPRESSION_H
 
-#include "ASTNode.h"
-#include "Visitor.h"
-#include <string>
-#include <vector>
 
-using namespace std;
+#ifndef AST_EXPRESSION_H
+#define AST_EXPRESSION_H
+
+#include "ast.h"
+
+// using namespace std;
 
 enum InfixOperator{
     INFIX_ASSIGN = 0,
     INFIX_AND, INFIX_OR,
-    INFIX_GT,  INFIX_LT, INFIX_GE, INFIX_LE, INFIX_EQ, INFIX_NE,
-    INFIX_PLUS, INFIX_STAR, INFIX_DIV
-};
+    INFIX_RELOP,
+    INFIX_PLUS, INFIX_MINUS, INFIX_STAR, INFIX_DIV
+};//INFIX_GT,  INFIX_LT, INFIX_GE, INFIX_LE, INFIX_EQ, INFIX_NE,
 
 enum PrefixOperator{
     PREFIX_MINUS = 0, PREFIX_NOT
@@ -36,8 +35,8 @@ struct InfixExp : Exp {
     Exp* rightSide;
     InfixOperator infixOp;
 
-    InfixExp(Exp *leftSide, Exp *rightSide, InfixOperator infixOp) : leftSide(leftSide), rightSide(rightSide),
-                                                                     infixOp(infixOp) {}
+    InfixExp(Exp *leftSide, InfixOperator infixOp, Exp *rightSide) : leftSide(leftSide),
+                                                                      infixOp(infixOp), rightSide(rightSide) {}
 
     void accept(Visitor &visitor) override {
         if (visitor.visit(*this)) {
@@ -80,7 +79,7 @@ struct ArrayExp : Exp{
 
     void accept(Visitor &visitor){
         if(visitor.visit(*this)){
-            ((ASTNode*) arrayID)->accept(visitor);
+            ((ASTNode*) arrayExp)->accept(visitor);
             ((ASTNode*) arrayIndex)->accept(visitor);
         }
     }
@@ -100,7 +99,7 @@ struct StructExp : Exp{
     Exp* structExp;
     IDExp* structID;
 
-    StructExp(Exp *structExp, Exp *structId) : structExp(structExp), structID(structId) {}
+    StructExp(Exp *structExp, IDExp *structId) : structExp(structExp), structID(structId) {}
 
     void accept(Visitor &visitor) override {
         if (visitor.visit(*this)) {
@@ -116,14 +115,14 @@ struct IntExp: Exp{
     IntExp(int value) : value(value) {}
 
     void accept(Visitor & visitor) override {
-        visitor.visitor(*this);
+        visitor.visit(*this);
     }
 };
 
 struct FloatExp : Exp{
-    float value;
+    string value;
 
-    FloatExp(float value) : value(value) {}
+    FloatExp(string value) : value(value) {}
 
     void accept(Visitor &visitor) override {
         visitor.visit(*this);
@@ -135,13 +134,13 @@ struct FunExp: Exp{
     IDExp* funID;
     vector<IDExp*> *args;
 
-    FunExp(IDExp *funcId) : funID(funcId) {}
+    FunExp(IDExp *funId) : funID(funId) {}
 
-    FunExp(IDExp *funcId, vector<IDExp *> *args) : funcID(funcId), args(args) {}
+    FunExp(IDExp *funId, vector<IDExp *> *args) : funID(funId), args(args) {}
 
     void accept(Visitor &visitor) override {
         if(visitor.visit(*this)){
-            ((ASTNode*)funcID)->accept(visitor);
+            ((ASTNode*)funID)->accept(visitor);
             for(Exp* exp: *args){
                 ((ASTNode*) exp)->accept(visitor);
             }
@@ -153,4 +152,4 @@ struct FunExp: Exp{
     }
 };
 
-#endif //CPP_SRC_EXPRESSION_H
+#endif //AST_EXPRESSION_H

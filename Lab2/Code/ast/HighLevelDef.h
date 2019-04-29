@@ -2,18 +2,11 @@
 // Created by 冯诗伟 on 2019-04-27.
 //
 
-#ifndef CPP_SRC_HIGHLEVELDEF_H
-#define CPP_SRC_HIGHLEVELDEF_H
+#ifndef AST_HIGHLEVELDEF_H
+#define AST_HIGHLEVELDEF_H
 
-#include <vector>
-#include "ASTNode.h"
-#include "Specifier.h"
-#include "Statement.h"
-#include "Visitor.h"
-#include "Declarator.h"
-#include "Definition.h"
 
-using namespace std;
+#include "ast.h"
 
 struct ExtDef : ASTNode{
     void accept(Visitor &visitor) override {
@@ -61,7 +54,7 @@ struct FunDef : ExtDef{
     FunDec* funDec;
     CompSt * compSt;
 
-    FunDef(Specifier *retSpecifier, FunDec *funcDec, CompSt *compSt) : retSpecifier(retSpecifier), funcDec(funcDec),
+    FunDef(Specifier *retSpecifier, FunDec *funDec, CompSt *compSt) : retSpecifier(retSpecifier), funDec(funDec),
                                                                          compSt(compSt) {}
 
     void accept(Visitor &visitor) override {
@@ -93,4 +86,4 @@ struct Program : ASTNode{
 
 };
 
-#endif //CPP_SRC_HIGHLEVELDEF_H
+#endif //AST_HIGHLEVELDEF_H

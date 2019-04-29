@@ -9,6 +9,7 @@ CFLAGS = -std=c99
 
 # 编译目标：src目录下的所有.c文件
 CFILES = $(shell find ./ -name "*.c")
+CPPFILES = $(shell find ./ -name "*.cpp")
 OBJS = $(CFILES:.c=.o)
 LFILE = $(shell find ./ -name "*.l")
 YFILE = $(shell find ./ -name "*.y")
@@ -17,8 +18,15 @@ YFC = $(shell find ./ -name "*.y" | sed s/[^/]*\\.y/syntax.tab.c/)
 LFO = $(LFC:.c=.o)
 YFO = $(YFC:.c=.o)
 
-parser: syntax $(filter-out $(LFO),$(OBJS))
-	$(CC) -o parser $(filter-out $(LFO),$(OBJS)) -lfl -ly
+cleanC:
+	rm -rf ast/cmake-build-debug/
+
+parser: cleanC syntax lexical $(CFILES) $(CPPFILES)
+	gcc -c -g main.c syntax.tab.c  -lfl -ly
+	g++ -std=c++11 -g $(CPPFILES) main.o syntax.tab.o -lfl -ly -o parser
+	@clear
+	@echo  "\033[0;32m Successful generate the parser! \033[0;30m"
+	
 
 syntax: lexical syntax-c
 	$(CC) -c $(YFC) -o $(YFO)
@@ -27,18 +35,36 @@ lexical: $(LFILE)
 	$(FLEX) -o $(LFC) $(LFILE)
 
 syntax-c: $(YFILE)
-	$(BISON) -o $(YFC) -d  -v $(YFILE)
+	$(BISON) -o $(YFC) -d -v $(YFILE)
 
 -include $(patsubst %.o, %.d, $(OBJS))
 
 # 定义的一些伪目标
 .PHONY: clean test
 test:
-	#./parser ../Test/test1.cmm
-	./parser ../Tests_1_Super/test_30.cmm  > test_fsw.output
-	diff ../Tests_1_Super/test_30.output test_fsw.output
+	./parser ../Test/test1.cmm
+
+# run: lexical syntax-c
+# 	gcc main.c syntax.tab.c -lfl -ly -o parser
+# 	@clear
+# 	@echo  "\033[0;32m Successful generate the parser! \033[0;30m"
+# tryLex: lexical
+# 	gcc main.c lex.yy.c -lfl -o scanner
+# 	echo $$(clear)
+# 	@./scanner tmpTest.cmm
+# trySyn: lexical syntax-c
+# 	gcc -c -g main.c syntax.tab.c  -lfl -ly
+# 	g++ -g cppAdapter.cpp main.o syntax.tab.o -lfl -ly -o parser
+# 	# echo $$(clear)
+# 	# @./parser tmpTest.cmm
+
+debug: lexical syntax-c $(CFILES) $(CPPFILES)
+	gcc -DDEBUG -c -g main.c syntax.tab.c  -lfl -ly
+	g++ -g $(CPPFILES) main.o syntax.tab.o -lfl -ly -o parser
+
 clean:
 	rm -f parser lex.yy.c syntax.tab.c syntax.tab.h syntax.output
+	rm -f scanner
 	rm -f $(OBJS) $(OBJS:.o=.d)
 	rm -f $(LFC) $(YFC) $(YFC:.c=.h)
 	rm -f *~

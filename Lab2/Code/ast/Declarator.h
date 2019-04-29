@@ -2,17 +2,19 @@
 // Created by 冯诗伟 on 2019-04-27.
 //
 
-#ifndef CPP_SRC_DECLARATOR_H
-#define CPP_SRC_DECLARATOR_H
+#ifndef AST_DECLARATOR_H
+#define AST_DECLARATOR_H
 
-#include <string>
+
 #include "ASTNode.h"
-#include "Expression.h"
-#include "Specifier.h"
+// #include "type.h"
+// #include <vector>
+// #include <algorithm>
 
-using namespace std;
+// using namespace std;
 
-struct Declarator : ASTNode{
+struct Declarator : ASTNode
+{
     void accept(Visitor &visitor) override {
         visitor.visit(*this);
     }
@@ -51,7 +53,7 @@ struct ArrayDec : VarDec{
 
     void accept(Visitor &visitor) override {
         if(visitor.visit(*this)){
-            ((ASTNode*)id)->accept(visitor);
+            ((ASTNode*)varDec)->accept(visitor);
         }
     }
 
@@ -79,7 +81,7 @@ struct ParamDec : Declarator{
 
 struct FunDec : Declarator{
     IDExp* id;
-    vector<ParamDec*> paramList;
+    vector<ParamDec*> *paramList;
 
     FunDec(IDExp *id, const vector<ParamDec *> &paramList) : id(id), paramList(paramList) {}
 
@@ -100,4 +102,4 @@ struct FunDec : Declarator{
 };
 
 
-#endif //CPP_SRC_DECLARATOR_H
+#endif //AST_DECLARATOR_H

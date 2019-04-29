@@ -5,13 +5,23 @@
 #ifndef AST_TRANSFORM_H
 #define AST_TRANSFORM_H
 
-#include "Definition.h"
-#include "Declarator.h"
-#include "Specifier.h"
-#include "Exp.h"
-#include "HighLevelDef.h"
-#include "Statement.h"
+#include "ast.h"
+#include "type.h"
 #include "../tree.h"
+#include <vector>
+#include <cstring>
+#include <iostream>
+#include "../syntax.tab.h"
+// #include "visitor/PrintVisitor.h"
+// #include "visitor/TypeVisitor.h"
+// #include "visitor/ExpressionVisitor.h"
+// #include "visitor/FunctionReturnVisitor.h"
+
+using namespace std;
+
+
+
+Program* transToAST(MultiNode* node);
 
 // Highlevel definition
 Program *transProgram(MultiNode *node);
@@ -82,9 +92,9 @@ ArrayExp *transArrayExp(MultiNode *node);
 
 StructExp *transStructExp(MultiNode *node);
 
-IntExp *transIntLiteral(MultiNode *node);
+IntExp *transIntValue(MultiNode *node);
 
-FloatExp *transFloatLiteral(MultiNode *node);
+FloatExp *transFloatValue(MultiNode *node);
 
 IDExp *transIdExp(MultiNode *node);
 

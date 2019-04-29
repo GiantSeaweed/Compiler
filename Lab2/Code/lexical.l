@@ -6,8 +6,11 @@ int yycolumn = 1;
     yylloc.first_line = yylloc.last_line = yylineno; \
     yylloc.first_column = yycolumn; \
     yylloc.last_column = yycolumn + yyleng - 1; \
-    yycolumn += yyleng;
+    yycolumn += yyleng;\
+    
 %}
+    
+    
 digit [0-9]
 letter [_a-zA-Z]
 relop ">"|"<"|">="|"<="|"=="|"!="
@@ -23,7 +26,7 @@ float {float_norm}|{float_exp}
 ";" { return SEMI; }
 "," { return COMMA; }
 "=" { return ASSIGNOP; }
-">"|"<"|">="|"<="|"=="|"!=" { return RELOP; }
+">"|"<"|">="|"<="|"=="|"!=" {  return RELOP; }
 "+" { return PLUS; }
 "-" { return MINUS; }
 "*" { return STAR; }
@@ -32,7 +35,8 @@ float {float_norm}|{float_exp}
 "||" { return OR; }
 "." { return DOT; }
 "!" { return NOT; }
-int|float {  yylval.sval = strdup(yytext); return TYPE; }
+int|float {  yylval.sval = strdup(yytext); 
+            return TYPE; }
 "(" { return LP; }
 ")" { return RP; }
 "[" { return LB; }

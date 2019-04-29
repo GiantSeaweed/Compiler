@@ -2,18 +2,14 @@
 // Created by 冯诗伟 on 2019-04-27.
 //
 
-#ifndef CPP_SRC_STATEMENT_H
-#define CPP_SRC_STATEMENT_H
+#ifndef AST_STATEMENT_H
+#define AST_STATEMENT_H
 
-#include "ASTNode.h"
-#include "Expression.h"
-#include "Definition.h"
-#include "Visitor.h"
-#include <vector>
+#include "ast.h"
 
-using namespace std;
+// using namespace std;
 
-struct Stmt : ASTNode{
+struct Stmt : ASTNode {
     void accept(Visitor &visitor) override {
         visitor.visit(*this);
     }
@@ -97,4 +93,4 @@ struct WhileStmt : Stmt {
     WhileStmt(Exp *condition, Stmt *body) : condition(condition), body(body) {}
 };
 
-#endif //CPP_SRC_STATEMENT_H
+#endif //AST_STATEMENT_H

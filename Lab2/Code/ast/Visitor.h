@@ -5,12 +5,7 @@
 #ifndef CPP_SRC_VISITOR_HH
 #define CPP_SRC_VISITOR_HH
 
-#include "Declarator.h"
-#include "Definition.h"
-#include "Expression.h"
-#include "HighLevelDef.h"
-#include "Specifier.h"
-#include "Statement.h"
+#include "type.h"
 
 struct Visitor {
     //Declarator.h 6
@@ -93,7 +88,7 @@ struct Visitor {
 
     virtual bool visit(WhileStmt &whileStmt) = 0;
 
-    virtual ~Visitor() {}
+    virtual ~Visitor() = default;
 };
 
 struct VisitorTrue : Visitor{
