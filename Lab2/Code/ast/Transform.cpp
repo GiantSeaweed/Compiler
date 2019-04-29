@@ -5,6 +5,7 @@
 #include "type.h"
 //#include "../yystype.h"
 #include "../syntax.tab.h"
+//#include "VisitorType.h"
 
 // #define DEBUG
 using namespace std;
@@ -22,21 +23,21 @@ Program *transToAST(MultiNode *root)
 #ifdef DEBUG
     cout << "Parsing AST" << endl;
 #endif
-    Program *pg = transProgram(root);
+    Program *program = transProgram(root);
     
-// #ifdef DEBUG
-//     cout << "Parsing symbol" << endl;
-// #endif
-    // TypeVisitor visitor;
-    // pg->accept(visitor);
+ #ifdef DEBUG
+     cout << "Parsing symbol" << endl;
+ #endif
+    //  TypeVisitor visitor;
+    //  program->accept(visitor);
 
     // ExpressionVisitor expressionVisitor;
     // expressionVisitor.symTable = visitor.symbolTable;
     // expressionVisitor.funcTable = visitor.funcTable;
-    // pg->accept(expressionVisitor);
+    // program->accept(expressionVisitor);
 
     // FunctionReturnVisitor functionReturnVisitor;
-    // pg->accept(functionReturnVisitor);
+    // program->accept(functionReturnVisitor);
 
     //    auto symbols = visitor.symbolTable;
     //    for (Symbol *symbol:*symbols) {
@@ -44,8 +45,8 @@ Program *transToAST(MultiNode *root)
     //             << symbol->beginLineno << endl;
     //    }
     //    PrintVisitor printVisitor;
-    //    pg->accept(printVisitor);
-    return pg;
+    //    program->accept(printVisitor);
+    return program;
 }
 
 // high level definition
@@ -56,7 +57,7 @@ Program *transProgram(MultiNode *node) {
     vector<ExtDef*> *extDefList = transExtDefList(node->childList[0]);
 
     Program* program = new Program(extDefList);
-
+    program->beginLine = node->firstLine;
     return program;
 }
 
@@ -72,7 +73,6 @@ vector<ExtDef *> *transExtDefList(MultiNode *node){
     ExtDef* extDef = transExtDef(node->childList[0]);
     extDefListTail = transExtDefList(node->childList[1]);
     extDefListTail->insert(extDefListTail->begin(), extDef);
-
     return extDefListTail;
 }
 
@@ -85,11 +85,13 @@ ExtDef *transExtDef(MultiNode *node){
         //Specifier ExtDecList SEMI
         vector<VarDec*> *varDecList = transExtDecList(node->childList[1]);
         ExtDef* extDef = new DecDef(specifier, varDecList);
+        extDef->beginLine = node->firstLine;
         return extDef;
     }
     else if(!strcmp(node->childList[1]->name, SEMI_STR)){
         //Specifier SEMI
         ExtDef* extDef = new TypeDef(specifier);
+        extDef->beginLine = node->firstLine;
         return extDef;
     }
     else if(!strcmp(node->childList[1]->name, FUNDEC)) {
@@ -97,9 +99,12 @@ ExtDef *transExtDef(MultiNode *node){
         FunDec *funDec = transFunDec(node->childList[1]);
         CompSt *compSt = transCompSt(node->childList[2]);
         ExtDef *extDef = new FunDef(specifier, funDec, compSt);
+        extDef->beginLine = node->firstLine;
         return extDef;
 
     }
+
+
 }
 
 vector<VarDec*> *transExtDecList(MultiNode* node){
@@ -125,13 +130,16 @@ vector<VarDec*> *transExtDecList(MultiNode* node){
 Specifier *transSpecifier(MultiNode *node){
 #ifdef DEBUG
     cout << "Parsing Specifier" << endl;
+    printNode(node);
 #endif
     if(!strcmp(node->childList[0]->name, TYPE_STR)){
         Specifier* specifier = transBasicSpecifier(node->childList[0]);
+        specifier->beginLine = node->firstLine;
         return specifier;
     }
     else{
         Specifier* specifier = transStructSpecifier(node->childList[0]);
+        specifier->beginLine = node->firstLine;
         return specifier;
     }
 }
@@ -139,13 +147,22 @@ Specifier *transSpecifier(MultiNode *node){
 BasicSpecifier *transBasicSpecifier(MultiNode* node){
 #ifdef DEBUG
     cout << "Parsing BasicSpecifier" << endl;
+//    printNode(node);
 #endif
-    if(!strcmp(node->name, INT_STR)){
+    if(!strcmp(node->attr, "int")){
+#ifdef DEBUG
+        cout << "Parsing BasicSpecifier::INT" << endl;
+#endif
         BasicSpecifier* basicSpecifier = new BasicSpecifier(BASICTYPE_INT);
+        basicSpecifier->beginLine = node->firstLine;
         return basicSpecifier;
     }
-    else if(!strcmp(node->name, FLOAT_STR)){
+    else if(!strcmp(node->attr, "float")){
+#ifdef DEBUG
+        cout << "Parsing BasicSpecifier::Float" << endl;
+#endif
         BasicSpecifier* basicSpecifier = new BasicSpecifier(BASICTYPE_FLOAT);
+        basicSpecifier->beginLine = node->firstLine;
         return basicSpecifier;
     }
 }
@@ -158,6 +175,7 @@ StructSpecifier *transStructSpecifier(MultiNode* node){
         //STRUCT Tag
         IDExp *tag = transTag(node->childList[1]);
         StructSpecifier* structSpecifier = new NormalStructSpecifier(tag);
+        structSpecifier->beginLine = node->firstLine;
         return structSpecifier;
     }
     else if(node->numChild == 5){
@@ -166,6 +184,7 @@ StructSpecifier *transStructSpecifier(MultiNode* node){
         vector<Definition*> *defList = transDefList(node->childList[3]);
 
         StructSpecifier* structSpecifier = new DefStructSpecifier(optTag, defList);
+        structSpecifier->beginLine = node->firstLine;
         return structSpecifier;
     }
 
@@ -183,6 +202,7 @@ IDExp *transOptionalTag(MultiNode *node){
     }
     else{
         IDExp* tag = transIdExp(node->childList[0]);
+        tag->beginLine = node->firstLine;
         return tag;
     }
 }
@@ -193,6 +213,7 @@ IDExp *transTag(MultiNode *node){
 #endif
     //tag
     IDExp* tag = transIdExp(node->childList[0]);
+    tag->beginLine = node->firstLine;
     return tag;
 
 }
@@ -207,6 +228,7 @@ VarDec *transVarDec(MultiNode *node){
         IDExp* id = transIdExp(node->childList[0]);
 
         NormalVarDec* normalVarDec = new NormalVarDec(id);
+        normalVarDec->beginLine = node->firstLine;
         return normalVarDec;
     }
     else{
@@ -215,6 +237,7 @@ VarDec *transVarDec(MultiNode *node){
         int intValue = atoi(node->childList[2]->attr);
 
         ArrayDec* arrayDec = new ArrayDec(varDec, intValue);
+        arrayDec->beginLine = node->firstLine;
         return arrayDec;
     }
 }
@@ -233,6 +256,7 @@ FunDec *transFunDec(MultiNode *node){
     }
 
     FunDec* funDec = new FunDec(idExp, varList);
+    funDec->beginLine = node->firstLine;
     return funDec;
 }
 
@@ -264,6 +288,7 @@ ParamDec *transParamDec(MultiNode *node){
     VarDec* varDec =transVarDec(node->childList[1]);
 
     ParamDec* paramDec = new ParamDec(specifier, varDec);
+    paramDec->beginLine = node->firstLine;
     return paramDec;
 }
 
@@ -278,6 +303,7 @@ CompSt *transCompSt(MultiNode *node){
     vector<Stmt*> *stmtList = transStmtList(node->childList[2]);
 
     CompSt* compSt = new CompSt(defList, stmtList);
+    compSt->beginLine = node->firstLine;
     return compSt;
 }
 
@@ -329,6 +355,8 @@ Stmt *transStmt(MultiNode *node){
         cout <<"Error in TransStmt()"<<endl;
         exit(-1);
     }
+    stmt->beginLine = node->firstLine;
+
     return stmt;
 }
 
@@ -339,6 +367,7 @@ ExpStmt *transExpStmt(MultiNode *node){
     //Exp SEMI
     Exp* exp = transExp(node->childList[0]);
     ExpStmt* expStmt = new ExpStmt(exp);
+    expStmt->beginLine = node->firstLine;
     return expStmt;
 }
 
@@ -349,6 +378,7 @@ ReturnStmt *transRetStmt(MultiNode *node){
     //RETURN Exp SEMI
     Exp* exp = transExp(node->childList[1]);
     ReturnStmt* expStmt = new ReturnStmt(exp);
+    expStmt->beginLine = node->firstLine;
     return expStmt;
 }
 
@@ -366,6 +396,7 @@ IfElseStmt *transIfElseStmt(MultiNode *node){
     }
 
     IfElseStmt* expStmt = new IfElseStmt(condition,thenBody,elseBody);
+    expStmt->beginLine = node->firstLine;
     return expStmt;
 }
 
@@ -377,6 +408,7 @@ WhileStmt *transWhileStmt(MultiNode *node){
     Exp* condition = transExp(node->childList[2]);
     Stmt* body = transStmt(node->childList[4]);
     WhileStmt* expStmt = new WhileStmt(condition,body);
+    expStmt->beginLine = node->firstLine;
     return expStmt;
 }
 
@@ -407,6 +439,7 @@ Definition *transDef(MultiNode *node){
     vector<Dec*> *decList = transDecList(node->childList[1]);
 
     Definition* definition = new Definition(specifier, decList);
+    definition->beginLine = node->firstLine;
     return definition;
 }
 
@@ -442,6 +475,7 @@ Dec *transDec(MultiNode *node){
         //VarDec
         VarDec* varDec = transVarDec(node->childList[0]);
         Dec* dec = new NormalDec(varDec);
+        dec->beginLine = node->firstLine;
         return dec;
     }
     else{
@@ -449,6 +483,7 @@ Dec *transDec(MultiNode *node){
         VarDec* varDec = transVarDec(node->childList[0]);
         Exp* exp = transExp(node->childList[2]);
         Dec* dec = new InitializedDec(varDec,exp);
+        dec->beginLine = node->firstLine;
         return dec;
     }
 
@@ -459,11 +494,6 @@ Dec *transDec(MultiNode *node){
 Exp *transExp(MultiNode *node){
 #ifdef DEBUG
     cout << "Parsing Exp" << endl;
-//    cout << (node->numChild)<<endl;
-    // cout << "child:" << node->numChild<<endl;
-    // cout << "name:" << node->name<<endl;
-    // cout << "child0:"<<node->childList[0]->name<<endl;
-    // cout << "cmp:" << strcmp(node->childList[0]->name,"INT")<<endl;
 #endif
     Exp* exp;
     if(node->numChild == 3
@@ -540,7 +570,7 @@ Exp *transExp(MultiNode *node){
         cout << "Magic Exp" <<endl;
         exit(-1);
     }
-
+    exp->beginLine = node->firstLine;
     return exp;
 }
 
@@ -575,6 +605,7 @@ InfixExp *transInfixExp(MultiNode *node){
         exit(-1);
     }
     InfixExp* infixExp = new InfixExp(leftSide,infixOperator,rightSide);
+    infixExp->beginLine = node->firstLine;
     return infixExp;
 }
 
@@ -585,6 +616,7 @@ ParenthesizedExp *transParenthesizedExp(MultiNode *node){
     //LP Exp RP
     Exp* exp = transExp(node->childList[1]);
     ParenthesizedExp* parenthesizedExp = new ParenthesizedExp(exp);
+    parenthesizedExp->beginLine = node->firstLine;
     return parenthesizedExp;
 }
 
@@ -599,6 +631,7 @@ PrefixExp *transPrefixExp(MultiNode *node){
         Exp* exp = transExp(node->childList[1]);
 
         PrefixExp* prefixExp = new PrefixExp(exp, PREFIX_NOT);
+        prefixExp->beginLine = node->firstLine;
         return prefixExp;
     }
     else{
@@ -606,6 +639,7 @@ PrefixExp *transPrefixExp(MultiNode *node){
         Exp* exp = transExp(node->childList[1]);
 
         PrefixExp* prefixExp = new PrefixExp(exp, PREFIX_MINUS);
+        prefixExp->beginLine = node->firstLine;
         return prefixExp;
     }
 }
@@ -619,6 +653,7 @@ FunExp *transFunExp(MultiNode *node){
     if(node->numChild == 3){
         IDExp* idExp = transIdExp(node->childList[0]);
         FunExp* funExp = new FunExp(idExp);
+        funExp->beginLine = node->firstLine;
         return funExp;
     }
     else{
@@ -626,6 +661,7 @@ FunExp *transFunExp(MultiNode *node){
         vector<Exp*> *args = transArgs(node->childList[2]);
 
         FunExp* funExp = new FunExp(idExp, args);
+        funExp->beginLine = node->firstLine;
         return funExp;
     }
 }
@@ -639,6 +675,7 @@ ArrayExp *transArrayExp(MultiNode *node){
     Exp* index = transExp(node->childList[2]);
 
     ArrayExp* arrayExp = new ArrayExp(idExp, index);
+    arrayExp->beginLine = node->firstLine;
     return arrayExp;
 }
 
@@ -651,6 +688,7 @@ StructExp *transStructExp(MultiNode *node){
     IDExp* idExp = transIdExp(node->childList[2]);
 
     StructExp* structExp = new StructExp(exp,idExp);
+    structExp->beginLine = node->firstLine;
     return structExp;
 }
 
@@ -659,6 +697,7 @@ IntExp *transIntValue(MultiNode *node){
     cout << "Parsing IntValue" << endl;
 #endif
     IntExp* intExp = new IntExp(atoi(node->attr));
+    intExp->beginLine = node->firstLine;
     return intExp;
 }
 
@@ -667,6 +706,7 @@ FloatExp *transFloatValue(MultiNode *node){
     cout << "Parsing FloatValue" << endl;
 #endif
     FloatExp* floatExp = new FloatExp(node->attr);
+    floatExp->beginLine = node->firstLine;
     return floatExp;
 }
 
@@ -675,6 +715,7 @@ IDExp *transIdExp(MultiNode *node) {
     cout << "Parsing IDExp" << endl;
 #endif
     IDExp *idExp = new IDExp(node->attr);
+    idExp->beginLine = node->firstLine;
     return idExp;
 }
 

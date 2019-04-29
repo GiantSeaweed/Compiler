@@ -45,8 +45,6 @@ test:
 	./parser ../Test/test1.cmm
 	# ./parser ../Test_1_Super/test_1.cmm  > test_fsw.output
 	# diff ../Test_1_Super/test_1.output test_fsw.output
-	# # ./parser ../Test_1_Super/test_2.cmm  > test_fsw.output
-	# # diff ../Test_1_Super/test_2.output test_fsw.output
 	# ./parser ../Test_1_Super/test_3.cmm  > test_fsw.output
 	# diff ../Test_1_Super/test_3.output test_fsw.output
 	# ./parser ../Test_1_Super/test_4.cmm  > test_fsw.output

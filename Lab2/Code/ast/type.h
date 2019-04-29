@@ -5,7 +5,7 @@
 #ifndef AST_TYPE_H
 #define AST_TYPE_H
 
-
+#include "../tree.h"
 
 // #include "Declarator.h"
 struct Declarator;
