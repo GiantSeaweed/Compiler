@@ -2,10 +2,15 @@
 %{ 
 #include "lex.yy.c"
 #include "tree.h"
-#include "ast/ast.h"
+#include "syntax.tab.h"
+
 #include "error.h"
 void yyerror(char* msg);
-struct MultiNode *root;
+int yylex(void);
+
+struct MultiNode *root = 0;
+int HAS_ERROR = 0;
+
 %}
 
 %union{
@@ -45,7 +50,7 @@ Program :
         if(HAS_ERROR == 0){
             printTree($$, 0);
             //transToAST($$);
-            root = &$$;
+            root = $$;
         }
             
     }

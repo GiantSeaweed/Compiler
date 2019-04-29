@@ -2,21 +2,30 @@
 #include <vector>
 
 #include "Transform.h"
+#include "type.h"
 //#include "../yystype.h"
 #include "../syntax.tab.h"
 
-
+// #define DEBUG
 using namespace std;
 
-struct Program *transToAST(MultiNode *root)
+void printNode(MultiNode* node){
+    cout<<"name:"<<node->name<<endl;
+    cout<<"child:"<<node->numChild<<endl;
+    for(int i =0 ;i<node->numChild;i++){
+        cout<<"\t"<<i<<":"<<node->childList[i]->name<<endl;
+    }
+}
+
+Program *transToAST(MultiNode *root)
 {
 #ifdef DEBUG
-    cout << "Parse AST" << endl;
+    cout << "Parsing AST" << endl;
 #endif
     Program *pg = transProgram(root);
     
 // #ifdef DEBUG
-//     cout << "Parse symbol" << endl;
+//     cout << "Parsing symbol" << endl;
 // #endif
     // TypeVisitor visitor;
     // pg->accept(visitor);
@@ -41,6 +50,9 @@ struct Program *transToAST(MultiNode *root)
 
 // high level definition
 Program *transProgram(MultiNode *node) {
+#ifdef DEBUG
+    cout << "Parsing Program" << endl;
+#endif
     vector<ExtDef*> *extDefList = transExtDefList(node->childList[0]);
 
     Program* program = new Program(extDefList);
@@ -49,6 +61,9 @@ Program *transProgram(MultiNode *node) {
 }
 
 vector<ExtDef *> *transExtDefList(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing ExtDefList" << endl;
+#endif
     vector<ExtDef*> *extDefListTail = new vector<ExtDef*>();
     if(!(strcmp(node->name,EMPTY)) ){
         return extDefListTail; //recursively
@@ -62,6 +77,9 @@ vector<ExtDef *> *transExtDefList(MultiNode *node){
 }
 
 ExtDef *transExtDef(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing ExtDef" << endl;
+#endif
     Specifier* specifier = transSpecifier(node->childList[0]);
     if(!strcmp(node->childList[1]->name, EXTDECLIST)){
         //Specifier ExtDecList SEMI
@@ -69,7 +87,7 @@ ExtDef *transExtDef(MultiNode *node){
         ExtDef* extDef = new DecDef(specifier, varDecList);
         return extDef;
     }
-    else if(!strcmp(node->childList[1]->name, SEMI)){
+    else if(!strcmp(node->childList[1]->name, SEMI_STR)){
         //Specifier SEMI
         ExtDef* extDef = new TypeDef(specifier);
         return extDef;
@@ -85,6 +103,9 @@ ExtDef *transExtDef(MultiNode *node){
 }
 
 vector<VarDec*> *transExtDecList(MultiNode* node){
+#ifdef DEBUG
+    cout << "Parsing ExtDecList" << endl;
+#endif
     VarDec* varDec = transVarDec(node->childList[0]);
     if(node->numChild == 1){
         //VarDec
@@ -102,7 +123,10 @@ vector<VarDec*> *transExtDecList(MultiNode* node){
 
 //specifier
 Specifier *transSpecifier(MultiNode *node){
-    if(!strcmp(node->childList[0]->name, TYPE)){
+#ifdef DEBUG
+    cout << "Parsing Specifier" << endl;
+#endif
+    if(!strcmp(node->childList[0]->name, TYPE_STR)){
         Specifier* specifier = transBasicSpecifier(node->childList[0]);
         return specifier;
     }
@@ -113,17 +137,23 @@ Specifier *transSpecifier(MultiNode *node){
 }
 
 BasicSpecifier *transBasicSpecifier(MultiNode* node){
-    if(!strcmp(node->name, INT)){
+#ifdef DEBUG
+    cout << "Parsing BasicSpecifier" << endl;
+#endif
+    if(!strcmp(node->name, INT_STR)){
         BasicSpecifier* basicSpecifier = new BasicSpecifier(BASICTYPE_INT);
         return basicSpecifier;
     }
-    else if(!strcmp(node->name, FLOAT)){
+    else if(!strcmp(node->name, FLOAT_STR)){
         BasicSpecifier* basicSpecifier = new BasicSpecifier(BASICTYPE_FLOAT);
         return basicSpecifier;
     }
 }
 
 StructSpecifier *transStructSpecifier(MultiNode* node){
+#ifdef DEBUG
+    cout << "Parsing StructSpecifier" << endl;
+#endif
     if(node->numChild == 2){
         //STRUCT Tag
         IDExp *tag = transTag(node->childList[1]);
@@ -144,6 +174,9 @@ StructSpecifier *transStructSpecifier(MultiNode* node){
 }
 
 IDExp *transOptionalTag(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing OptTag" << endl;
+#endif
     //tag or \epsilon
     if(!strcmp(node->name, EMPTY)){
         return nullptr;
@@ -155,6 +188,9 @@ IDExp *transOptionalTag(MultiNode *node){
 }
 
 IDExp *transTag(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing Tag" << endl;
+#endif
     //tag
     IDExp* tag = transIdExp(node->childList[0]);
     return tag;
@@ -163,6 +199,9 @@ IDExp *transTag(MultiNode *node){
 
 //Declarator
 VarDec *transVarDec(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing VarDec" << endl;
+#endif
     if(node->numChild == 1){
         //ID
         IDExp* id = transIdExp(node->childList[0]);
@@ -181,6 +220,9 @@ VarDec *transVarDec(MultiNode *node){
 }
 
 FunDec *transFunDec(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing FunDec" << endl;
+#endif
     IDExp* idExp = transIdExp(node->childList[0]);
     //ID LP RP
     vector<ParamDec*> *varList = new vector<ParamDec*>();
@@ -190,11 +232,14 @@ FunDec *transFunDec(MultiNode *node){
         varList = transVarList(node->childList[2]);
     }
 
-    FunDec* funDec = new FunDec(idExp, *varList);
+    FunDec* funDec = new FunDec(idExp, varList);
     return funDec;
 }
 
 vector<ParamDec *> *transVarList(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing VarList" << endl;
+#endif
     vector<ParamDec*>* varList = new vector<ParamDec*>();
     if(node->numChild == 1){
         //ParamDec
@@ -211,6 +256,9 @@ vector<ParamDec *> *transVarList(MultiNode *node){
 }
 
 ParamDec *transParamDec(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing ParamDec" << endl;
+#endif
     //Specifier VarDec
     Specifier* specifier = transSpecifier(node->childList[0]);
     VarDec* varDec =transVarDec(node->childList[1]);
@@ -222,6 +270,9 @@ ParamDec *transParamDec(MultiNode *node){
 
 //Statements
 CompSt *transCompSt(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing CompSt" << endl;
+#endif
     //LC DefList StmtList RC
     vector<Definition*> *defList = transDefList(node->childList[1]);
     vector<Stmt*> *stmtList = transStmtList(node->childList[2]);
@@ -231,6 +282,9 @@ CompSt *transCompSt(MultiNode *node){
 }
 
 vector<Stmt *> *transStmtList(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing StmtList" << endl;
+#endif
     vector<Stmt*> *stmtListTail = new vector<Stmt*>();
     if(!(strcmp(node->name,EMPTY)) ){
         return stmtListTail; //recursively
@@ -244,27 +298,32 @@ vector<Stmt *> *transStmtList(MultiNode *node){
 }
 
 Stmt *transStmt(MultiNode *node){
-    Stmt* stmt;
-    if(!strcmp(node->name, EXP)){
+#ifdef DEBUG
+    cout << "Parsing Stmt" << endl;
+    // printNode(node);
+    // cout << strcmp(node->name, RETURN_STR)<<endl;
+#endif
+    Stmt *stmt;
+    if(!strcmp(node->childList[0]->name, EXP)){
         //Exp SEMI
-        stmt = transExpStmt(node->childList[0]);
+        stmt = transExpStmt(node);
     }
-    else if(!strcmp(node->name, COMPST)){
+    else if (!strcmp(node->childList[0]->name, COMPST)){
         //CompSt
         stmt = transCompSt(node->childList[0]);
     }
-    else if(!strcmp(node->name, RETURN)){
+    else if (!strcmp(node->childList[0]->name, RETURN_STR)){
         //RETURN Exp SEMI
-        stmt = transRetStmt(node->childList[0]);
+        stmt = transRetStmt(node);
     }
-    else if(!strcmp(node->name, IF)) {
+    else if (!strcmp(node->childList[0]->name, IF_STR)){
         //IF LP Exp RP Stmt
         // IF LP Exp RP Stmt ELSE Stmt
-        stmt = transIfElseStmt(node->childList[0]);
+        stmt = transIfElseStmt(node);
     }
-    else if(!strcmp(node->name, WHILE)){
+    else if (!strcmp(node->childList[0]->name, WHILE_STR)){
         //WHILE LP Exp RP Stmt
-        stmt = transWhileStmt(node->childList[0]);
+        stmt = transWhileStmt(node);
     }
     else{
         cout <<"Error in TransStmt()"<<endl;
@@ -274,6 +333,9 @@ Stmt *transStmt(MultiNode *node){
 }
 
 ExpStmt *transExpStmt(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing ExpStmt" << endl;
+#endif
     //Exp SEMI
     Exp* exp = transExp(node->childList[0]);
     ExpStmt* expStmt = new ExpStmt(exp);
@@ -281,6 +343,9 @@ ExpStmt *transExpStmt(MultiNode *node){
 }
 
 ReturnStmt *transRetStmt(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing RetStmt" << endl;
+#endif
     //RETURN Exp SEMI
     Exp* exp = transExp(node->childList[1]);
     ReturnStmt* expStmt = new ReturnStmt(exp);
@@ -288,6 +353,9 @@ ReturnStmt *transRetStmt(MultiNode *node){
 }
 
 IfElseStmt *transIfElseStmt(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing IfElseStmt" << endl;
+#endif
     //IF LP Exp RP Stmt
     //IF LP Exp RP Stmt ELSE Stmt
     Exp* condition = transExp(node->childList[2]);
@@ -302,6 +370,9 @@ IfElseStmt *transIfElseStmt(MultiNode *node){
 }
 
 WhileStmt *transWhileStmt(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing WhileStmt" << endl;
+#endif
     //WHILE LP Exp RP Stmt
     Exp* condition = transExp(node->childList[2]);
     Stmt* body = transStmt(node->childList[4]);
@@ -311,6 +382,9 @@ WhileStmt *transWhileStmt(MultiNode *node){
 
 //local definition
 vector<Definition *> *transDefList(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing DefList" << endl;
+#endif
     vector<Definition*> *defList = new vector<Definition*>();
     if(!strcmp(node->name,EMPTY)){
         return defList;
@@ -325,6 +399,9 @@ vector<Definition *> *transDefList(MultiNode *node){
 }
 
 Definition *transDef(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing Def" << endl;
+#endif
     //Specifier DecList SEMI
     Specifier *specifier = transSpecifier(node->childList[0]);
     vector<Dec*> *decList = transDecList(node->childList[1]);
@@ -334,6 +411,9 @@ Definition *transDef(MultiNode *node){
 }
 
 vector<Dec *> *transDecList(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing DecLIst" << endl;
+#endif
     //Dec
     if(node->numChild == 1){
         Dec* dec = transDec(node->childList[0]);
@@ -353,6 +433,11 @@ vector<Dec *> *transDecList(MultiNode *node){
 }
 
 Dec *transDec(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing Dec" << endl;
+//    cout << "child " << node->numChild << endl;
+//    cout << node->childList[2]->numChild <<endl;
+#endif
     if(node->numChild == 1){
         //VarDec
         VarDec* varDec = transVarDec(node->childList[0]);
@@ -372,75 +457,118 @@ Dec *transDec(MultiNode *node){
 
 //Expression
 Exp *transExp(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing Exp" << endl;
+//    cout << (node->numChild)<<endl;
+    // cout << "child:" << node->numChild<<endl;
+    // cout << "name:" << node->name<<endl;
+    // cout << "child0:"<<node->childList[0]->name<<endl;
+    // cout << "cmp:" << strcmp(node->childList[0]->name,"INT")<<endl;
+#endif
     Exp* exp;
     if(node->numChild == 3
     && strcmp(node->childList[0]->name,EXP) == 0
     && strcmp(node->childList[2]->name,EXP) == 0){
         //infix
+#ifdef DEBUG
+        cout << "Parsing Exp::Infix" << endl;
+#endif
         exp = transInfixExp(node);
     }
-    else if(strcmp(node->childList[0]->name, LP) == 0){
+    else if(strcmp(node->childList[0]->name, LP_STR) == 0){
         //LP Exp RP
+#ifdef DEBUG
+        cout << "Parsing Exp::( exp )" << endl;
+#endif
         exp = transParenthesizedExp(node);
     }
-    else if(strcmp(node->childList[0]->name, MINUS) == 0
-         || strcmp(node->childList[0]->name, NOT) == 0){
+    else if(strcmp(node->childList[0]->name, MINUS_STR) == 0
+         || strcmp(node->childList[0]->name, NOT_STR) == 0){
         //MINUS Exp
         //NOT Exp
+#ifdef DEBUG
+        cout << "Parsing Exp::Prefix" << endl;
+#endif
         exp = transPrefixExp(node);
     }
     else if(node->numChild > 1
-         && strcmp(node->childList[0]->name, ID) == 0){
+         && strcmp(node->childList[0]->name, ID_STR) == 0){
         //ID LP Args RP
         //ID LP RP
+#ifdef DEBUG
+        cout << "Parsing Exp::FunExp" << endl;
+#endif
         exp = transFunExp(node);
     }
-    else if(strcmp(node->childList[1]->name, LB) == 0){
+    else if(node->numChild == 4
+        &&  strcmp(node->childList[1]->name, LB_STR) == 0){
         //Exp LB Exp RB
+#ifdef DEBUG
+        cout << "Parsing Exp::Array" << endl;
+#endif
         exp = transArrayExp(node);
     }
-    else if(strcmp(node->childList[1]->name, DOT) == 0){
+    else if(node->numChild == 3
+        && strcmp(node->childList[1]->name, DOT_STR) == 0){
         //Exp DOT ID
+#ifdef DEBUG
+        cout << "Parsing Exp::Struct" << endl;
+#endif
         exp = transStructExp(node);
     }
     else if(node->numChild == 1
-            && strcmp(node->childList[0]->name, ID) == 0){
+            && strcmp(node->childList[0]->name, ID_STR) == 0){
+#ifdef DEBUG
+        cout << "Parsing Exp::ID" << endl;
+#endif
         exp = transIdExp(node);
     }
     else if(node->numChild == 1
-            && strcmp(node->childList[0]->name, INT) == 0){
+            && strcmp(node->childList[0]->name, INT_STR) == 0){
+#ifdef DEBUG
+        cout << "Parsing Exp::INT" << endl;
+#endif
         exp = transIntValue(node);
     }
     else if(node->numChild == 1
-            && strcmp(node->childList[0]->name, FLOAT) == 0){
+            && strcmp(node->childList[0]->name, FLOAT_STR) == 0){
+#ifdef DEBUG
+        cout << "Parsing Exp::FLOAT" << endl;
+#endif
         exp = transFloatValue(node);
+    }else{
+        cout << "Magic Exp" <<endl;
+        exit(-1);
     }
 
     return exp;
 }
 
 InfixExp *transInfixExp(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing InfixExp" << endl;
+#endif
     //Exp Op Exp
     //TODO
     Exp* leftSide = transExp(node->childList[0]);
     Exp* rightSide = transExp(node->childList[2]);
     char* op = node->childList[1]->name;
     InfixOperator infixOperator;
-    if(!strcmp(op,ASSIGNOP)){
+    if(!strcmp(op,ASSIGNOP_STR)){
         infixOperator = INFIX_ASSIGN;
-    }else if(!strcmp(op,AND)){
+    }else if(!strcmp(op,AND_STR)){
         infixOperator = INFIX_AND;
-    }else if(!strcmp(op,OR)){
+    }else if(!strcmp(op,OR_STR)){
         infixOperator = INFIX_OR;
-    }else if(!strcmp(op,RELOP)){
+    }else if(!strcmp(op,RELOP_STR)){
         infixOperator = INFIX_RELOP;
-    }else if(!strcmp(op,PLUS)){
+    }else if(!strcmp(op,PLUS_STR)){
         infixOperator = INFIX_PLUS;
-    }else if(!strcmp(op,MINUS)){
+    }else if(!strcmp(op,MINUS_STR)){
         infixOperator = INFIX_MINUS;
-    }else if(!strcmp(op,STAR)) {
+    }else if(!strcmp(op,STAR_STR)) {
         infixOperator = INFIX_STAR;
-    }else if(!strcmp(op,DIV)) {
+    }else if(!strcmp(op,DIV_STR)) {
         infixOperator = INFIX_DIV;
     }else{
         cout<<"Illegal op"<<endl;
@@ -451,6 +579,9 @@ InfixExp *transInfixExp(MultiNode *node){
 }
 
 ParenthesizedExp *transParenthesizedExp(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing parenthesizedExp" << endl;
+#endif
     //LP Exp RP
     Exp* exp = transExp(node->childList[1]);
     ParenthesizedExp* parenthesizedExp = new ParenthesizedExp(exp);
@@ -458,9 +589,12 @@ ParenthesizedExp *transParenthesizedExp(MultiNode *node){
 }
 
 PrefixExp *transPrefixExp(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing PrefixExp" << endl;
+#endif
     //MINUS Exp
     //NOT Exp
-    if(!strcmp(node->childList[0]->name,NOT)){
+    if(!strcmp(node->childList[0]->name,NOT_STR)){
         //NOT Exp
         Exp* exp = transExp(node->childList[1]);
 
@@ -477,6 +611,9 @@ PrefixExp *transPrefixExp(MultiNode *node){
 }
 
 FunExp *transFunExp(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing FunExp" << endl;
+#endif
     //ID LP Args RP
     //ID LP RP
     if(node->numChild == 3){
@@ -494,6 +631,9 @@ FunExp *transFunExp(MultiNode *node){
 }
 
 ArrayExp *transArrayExp(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing ArrayExp" << endl;
+#endif
     //Exp LB Exp RB
     Exp* idExp = transExp(node->childList[0]);
     Exp* index = transExp(node->childList[2]);
@@ -503,6 +643,9 @@ ArrayExp *transArrayExp(MultiNode *node){
 }
 
 StructExp *transStructExp(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing StructExp" << endl;
+#endif
     //Exp DOT ID
     Exp* exp = transExp(node->childList[0]);
     IDExp* idExp = transIdExp(node->childList[2]);
@@ -512,21 +655,33 @@ StructExp *transStructExp(MultiNode *node){
 }
 
 IntExp *transIntValue(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing IntValue" << endl;
+#endif
     IntExp* intExp = new IntExp(atoi(node->attr));
     return intExp;
 }
 
 FloatExp *transFloatValue(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing FloatValue" << endl;
+#endif
     FloatExp* floatExp = new FloatExp(node->attr);
     return floatExp;
 }
 
 IDExp *transIdExp(MultiNode *node) {
+#ifdef DEBUG
+    cout << "Parsing IDExp" << endl;
+#endif
     IDExp *idExp = new IDExp(node->attr);
     return idExp;
 }
 
 vector<Exp *> *transArgs(MultiNode *node){
+#ifdef DEBUG
+    cout << "Parsing Args" << endl;
+#endif
     vector<Exp*> *args = new vector<Exp*>();
     if(node->numChild == 1){
         //Exp

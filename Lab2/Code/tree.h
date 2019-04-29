@@ -4,6 +4,8 @@
 #include<string.h>
 #include<stdint.h>
 
+#ifndef TREE_H
+#define TREE_H
 extern int yylineno;
 
 typedef struct MultiNode{
@@ -24,7 +26,7 @@ extern void insertTermAttr(MultiNode *parent, char *childName, char* attr, int l
 extern void printIndent(int num);
 extern void printTree();
 
-//node name
+//node name; used in Transform.cpp
 #define EMPTY "%empty"
 #define EXTDEFLIST "ExtDefList"
 #define EXTDECLIST "ExtDecList"
@@ -32,26 +34,28 @@ extern void printTree();
 #define COMPST "CompSt"
 #define EXP "Exp"
 
-#define RETURN "RETURN"
-#define INT  "INT"
-#define FLOAT "FLOAT"
-#define SEMI "SEMI"
-#define TYPE "TYPE"
-#define IF "IF"
-#define WHILE "WHILE"
-#define NOT "NOT"
-#define LP "LP"
-#define LB "LB"
-#define RP "RP"
-#define RB "RB"
-#define ID "ID"
-#define DOT "DOT"
+#define RETURN_STR "RETURN"
+#define INT_STR  "INT"
+#define FLOAT_STR "FLOAT"
+#define SEMI_STR "SEMI"
+#define TYPE_STR "TYPE"
+#define IF_STR "IF"
+#define WHILE_STR "WHILE"
+#define NOT_STR "NOT"
+#define LP_STR "LP"
+#define LB_STR "LB"
+#define RP_STR "RP"
+#define RB_STR "RB"
+#define ID_STR "ID"
+#define DOT_STR "DOT"
 
-#define ASSIGNOP "ASSIGNOP"
-#define AND "AND"
-#define OR "OR"
-#define RELOP "RELOP"
-#define PLUS "PLUS"
-#define MINUS "MINUS"
-#define STAR "STAR"
-#define DIV "DIV"
+#define ASSIGNOP_STR "ASSIGNOP"
+#define AND_STR "AND"
+#define OR_STR "OR"
+#define RELOP_STR "RELOP"
+#define PLUS_STR "PLUS"
+#define MINUS_STR "MINUS"
+#define STAR_STR "STAR"
+#define DIV_STR "DIV"
+
+#endif

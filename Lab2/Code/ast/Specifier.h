@@ -14,7 +14,7 @@ enum BasicType{
 
 struct Specifier : ASTNode{
     void accept(Visitor &visitor) override {
-        visitor.visitor(*this);
+        visitor.visit(*this);
     }
 };
 

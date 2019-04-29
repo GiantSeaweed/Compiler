@@ -66,12 +66,17 @@
  
 #include "lex.yy.c"
 #include "tree.h"
-#include "ast/ast.h"
+#include "syntax.tab.h"
+
 #include "error.h"
 void yyerror(char* msg);
-struct MultiNode *root;
+int yylex(void);
 
-#line 75 "./syntax.tab.c" /* yacc.c:339  */
+struct MultiNode *root = 0;
+int HAS_ERROR = 0;
+
+
+#line 80 "./syntax.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -142,14 +147,14 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 11 "./syntax.y" /* yacc.c:355  */
+#line 16 "./syntax.y" /* yacc.c:355  */
 
     int ival;
     float fval;
     char* sval;
     struct MultiNode *m_node;
 
-#line 153 "./syntax.tab.c" /* yacc.c:355  */
+#line 158 "./syntax.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -180,7 +185,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 184 "./syntax.tab.c" /* yacc.c:358  */
+#line 189 "./syntax.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -482,14 +487,14 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,    41,    41,    54,    59,    65,    71,    76,    84,    88,
-      94,   101,   105,   111,   119,   124,   128,   134,   139,   146,
-     153,   157,   164,   168,   174,   181,   187,   191,   197,   204,
-     213,   220,   225,   230,   237,   242,   245,   250,   257,   266,
-     277,   286,   291,   299,   305,   313,   320,   325,   332,   337,
-     346,   350,   357,   365,   371,   377,   384,   391,   398,   405,
-     412,   419,   426,   433,   437,   444,   450,   458,   462,   469,
-     477,   482,   489,   494,   499,   506,   514,   519
+       0,    46,    46,    59,    64,    70,    76,    81,    89,    93,
+      99,   106,   110,   116,   124,   129,   133,   139,   144,   151,
+     158,   162,   169,   173,   179,   186,   192,   196,   202,   209,
+     218,   225,   230,   235,   242,   247,   250,   255,   262,   271,
+     282,   291,   296,   304,   310,   318,   325,   330,   337,   342,
+     351,   355,   362,   370,   376,   382,   389,   396,   403,   410,
+     417,   424,   431,   438,   442,   449,   455,   463,   467,   474,
+     482,   487,   494,   499,   504,   511,   519,   524
 };
 #endif
 
@@ -1469,7 +1474,7 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 41 "./syntax.y" /* yacc.c:1646  */
+#line 46 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Program");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
@@ -1477,113 +1482,113 @@ yyreduce:
         if(HAS_ERROR == 0){
             printTree((yyval.m_node), 0);
             //transToAST($$);
-            root = &(yyval.m_node);
+            root = (yyval.m_node);
         }
             
     }
-#line 1485 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1490 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 54 "./syntax.y" /* yacc.c:1646  */
+#line 59 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("ExtDefList");
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1495 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1500 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 59 "./syntax.y" /* yacc.c:1646  */
+#line 64 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree(EMPTY);
         // insertTerm($$, EMPTY, @$.first_line);
     }
-#line 1504 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1509 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 65 "./syntax.y" /* yacc.c:1646  */
+#line 70 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("ExtDef");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "SEMI", (yylsp[0]).first_line);
     }
-#line 1515 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1520 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 71 "./syntax.y" /* yacc.c:1646  */
+#line 76 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("ExtDef");
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "SEMI", (yylsp[0]).first_line);
     }
-#line 1525 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1530 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 76 "./syntax.y" /* yacc.c:1646  */
+#line 81 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("ExtDef");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1536 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1541 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 84 "./syntax.y" /* yacc.c:1646  */
+#line 89 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("ExtDecList");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1545 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1550 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 88 "./syntax.y" /* yacc.c:1646  */
+#line 93 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("ExtDecList");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "COMMA", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1556 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1561 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 94 "./syntax.y" /* yacc.c:1646  */
+#line 99 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_MISS_COMMA_HIGH, (yylsp[-2]).first_line);
         // printf("Error Type B at Line %d: Missing \",\" in high-level declaration list.\n", @1.first_line);
     }
-#line 1565 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1570 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 101 "./syntax.y" /* yacc.c:1646  */
+#line 106 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Specifier");
         insertTermAttr((yyval.m_node), "TYPE", yylval.sval, (yylsp[0]).first_line);
     }
-#line 1574 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1579 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 105 "./syntax.y" /* yacc.c:1646  */
+#line 110 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Specifier");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1583 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1588 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 111 "./syntax.y" /* yacc.c:1646  */
+#line 116 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("StructSpecifier");
         insertTerm((yyval.m_node), "STRUCT", yylineno);
@@ -1592,75 +1597,75 @@ yyreduce:
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "RC", yylineno);
     }
-#line 1596 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1601 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 119 "./syntax.y" /* yacc.c:1646  */
+#line 124 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("StructSpecifier");
         insertTerm((yyval.m_node), "STRUCT", yylineno);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1606 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1611 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 124 "./syntax.y" /* yacc.c:1646  */
+#line 129 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_MISS_RC, (yylsp[-1]).last_line+1);
         // printf("Error Type B at Line %d: Missing \"}\".\n", @4.last_line+1);
     }
-#line 1615 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1620 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 128 "./syntax.y" /* yacc.c:1646  */
+#line 133 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_MISS_STRUCTTAG, (yylsp[-1]).last_line);
         // printf("Error Type B at Line %d: Missing tag of struct.\n", @1.last_line);
     }
-#line 1624 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1629 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 135 "./syntax.y" /* yacc.c:1646  */
+#line 140 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("OptTag");
         insertTermAttr((yyval.m_node), "ID", (yyvsp[0].m_node)->name, (yylsp[0]).first_line);
     }
-#line 1633 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1638 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 140 "./syntax.y" /* yacc.c:1646  */
+#line 145 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree(EMPTY);
         // insertTerm($$, EMPTY, @$.first_line);
     }
-#line 1642 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1647 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 146 "./syntax.y" /* yacc.c:1646  */
+#line 151 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Tag");
         insertTermAttr((yyval.m_node), "ID", (yyvsp[0].m_node)->name, (yylsp[0]).first_line);
     }
-#line 1651 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1656 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 153 "./syntax.y" /* yacc.c:1646  */
+#line 158 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("VarDec");
         insertTermAttr((yyval.m_node), "ID", yylval.sval, (yylsp[0]).first_line);
     }
-#line 1660 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1665 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 157 "./syntax.y" /* yacc.c:1646  */
+#line 162 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("VarDec");
         insertNon((yyval.m_node), (yyvsp[-3].m_node));
@@ -1668,68 +1673,68 @@ yyreduce:
         insertTermAttr((yyval.m_node), "INT", yylval.sval, (yylsp[-1]).first_line);
         insertTerm((yyval.m_node), "RB", (yylsp[0]).first_line);
     }
-#line 1672 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1677 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 164 "./syntax.y" /* yacc.c:1646  */
+#line 169 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_VARDEC, (yylsp[-2]).first_line);
         // printf("Error Type B at Line %d: Something wrong about the declaration after \"[\".\n", @1.first_line);
     }
-#line 1681 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1686 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 168 "./syntax.y" /* yacc.c:1646  */
+#line 173 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_MISS_RB,(yylsp[-3]).first_line);
         // printf("Error Type B at Line %d: Missing \"]\".\n", @1.first_line);
     }
-#line 1690 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1695 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 174 "./syntax.y" /* yacc.c:1646  */
+#line 179 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("ParamDec");
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1700 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1705 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 181 "./syntax.y" /* yacc.c:1646  */
+#line 186 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("VarList");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "COMMA", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1711 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1716 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 187 "./syntax.y" /* yacc.c:1646  */
+#line 192 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("VarList");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1720 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1725 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 191 "./syntax.y" /* yacc.c:1646  */
+#line 196 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_MISS_COMMA_VARLIST, (yylsp[-2]).first_line);
         // printf("Error Type B at Line %d: Missing \",\" in variant list.\n", @1.first_line);
     }
-#line 1729 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1734 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 197 "./syntax.y" /* yacc.c:1646  */
+#line 202 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("FunDec");
         insertTermAttr((yyval.m_node), "ID", (yyvsp[-3].m_node)->name, (yylsp[-3]).first_line);
@@ -1737,22 +1742,22 @@ yyreduce:
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "RP", (yylsp[0]).first_line);
     }
-#line 1741 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1746 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 204 "./syntax.y" /* yacc.c:1646  */
+#line 209 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("FunDec");
         insertTermAttr((yyval.m_node), "ID", (yyvsp[-2].m_node)->name, (yylsp[-2]).first_line);
         insertTerm((yyval.m_node), "LP", (yylsp[-1]).first_line);
         insertTerm((yyval.m_node), "RP", (yylsp[0]).first_line);
     }
-#line 1752 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1757 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 213 "./syntax.y" /* yacc.c:1646  */
+#line 218 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("CompSt");
         insertTerm((yyval.m_node), "LC", (yylsp[-3]).first_line);
@@ -1760,77 +1765,77 @@ yyreduce:
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "RC", (yylsp[0]).first_line);
     }
-#line 1764 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1769 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 220 "./syntax.y" /* yacc.c:1646  */
+#line 225 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_MISS_RC, (yylsp[-1]).last_line+1);
         // printf("Error Type B at Line %d: Missing \"}\".\n", @3.last_line+1);
     }
-#line 1773 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1778 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 225 "./syntax.y" /* yacc.c:1646  */
+#line 230 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("StmtList");
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1783 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1788 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 230 "./syntax.y" /* yacc.c:1646  */
+#line 235 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree(EMPTY);
         // insertTerm($$, EMPTY, @$.first_line);
     }
-#line 1792 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1797 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 34:
-#line 237 "./syntax.y" /* yacc.c:1646  */
+#line 242 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Stmt");
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "SEMI", (yylsp[0]).first_line);
     }
-#line 1802 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1807 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 242 "./syntax.y" /* yacc.c:1646  */
+#line 247 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_MISS_SEMI, (yylsp[-1]).first_line);
     }
-#line 1810 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1815 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 246 "./syntax.y" /* yacc.c:1646  */
+#line 251 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Stmt");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1819 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1824 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 251 "./syntax.y" /* yacc.c:1646  */
+#line 256 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Stmt");
         insertTerm((yyval.m_node), "RETURN", (yylsp[-2]).first_line);
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "SEMI", (yylsp[0]).first_line);
     }
-#line 1830 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1835 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 258 "./syntax.y" /* yacc.c:1646  */
+#line 263 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Stmt");
         insertTerm((yyval.m_node), "IF", (yylsp[-4]).first_line);
@@ -1839,11 +1844,11 @@ yyreduce:
         insertTerm((yyval.m_node), "RP", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1843 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1848 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 267 "./syntax.y" /* yacc.c:1646  */
+#line 272 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Stmt");
         insertTerm((yyval.m_node), "IF", (yylsp[-6]).first_line);
@@ -1854,11 +1859,11 @@ yyreduce:
         insertTerm((yyval.m_node), "ELSE", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1858 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1863 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 278 "./syntax.y" /* yacc.c:1646  */
+#line 283 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Stmt");
         insertTerm((yyval.m_node), "WHILE", (yylsp[-4]).first_line);
@@ -1867,263 +1872,263 @@ yyreduce:
         insertTerm((yyval.m_node), "RP", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1871 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1876 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 287 "./syntax.y" /* yacc.c:1646  */
+#line 292 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_MISS_RETURNEXP, (yylsp[-2]).first_line);
         // printf("Error Type B at Line %d: Missing return expression.\n", @1.first_line);
     }
-#line 1880 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1885 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 42:
-#line 292 "./syntax.y" /* yacc.c:1646  */
+#line 297 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_MISS_SEMI_RETURN,(yylsp[-2]).first_line);
         // printf("Error Type B at Line %d: Missing \";\" in return sentence.\n", @1.first_line);
     }
-#line 1889 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1894 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 43:
-#line 300 "./syntax.y" /* yacc.c:1646  */
+#line 305 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("DefList");
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1899 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1904 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 44:
-#line 306 "./syntax.y" /* yacc.c:1646  */
+#line 311 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree(EMPTY);
         // insertTerm($$, EMPTY, @$.first_line);
     }
-#line 1908 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1913 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 45:
-#line 314 "./syntax.y" /* yacc.c:1646  */
+#line 319 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Def");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "SEMI", (yylsp[0]).first_line);
     }
-#line 1919 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1924 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 321 "./syntax.y" /* yacc.c:1646  */
+#line 326 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_DEC, (yylsp[-3]).first_line);
         // printf("Error Type B at Line %d: Missing \";\" after declaration.\n", @1.first_line);
     }
-#line 1928 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1933 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 47:
-#line 326 "./syntax.y" /* yacc.c:1646  */
+#line 331 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_DEC, (yylsp[-2]).first_line);
         // printf("Error Type B at Line %d: Something wrong with declaration.\n", @1.last_line);
     }
-#line 1937 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1942 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 48:
-#line 333 "./syntax.y" /* yacc.c:1646  */
+#line 338 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("DecList");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1946 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1951 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 49:
-#line 338 "./syntax.y" /* yacc.c:1646  */
+#line 343 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("DecList");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "COMMA", yylineno);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1957 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1962 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 50:
-#line 346 "./syntax.y" /* yacc.c:1646  */
+#line 351 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Dec");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1966 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1971 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 51:
-#line 351 "./syntax.y" /* yacc.c:1646  */
+#line 356 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Dec");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "ASSIGNOP", yylineno);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1977 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1982 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 358 "./syntax.y" /* yacc.c:1646  */
+#line 363 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_EXPECT_EXP, (yylsp[-2]).first_line);
         // printf("Error Type B at Line %d: Expected expression.\n", @1.first_line);
     }
-#line 1986 "./syntax.tab.c" /* yacc.c:1646  */
+#line 1991 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 365 "./syntax.y" /* yacc.c:1646  */
+#line 370 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "ASSIGNOP", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 1997 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2002 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 372 "./syntax.y" /* yacc.c:1646  */
+#line 377 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_EXPECT_EXP, (yylsp[-2]).first_line);
         // printf("Error Type B at Line %d: Expected expression.\n", @1.first_line);
     }
-#line 2006 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2011 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 378 "./syntax.y" /* yacc.c:1646  */
+#line 383 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "AND", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2017 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2022 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 385 "./syntax.y" /* yacc.c:1646  */
+#line 390 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "OR", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2028 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2033 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 57:
-#line 392 "./syntax.y" /* yacc.c:1646  */
+#line 397 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "RELOP", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2039 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2044 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 58:
-#line 399 "./syntax.y" /* yacc.c:1646  */
+#line 404 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "PLUS", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2050 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2055 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 59:
-#line 406 "./syntax.y" /* yacc.c:1646  */
+#line 411 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "MINUS", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2061 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2066 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 413 "./syntax.y" /* yacc.c:1646  */
+#line 418 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "STAR", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2072 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2077 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 61:
-#line 420 "./syntax.y" /* yacc.c:1646  */
+#line 425 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "DIV", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2083 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2088 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 427 "./syntax.y" /* yacc.c:1646  */
+#line 432 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertTerm((yyval.m_node), "LP", (yylsp[-2]).first_line);
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "RP", (yylsp[0]).first_line);
     }
-#line 2094 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2099 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 434 "./syntax.y" /* yacc.c:1646  */
+#line 439 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_MISS_RP, (yylsp[-1]).last_line);
     }
-#line 2102 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2107 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 438 "./syntax.y" /* yacc.c:1646  */
+#line 443 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertTerm((yyval.m_node), "MINUS", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
         
     }
-#line 2113 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2118 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 445 "./syntax.y" /* yacc.c:1646  */
+#line 450 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertTerm((yyval.m_node), "NOT", (yylsp[-1]).first_line);
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2123 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2128 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 451 "./syntax.y" /* yacc.c:1646  */
+#line 456 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertTermAttr((yyval.m_node), "ID", (yyvsp[-3].m_node)->name, (yylsp[-3]).first_line);
@@ -2131,30 +2136,30 @@ yyreduce:
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "RP", (yylsp[0]).first_line);
     }
-#line 2135 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2140 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 459 "./syntax.y" /* yacc.c:1646  */
+#line 464 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_MISS_RP_FUNC, (yylsp[-1]).last_line);
     }
-#line 2143 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2148 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 463 "./syntax.y" /* yacc.c:1646  */
+#line 468 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertTermAttr((yyval.m_node), "ID", (yyvsp[-2].m_node)->name, (yylsp[-2]).first_line);
         insertTerm((yyval.m_node), "LP", (yylsp[-1]).first_line);
         insertTerm((yyval.m_node), "RP", (yylsp[0]).first_line);
     }
-#line 2154 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2159 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 470 "./syntax.y" /* yacc.c:1646  */
+#line 475 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-3].m_node));
@@ -2162,58 +2167,58 @@ yyreduce:
         insertNon((yyval.m_node), (yyvsp[-1].m_node));
         insertTerm((yyval.m_node), "RB", (yylsp[0]).first_line);
     }
-#line 2166 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2171 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 70:
-#line 478 "./syntax.y" /* yacc.c:1646  */
+#line 483 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_INDEX, (yylsp[-3]).first_line);
         // printf("Error Type B at Line %d: Something wrong with index.\n", @1.first_line);
     }
-#line 2175 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2180 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 71:
-#line 483 "./syntax.y" /* yacc.c:1646  */
+#line 488 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
         insertTerm((yyval.m_node), "DOT", (yylsp[-1]).first_line);
         insertTermAttr((yyval.m_node), "ID", yylval.sval, (yylsp[0]).first_line);
     }
-#line 2186 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2191 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 72:
-#line 490 "./syntax.y" /* yacc.c:1646  */
+#line 495 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertTermAttr((yyval.m_node), "ID", yylval.sval, (yylsp[0]).first_line);
     }
-#line 2195 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2200 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 73:
-#line 495 "./syntax.y" /* yacc.c:1646  */
+#line 500 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertTermAttr((yyval.m_node), "INT", yylval.sval, (yylsp[0]).first_line);
     }
-#line 2204 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2209 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 74:
-#line 500 "./syntax.y" /* yacc.c:1646  */
+#line 505 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Exp");
         insertTermAttr((yyval.m_node), "FLOAT", yylval.sval, (yylsp[0]).first_line);
     }
-#line 2213 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2218 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 75:
-#line 507 "./syntax.y" /* yacc.c:1646  */
+#line 512 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Args");
         insertNon((yyval.m_node), (yyvsp[-2].m_node));
@@ -2221,29 +2226,29 @@ yyreduce:
         insertNon((yyval.m_node), (yyvsp[0].m_node));
 
     }
-#line 2225 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2230 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 76:
-#line 515 "./syntax.y" /* yacc.c:1646  */
+#line 520 "./syntax.y" /* yacc.c:1646  */
     {
         (yyval.m_node) = createMultiTree("Args");
         insertNon((yyval.m_node), (yyvsp[0].m_node));
     }
-#line 2234 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2239 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
   case 77:
-#line 520 "./syntax.y" /* yacc.c:1646  */
+#line 525 "./syntax.y" /* yacc.c:1646  */
     {
         errorReport(ERR_MISS_COMMA_ARGS, (yylsp[-2]).first_line);
         // printf("Error Type B at Line %d: Missing \",\" in argument list.\n", @1.first_line);
     }
-#line 2243 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2248 "./syntax.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 2247 "./syntax.tab.c" /* yacc.c:1646  */
+#line 2252 "./syntax.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2478,7 +2483,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 526 "./syntax.y" /* yacc.c:1906  */
+#line 531 "./syntax.y" /* yacc.c:1906  */
 
 void yyerror(char* msg) {
     // fprintf(stderr, "error: %s; %s %d\n", msg, yytext, yylineno);

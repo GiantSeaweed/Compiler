@@ -4,8 +4,8 @@
 
 #ifndef AST_AST_H
 #define AST_AST_H
-// #include "../tree.h"
-struct MultiNode;
+#include "../tree.h"
+// struct MultiNode;
 #include "Declarator.h"
 #include "Definition.h"
 #include "Specifier.h"
@@ -15,10 +15,11 @@ struct MultiNode;
 
 #include "ASTNode.h"
 #include "Visitor.h"
-// #include<iostream>
-// #include <vector>
-
-// using namespace std;
-struct Program *transToAST(MultiNode *root);
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstring>
+using namespace std;
+Program *transToAST(MultiNode *root);
 
 #endif //AST_AST_H

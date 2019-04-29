@@ -4,6 +4,9 @@
 
 #ifndef AST_TYPE_H
 #define AST_TYPE_H
+
+
+
 // #include "Declarator.h"
 struct Declarator;
 struct VarDec;
@@ -29,9 +32,9 @@ struct DefStructSpecifier;
 struct Exp;
 struct InfixExp;
 struct PrefixExp;
+struct IDExp;
 struct ParenthesizedExp;
 struct ArrayExp;
-struct IDExp;
 struct StructExp;
 struct IntExp;
 struct FloatExp;
@@ -54,5 +57,7 @@ struct WhileStmt;
 
 struct ASTNode;
 struct Visitor;
+
+Program *transToAST(MultiNode *node);
 
 #endif //AST_TYPE_H

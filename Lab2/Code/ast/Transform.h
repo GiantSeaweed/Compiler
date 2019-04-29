@@ -21,7 +21,6 @@ using namespace std;
 
 
 
-Program* transToAST(MultiNode* node);
 
 // Highlevel definition
 Program *transProgram(MultiNode *node);

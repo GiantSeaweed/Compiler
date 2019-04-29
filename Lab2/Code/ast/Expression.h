@@ -8,8 +8,10 @@
 #define AST_EXPRESSION_H
 
 #include "ast.h"
-
-// using namespace std;
+#include <vector>
+#include <string>
+#include <cstring>
+using namespace std;
 
 enum InfixOperator{
     INFIX_ASSIGN = 0,
@@ -88,7 +90,7 @@ struct ArrayExp : Exp{
 struct IDExp : Exp{
     string id;
 
-    IDExp(const string &id) : id(id) {}
+    IDExp(const string &id) : id(std::move(id)) {}
     void accept(Visitor &visitor) override {
         visitor.visit(*this);
     }
@@ -132,11 +134,11 @@ struct FloatExp : Exp{
 
 struct FunExp: Exp{
     IDExp* funID;
-    vector<IDExp*> *args;
+    vector<Exp*> *args;
 
     FunExp(IDExp *funId) : funID(funId) {}
 
-    FunExp(IDExp *funId, vector<IDExp *> *args) : funID(funId), args(args) {}
+    FunExp(IDExp *funId, vector<Exp *> *args) : funID(funId), args(args) {}
 
     void accept(Visitor &visitor) override {
         if(visitor.visit(*this)){

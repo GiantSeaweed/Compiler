@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include "error.h"
-
-int HAS_ERROR = 0;
+#include "syntax.tab.h"
+// int HAS_ERROR = 0;
 
 void errorReport(int errno, int lineno){
     HAS_ERROR = 1;

@@ -7,11 +7,17 @@
 
 
 #include "ASTNode.h"
+#include "ast.h"
+#include "Expression.h"
+#include <vector>
+#include <string>
+#include <cstring>
+
 // #include "type.h"
 // #include <vector>
 // #include <algorithm>
 
-// using namespace std;
+using namespace std;
 
 struct Declarator : ASTNode
 {
@@ -83,7 +89,7 @@ struct FunDec : Declarator{
     IDExp* id;
     vector<ParamDec*> *paramList;
 
-    FunDec(IDExp *id, const vector<ParamDec *> &paramList) : id(id), paramList(paramList) {}
+    FunDec(IDExp *id, vector<ParamDec *> *paramList) : id(id), paramList(paramList) {}
 
     void accept(Visitor &visitor) override {
         if (visitor.visit(*this)) {

@@ -19,14 +19,14 @@ LFO = $(LFC:.c=.o)
 YFO = $(YFC:.c=.o)
 
 cleanC:
-	rm -rf ast/cmake-build-debug/
+	rm -rf model/cmake-build-debug/
 
 parser: cleanC syntax lexical $(CFILES) $(CPPFILES)
-	gcc -c -g main.c syntax.tab.c  -lfl -ly
-	g++ -std=c++11 -g $(CPPFILES) main.o syntax.tab.o -lfl -ly -o parser
+	gcc -c -g main.c syntax.tab.c tree.c error.c -lfl -ly
+	g++ -std=c++11 -g $(CPPFILES) main.o syntax.tab.o tree.o error.o -lfl -ly -o parser
 	@clear
-	@echo  "\033[0;32m Successful generate the parser! \033[0;30m"
-	
+	@echo  "Successfully get the parser!"
+
 
 syntax: lexical syntax-c
 	$(CC) -c $(YFC) -o $(YFO)
@@ -43,20 +43,49 @@ syntax-c: $(YFILE)
 .PHONY: clean test
 test:
 	./parser ../Test/test1.cmm
-
-# run: lexical syntax-c
-# 	gcc main.c syntax.tab.c -lfl -ly -o parser
-# 	@clear
-# 	@echo  "\033[0;32m Successful generate the parser! \033[0;30m"
-# tryLex: lexical
-# 	gcc main.c lex.yy.c -lfl -o scanner
-# 	echo $$(clear)
-# 	@./scanner tmpTest.cmm
-# trySyn: lexical syntax-c
-# 	gcc -c -g main.c syntax.tab.c  -lfl -ly
-# 	g++ -g cppAdapter.cpp main.o syntax.tab.o -lfl -ly -o parser
-# 	# echo $$(clear)
-# 	# @./parser tmpTest.cmm
+	# ./parser ../Test_1_Super/test_1.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_1.output test_fsw.output
+	# # ./parser ../Test_1_Super/test_2.cmm  > test_fsw.output
+	# # diff ../Test_1_Super/test_2.output test_fsw.output
+	# ./parser ../Test_1_Super/test_3.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_3.output test_fsw.output
+	# ./parser ../Test_1_Super/test_4.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_4.output test_fsw.output
+	# ./parser ../Test_1_Super/test_5.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_5.output test_fsw.output
+	# ./parser ../Test_1_Super/test_6.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_6.output test_fsw.output
+	# ./parser ../Test_1_Super/test_7.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_7.output test_fsw.output
+	# ./parser ../Test_1_Super/test_8.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_8.output test_fsw.output
+	# ./parser ../Test_1_Super/test_9.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_9.output test_fsw.output
+	# ./parser ../Test_1_Super/test_10.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_10.output test_fsw.output
+	# ./parser ../Test_1_Super/test_11.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_11.output test_fsw.output
+	# ./parser ../Test_1_Super/test_12.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_12.output test_fsw.output
+	# ./parser ../Test_1_Super/test_13.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_13.output test_fsw.output
+	# ./parser ../Test_1_Super/test_14.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_14.output test_fsw.output
+	# ./parser ../Test_1_Super/test_15.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_15.output test_fsw.output
+	# ./parser ../Test_1_Super/test_26.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_26.output test_fsw.output
+	# ./parser ../Test_1_Super/test_27.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_27.output test_fsw.output
+	# ./parser ../Test_1_Super/test_28.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_28.output test_fsw.output
+	# ./parser ../Test_1_Super/test_29.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_29.output test_fsw.output
+	# ./parser ../Test_1_Super/test_30.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_30.output test_fsw.output
+	# ./parser ../Test_1_Super/test_31.cmm  > test_fsw.output
+	# diff ../Test_1_Super/test_31.output test_fsw.output
+	
 
 debug: lexical syntax-c $(CFILES) $(CPPFILES)
 	gcc -DDEBUG -c -g main.c syntax.tab.c  -lfl -ly

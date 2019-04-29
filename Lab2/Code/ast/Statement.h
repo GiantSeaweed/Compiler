@@ -33,10 +33,9 @@ struct CompSt : Stmt{
         }
     }
 
-    virtual ~CompSt() {
+    ~CompSt() {
         delete this->defList;
         delete this->stmtList;
-
     }
 };
 
