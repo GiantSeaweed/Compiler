@@ -13,7 +13,7 @@
 #include <iostream>
 #include "../syntax.tab.h"
 // #include "visitor/PrintVisitor.h"
-// #include "visitor/TypeVisitor.h"
+#include "visitor/TypeVisitor.h"
 // #include "visitor/ExpressionVisitor.h"
 // #include "visitor/FunctionReturnVisitor.h"
 

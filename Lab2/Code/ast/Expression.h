@@ -7,7 +7,8 @@
 #ifndef AST_EXPRESSION_H
 #define AST_EXPRESSION_H
 
-#include "ast.h"
+#include "ASTNode.h"
+#include "visitor/Visitor.h"
 #include <vector>
 #include <string>
 #include <cstring>
@@ -25,11 +26,21 @@ enum PrefixOperator{
 };
 
 struct Exp : ASTNode{
-
+    bool lval;
     void accept(Visitor &visitor) override {
         visitor.visit(*this);
     }
     ~Exp() = default;
+};
+
+struct IDExp : Exp{
+    string id;
+
+    IDExp(const string &id) : id(std::move(id)) {}
+    void accept(Visitor &visitor) override {
+        visitor.visit(*this);
+    }
+
 };
 
 struct InfixExp : Exp {
@@ -87,15 +98,7 @@ struct ArrayExp : Exp{
     }
 };
 
-struct IDExp : Exp{
-    string id;
 
-    IDExp(const string &id) : id(std::move(id)) {}
-    void accept(Visitor &visitor) override {
-        visitor.visit(*this);
-    }
-
-};
 
 struct StructExp : Exp{
     Exp* structExp;

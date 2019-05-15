@@ -5,7 +5,11 @@
 #ifndef CPP_SRC_VISITOR_HH
 #define CPP_SRC_VISITOR_HH
 
-#include "type.h"
+#include "../type.h"
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 struct Visitor {
     //Declarator.h 6

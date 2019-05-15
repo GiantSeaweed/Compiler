@@ -14,12 +14,16 @@
 #include "Statement.h"
 
 #include "ASTNode.h"
-#include "Visitor.h"
+#include "visitor/Visitor.h"
 #include <iostream>
 #include <vector>
 #include <string>
 #include <cstring>
 using namespace std;
+
+
+#define DEBUG
+
 Program *transToAST(MultiNode *root);
 
 #endif //AST_AST_H

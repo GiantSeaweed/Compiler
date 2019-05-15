@@ -7,8 +7,10 @@
 
 
 #include "ASTNode.h"
-#include "ast.h"
+//#include "ast.h"
+#include "type.h"
 #include "Expression.h"
+
 #include <vector>
 #include <string>
 #include <cstring>
@@ -100,11 +102,9 @@ struct FunDec : Declarator{
         }
     }
 
-
     ~FunDec() {
         delete this->paramList;
     }
-
 };
 
 

@@ -4,15 +4,15 @@
 
 #ifndef AST_ASTNODE_H
 #define AST_ASTNODE_H
-#include "Visitor.h"
-//#include "TypeSystem.h"
+#include "visitor/Visitor.h"
+#include "TypeSystem.h"
 
 struct ASTNode{
     int beginLine;
     int endLine;
-//    TypeSystem *typeSystem;
+    TypeSystem *typeSystem;
     virtual void accept(Visitor &visitor) = 0;
-    // virtual ~ASTNode(){};
+    virtual ~ASTNode(){};
 
 };
 #endif //AST_ASTNODE_H

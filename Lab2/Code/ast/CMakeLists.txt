@@ -10,4 +10,15 @@ add_executable(ast Transform.cpp
         HighLevelDef.h
         Specifier.h
         Statement.h
-        Visitor.h Transform.h ast.h type.h VisitorExpression.h Symbol.h SymbolHead.h TypeSystem.h TypeSystem.cpp VisitorType.h VisitorType.cpp)
+        visitor/Visitor.h
+        Transform.h
+        ast.h
+        type.h
+        Symbol.h
+        SymbolHead.h
+        TypeSystem.h
+        TypeSystem.cpp
+        visitor/TypeVisitor.h
+        visitor/TypeVisitor.cpp
+        visitor/ExpressionVisitor.h
+        visitor/ExpressionVisitor.cpp utils/utils.h utils/utils.cpp visitor/FunReturnVisitor.h visitor/FunReturnVisitor.cpp visitor/PrintVisitor.h visitor/PrintVisitor.cpp)

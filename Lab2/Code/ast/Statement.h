@@ -71,7 +71,8 @@ struct IfElseStmt : Stmt {
         if(visitor.visit(*this)){
             ((ASTNode*)condition)->accept(visitor);
             ((ASTNode*)thenBody)->accept(visitor);
-            ((ASTNode*)elseBody)->accept(visitor);
+            if(elseBody != nullptr)
+                ((ASTNode*)elseBody)->accept(visitor);
         }
     }
     IfElseStmt(Exp *condition, Stmt *thenBody, Stmt *elseBody) : condition(condition), thenBody(thenBody),

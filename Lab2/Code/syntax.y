@@ -444,7 +444,6 @@ Exp :
         $$ = createMultiTree("Exp");
         insertTerm($$, "MINUS", @1.first_line);
         insertNon($$, $2);
-        
     }
     | NOT Exp
     {

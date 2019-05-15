@@ -19,7 +19,7 @@ LFO = $(LFC:.c=.o)
 YFO = $(YFC:.c=.o)
 
 cleanC:
-	rm -rf model/cmake-build-debug/
+	rm -rf ast/cmake-build-debug/
 
 parser: cleanC syntax lexical $(CFILES) $(CPPFILES)
 	gcc -c -g main.c syntax.tab.c tree.c error.c -lfl -ly
@@ -41,49 +41,9 @@ syntax-c: $(YFILE)
 
 # 定义的一些伪目标
 .PHONY: clean test
-test:
-	./parser ../Test/test1.cmm
-	# ./parser ../Test_1_Super/test_1.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_1.output test_fsw.output
-	# ./parser ../Test_1_Super/test_3.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_3.output test_fsw.output
-	# ./parser ../Test_1_Super/test_4.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_4.output test_fsw.output
-	# ./parser ../Test_1_Super/test_5.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_5.output test_fsw.output
-	# ./parser ../Test_1_Super/test_6.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_6.output test_fsw.output
-	# ./parser ../Test_1_Super/test_7.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_7.output test_fsw.output
-	# ./parser ../Test_1_Super/test_8.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_8.output test_fsw.output
-	# ./parser ../Test_1_Super/test_9.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_9.output test_fsw.output
-	# ./parser ../Test_1_Super/test_10.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_10.output test_fsw.output
-	# ./parser ../Test_1_Super/test_11.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_11.output test_fsw.output
-	# ./parser ../Test_1_Super/test_12.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_12.output test_fsw.output
-	# ./parser ../Test_1_Super/test_13.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_13.output test_fsw.output
-	# ./parser ../Test_1_Super/test_14.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_14.output test_fsw.output
-	# ./parser ../Test_1_Super/test_15.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_15.output test_fsw.output
-	# ./parser ../Test_1_Super/test_26.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_26.output test_fsw.output
-	# ./parser ../Test_1_Super/test_27.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_27.output test_fsw.output
-	# ./parser ../Test_1_Super/test_28.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_28.output test_fsw.output
-	# ./parser ../Test_1_Super/test_29.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_29.output test_fsw.output
-	# ./parser ../Test_1_Super/test_30.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_30.output test_fsw.output
-	# ./parser ../Test_1_Super/test_31.cmm  > test_fsw.output
-	# diff ../Test_1_Super/test_31.output test_fsw.output
-	
+test: 
+	# ./parser ../Test/test1.cmm
+	./parser ../Test_2_Normal/Tests/A_1.cmm
 
 debug: lexical syntax-c $(CFILES) $(CPPFILES)
 	gcc -DDEBUG -c -g main.c syntax.tab.c  -lfl -ly

@@ -5,9 +5,11 @@
 #include "type.h"
 //#include "../yystype.h"
 #include "../syntax.tab.h"
-//#include "VisitorType.h"
+#include "visitor/TypeVisitor.h"
+#include "visitor/ExpressionVisitor.h"
+#include "visitor/FunReturnVisitor.h"
+#include "visitor/PrintVisitor.h"
 
-// #define DEBUG
 using namespace std;
 
 void printNode(MultiNode* node){
@@ -26,26 +28,32 @@ Program *transToAST(MultiNode *root)
     Program *program = transProgram(root);
     
  #ifdef DEBUG
-     cout << "Parsing symbol" << endl;
+     cout << "Get AST! Begin visiting!" << endl;
  #endif
-    //  TypeVisitor visitor;
-    //  program->accept(visitor);
+     TypeVisitor visitor;
+     program->accept(visitor);
 
-    // ExpressionVisitor expressionVisitor;
-    // expressionVisitor.symTable = visitor.symbolTable;
-    // expressionVisitor.funcTable = visitor.funcTable;
-    // program->accept(expressionVisitor);
+     ExpressionVisitor expressionVisitor;
+     expressionVisitor.symTable = visitor.symbolTable;
+     expressionVisitor.funcTable = visitor.funcTable;
+     program->accept(expressionVisitor);
 
-    // FunctionReturnVisitor functionReturnVisitor;
-    // program->accept(functionReturnVisitor);
+    FunReturnVisitor funReturnVisitor;
+    program->accept(funReturnVisitor);
 
-    //    auto symbols = visitor.symbolTable;
-    //    for (Symbol *symbol:*symbols) {
-    //        cout << "Symbol: " << symbol->id << " type: " << symbol->typeElement->toString() << " lineno:"
-    //             << symbol->beginLineno << endl;
-    //    }
-    //    PrintVisitor printVisitor;
-    //    program->accept(printVisitor);
+    auto symbols = visitor.symbolTable;
+    for (Symbol *symbol:*symbols) {
+        cout << "Symbol: " << symbol->id << "\ttype: " << symbol->typeSystem->toString() << " lineno:"
+            << symbol->firstLine << endl;
+    }
+    symbols = visitor.funcTable;
+    for (Symbol *symbol : *symbols)
+    {
+        cout << "Symbol: " << symbol->id << "\ttype: " << symbol->typeSystem->toString() << " lineno:"
+             << symbol->firstLine << endl;
+    }
+    PrintVisitor printVisitor;
+    program->accept(printVisitor);
     return program;
 }
 

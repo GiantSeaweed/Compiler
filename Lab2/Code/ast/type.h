@@ -58,6 +58,7 @@ struct WhileStmt;
 struct ASTNode;
 struct Visitor;
 
+
 Program *transToAST(MultiNode *node);
 
 #endif //AST_TYPE_H
