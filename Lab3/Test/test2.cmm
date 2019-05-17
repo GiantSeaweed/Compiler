@@ -1,0 +1,28 @@
+struct Node
+{
+    float lc[4][6];
+    int rc;
+};
+int main()
+{
+    int i1;
+    struct Node node;
+    float f1 = 1.05e-4;
+    float f2 = 134312.232413E-4;
+    float f3 = 123.342E+4;
+    float f4 = 1243.3432e+3;
+    if((i1 + i3 >= 4645 || i3-i1 !=2) && i1 > 0)
+    {
+        i1 = i3*(i3-1);
+        i3 = i1/i3;
+    }
+    else
+    {
+        while(i1 < 13 || i1 <= 0)
+        {
+            int i3i;
+            i1 = i1+1;
+        }
+    }
+    return 0;
+}
