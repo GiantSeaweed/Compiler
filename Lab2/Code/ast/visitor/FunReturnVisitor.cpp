@@ -14,7 +14,7 @@ bool FunReturnVisitor::visit(ReturnStmt &stmt) {
     cout << "visiting FunReturnVisitor::ReturnStmt" << endl;
 #endif
     if (inFunction) {
-        cout << this->retType->type << " " << stmt.exp->typeSystem->type <<endl;
+        // cout << this->retType->type << " " << stmt.exp->typeSystem->type <<endl;
         if (*this->retType != *stmt.exp->typeSystem)
         {
             printError(8, "Return type cannot match function return type!", stmt.beginLine);

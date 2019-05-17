@@ -107,6 +107,7 @@ bool TypeVisitor::visit(FunDef &hlDef) {
             cerr << "error at typeVisitor.visit(FunDef&)" << endl;
         }
         paramsType.push_back(p->typeSystem);
+    }
         auto myType = new FunctionType(BASE_FUNCTION, retSpecifier, paramsType);
         hlDef.typeSystem = myType;
         auto mySymbol = new Symbol(&hlDef, myType, hlDef.funDec->id->id);
@@ -134,7 +135,7 @@ bool TypeVisitor::visit(FunDef &hlDef) {
             }
         }
         return VisitorFalse::visit(hlDef);
-    }
+    // }
 }
 bool TypeVisitor::visit(Program &hlDef) {
 #ifdef DEBUG
@@ -361,6 +362,7 @@ bool TypeVisitor::visit(IfElseStmt &stmt) {
     }
     return VisitorFalse::visit(stmt);
 }
+
 bool TypeVisitor::visit(WhileStmt &stmt) {
 #ifdef DEBUG
     cout << "visiting TypeVisitor::WhileStmt" <<endl;
@@ -368,6 +370,7 @@ bool TypeVisitor::visit(WhileStmt &stmt) {
     stmt.body->accept(*this);
     return VisitorFalse::visit(stmt);
 }
+
 bool TypeVisitor::visit(CompSt &stmt) {
 #ifdef DEBUG
     cout << "visiting TypeVisitor::CompSt" <<endl;

@@ -13,10 +13,14 @@
 using namespace std;
 
 void printNode(MultiNode* node){
+    if(node == nullptr){
+        cout<<"This is a nullptr!"<<endl;
+        return;
+    }
     cout<<"name:"<<node->name<<endl;
     cout<<"child:"<<node->numChild<<endl;
     for(int i =0 ;i<node->numChild;i++){
-        cout<<"\t"<<i<<":"<<node->childList[i]->name<<endl;
+        cout << "\t" << i << ":" << node->childList[i]->name << "," << node->childList[i]->attr << endl;
     }
 }
 
@@ -32,19 +36,11 @@ Program *transToAST(MultiNode *root)
  #endif
      TypeVisitor visitor;
      program->accept(visitor);
-
-     ExpressionVisitor expressionVisitor;
-     expressionVisitor.symTable = visitor.symbolTable;
-     expressionVisitor.funcTable = visitor.funcTable;
-     program->accept(expressionVisitor);
-
-    FunReturnVisitor funReturnVisitor;
-    program->accept(funReturnVisitor);
-
+#ifdef DEBUG
     auto symbols = visitor.symbolTable;
     for (Symbol *symbol:*symbols) {
         cout << "Symbol: " << symbol->id << "\ttype: " << symbol->typeSystem->toString() << " lineno:"
-            << symbol->firstLine << endl;
+             << symbol->firstLine << endl;
     }
     symbols = visitor.funcTable;
     for (Symbol *symbol : *symbols)
@@ -52,32 +48,47 @@ Program *transToAST(MultiNode *root)
         cout << "Symbol: " << symbol->id << "\ttype: " << symbol->typeSystem->toString() << " lineno:"
              << symbol->firstLine << endl;
     }
-    PrintVisitor printVisitor;
-    program->accept(printVisitor);
+#endif
+#ifdef DEBUG
+    cout << "******Finish TypeVisiting! Begin ExpVisiting!******" << endl;
+#endif
+     ExpressionVisitor expressionVisitor;
+     expressionVisitor.symTable = visitor.symbolTable;
+     expressionVisitor.funcTable = visitor.funcTable;
+     program->accept(expressionVisitor);
+#ifdef DEBUG
+    cout << "******Finish ExpVisiting! Begin FunVisiting!********" << endl;
+#endif
+
+     FunReturnVisitor funReturnVisitor;
+     program->accept(funReturnVisitor);
+
+    // PrintVisitor printVisitor;
+    // program->accept(printVisitor);
     return program;
 }
 
 // high level definition
 Program *transProgram(MultiNode *node) {
 #ifdef DEBUG
-    cout << "Parsing Program" << endl;
+    cout << "Parsing Program!" << endl;
+    printNode(node);
 #endif
     vector<ExtDef*> *extDefList = transExtDefList(node->childList[0]);
-
     Program* program = new Program(extDefList);
     program->beginLine = node->firstLine;
     return program;
 }
 
 vector<ExtDef *> *transExtDefList(MultiNode *node){
-#ifdef DEBUG
-    cout << "Parsing ExtDefList" << endl;
-#endif
     vector<ExtDef*> *extDefListTail = new vector<ExtDef*>();
+
     if(!(strcmp(node->name,EMPTY)) ){
         return extDefListTail; //recursively
     }
-
+#ifdef DEBUG
+    cout << "Parsing ExtDefList" << endl;
+#endif
     ExtDef* extDef = transExtDef(node->childList[0]);
     extDefListTail = transExtDefList(node->childList[1]);
     extDefListTail->insert(extDefListTail->begin(), extDef);
@@ -316,13 +327,14 @@ CompSt *transCompSt(MultiNode *node){
 }
 
 vector<Stmt *> *transStmtList(MultiNode *node){
-#ifdef DEBUG
-    cout << "Parsing StmtList" << endl;
-#endif
+
     vector<Stmt*> *stmtListTail = new vector<Stmt*>();
     if(!(strcmp(node->name,EMPTY)) ){
         return stmtListTail; //recursively
     }
+#ifdef DEBUG
+    cout << "Parsing StmtList" << endl;
+#endif
     //Stmt StmtList
     Stmt* stmt = transStmt(node->childList[0]);
     stmtListTail = transStmtList(node->childList[1]);
@@ -476,8 +488,9 @@ vector<Dec *> *transDecList(MultiNode *node){
 Dec *transDec(MultiNode *node){
 #ifdef DEBUG
     cout << "Parsing Dec" << endl;
-//    cout << "child " << node->numChild << endl;
-//    cout << node->childList[2]->numChild <<endl;
+    printNode(node);
+    // cout << "\tchild " << node->numChild << endl;
+    // cout << "\t\t" << node->childList[2]->numChild <<endl;
 #endif
     if(node->numChild == 1){
         //VarDec
@@ -559,21 +572,22 @@ Exp *transExp(MultiNode *node){
 #ifdef DEBUG
         cout << "Parsing Exp::ID" << endl;
 #endif
-        exp = transIdExp(node);
+        //hao keng a !
+        exp = transIdExp(node->childList[0]);
     }
     else if(node->numChild == 1
             && strcmp(node->childList[0]->name, INT_STR) == 0){
 #ifdef DEBUG
         cout << "Parsing Exp::INT" << endl;
 #endif
-        exp = transIntValue(node);
+        exp = transIntValue(node->childList[0]);
     }
     else if(node->numChild == 1
             && strcmp(node->childList[0]->name, FLOAT_STR) == 0){
 #ifdef DEBUG
         cout << "Parsing Exp::FLOAT" << endl;
 #endif
-        exp = transFloatValue(node);
+        exp = transFloatValue(node->childList[0]);
     }else{
         cout << "Magic Exp" <<endl;
         exit(-1);
@@ -660,7 +674,10 @@ FunExp *transFunExp(MultiNode *node){
     //ID LP RP
     if(node->numChild == 3){
         IDExp* idExp = transIdExp(node->childList[0]);
-        FunExp* funExp = new FunExp(idExp);
+        vector<Exp*> *args = new vector<Exp*>;
+        FunExp* funExp = new FunExp(idExp,args);
+//        FunExp* funExp = new FunExp(idExp);
+
         funExp->beginLine = node->firstLine;
         return funExp;
     }
@@ -703,8 +720,9 @@ StructExp *transStructExp(MultiNode *node){
 IntExp *transIntValue(MultiNode *node){
 #ifdef DEBUG
     cout << "Parsing IntValue" << endl;
+    cout << "\tIntValue:" << atoi(node->attr)<<endl;
 #endif
-    IntExp* intExp = new IntExp(atoi(node->attr));
+    IntExp *intExp = new IntExp(atoi(node->attr));
     intExp->beginLine = node->firstLine;
     return intExp;
 }
@@ -720,7 +738,7 @@ FloatExp *transFloatValue(MultiNode *node){
 
 IDExp *transIdExp(MultiNode *node) {
 #ifdef DEBUG
-    cout << "Parsing IDExp" << endl;
+    cout << "Parsing IDExp:" << node->attr<< endl;
 #endif
     IDExp *idExp = new IDExp(node->attr);
     idExp->beginLine = node->firstLine;

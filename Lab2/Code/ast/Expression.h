@@ -26,7 +26,7 @@ enum PrefixOperator{
 };
 
 struct Exp : ASTNode{
-    bool lval;
+    bool lval ;
     void accept(Visitor &visitor) override {
         visitor.visit(*this);
     }

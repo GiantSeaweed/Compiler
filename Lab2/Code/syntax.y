@@ -48,7 +48,7 @@ Program :
         insertNon($$, $1);
         // printf("%d %s\n",yylineno, $$->name);
         if(HAS_ERROR == 0){
-            printTree($$, 0);
+            // printTree($$, 0);
             //transToAST($$);
             root = $$;
         }
@@ -83,6 +83,9 @@ ExtDef :
         insertNon($$, $1);
         insertNon($$, $2);
         insertNon($$, $3);
+    }
+    | Specifier FunDec SEMI {
+        errorReport(ERR_FUNDEC, @1.first_line);
     }
     ;
 ExtDecList : 

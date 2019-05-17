@@ -52,7 +52,9 @@ void errorReport(int errno, int lineno){
         case ERR_INDEX:
             printf("Error Type B at Line %d: Something wrong with index.\n", lineno);
             break;
-
+        case ERR_FUNDEC:
+            printf("Error Type B at Line %d: C-- does not allow function declaration.\n", lineno);
+            break;
         /*** Expected sth ***/
         case ERR_EXPECT_EXP:
             printf("Error Type B at Line %d: Expected expression.\n", lineno);

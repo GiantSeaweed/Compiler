@@ -86,7 +86,7 @@ struct WhileStmt : Stmt {
     void accept(Visitor &visitor) override {
         if(visitor.visit(*this)){
             ((ASTNode*) condition)->accept(visitor);
-            ((ASTNode*) condition)->accept(visitor);
+            ((ASTNode*) body)->accept(visitor);
         }
     }
 

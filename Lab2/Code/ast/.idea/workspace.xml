@@ -33,12 +33,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="396ee58d-0b50-4527-91f4-7def38ccb5e2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/utils/utils.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/utils.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/visitor/FunReturnVisitor.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/visitor/FunReturnVisitor.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/visitor/PrintVisitor.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/visitor/PrintVisitor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Code/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Code/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Code/parser" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Code/parser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab1/Code/syntax.output" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab1/Code/syntax.output" afterDir="false" />
@@ -53,19 +47,19 @@
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ASTNode.h" beforeDir="false" afterPath="$PROJECT_DIR$/ASTNode.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Declarator.h" beforeDir="false" afterPath="$PROJECT_DIR$/Declarator.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Expression.h" beforeDir="false" afterPath="$PROJECT_DIR$/Expression.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HighLevelDef.h" beforeDir="false" afterPath="$PROJECT_DIR$/HighLevelDef.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Statement.h" beforeDir="false" afterPath="$PROJECT_DIR$/Statement.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Transform.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Transform.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Transform.h" beforeDir="false" afterPath="$PROJECT_DIR$/Transform.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Visitor.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TypeSystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TypeSystem.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ast.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/type.h" beforeDir="false" afterPath="$PROJECT_DIR$/type.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../autogen.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../autogen.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visitor/ExpressionVisitor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/ExpressionVisitor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visitor/FunReturnVisitor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/FunReturnVisitor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visitor/PrintVisitor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/PrintVisitor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visitor/TypeVisitor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/TypeVisitor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../error.c" beforeDir="false" afterPath="$PROJECT_DIR$/../error.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../error.h" beforeDir="false" afterPath="$PROJECT_DIR$/../error.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../syntax.y" beforeDir="false" afterPath="$PROJECT_DIR$/../syntax.y" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test_fsw.output" beforeDir="false" afterPath="$PROJECT_DIR$/../test_fsw.output" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Test/test1.cmm" beforeDir="false" afterPath="$PROJECT_DIR$/../../Test/test1.cmm" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -81,13 +75,46 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Transform.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="274">
+              <caret line="41" column="61" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
               <folding>
-                <element signature="e#106#132#0" expanded="true" />
+                <element signature="e#300#565#0" />
+                <element signature="e#2455#3469#0" />
+                <element signature="e#3471#4068#0" />
+                <element signature="e#4070#4577#0" />
+                <element signature="e#4579#5288#0" />
+                <element signature="e#5290#6132#0" />
+                <element signature="e#6134#6454#0" />
+                <element signature="e#6456#6660#0" />
+                <element signature="e#6662#7302#0" />
+                <element signature="e#7304#7750#0" />
+                <element signature="e#7752#8330#0" />
+                <element signature="e#8332#8697#0" />
+                <element signature="e#8700#9086#0" />
+                <element signature="e#9088#9543#0" />
+                <element signature="e#9545#10531#0" />
+                <element signature="e#10533#10796#0" />
+                <element signature="e#10798#11077#0" />
+                <element signature="e#11079#11598#0" />
+                <element signature="e#11600#11950#0" />
+                <element signature="e#11952#12465#0" />
+                <element signature="e#12467#12850#0" />
+                <element signature="e#12852#13425#0" />
+                <element signature="e#13427#14132#0" />
+                <element signature="e#14135#16439#0" />
+                <element signature="e#16441#17527#0" />
+                <element signature="e#17529#17865#0" />
+                <element signature="e#17867#18490#0" />
+                <element signature="e#18492#19076#0" />
+                <element signature="e#19078#19413#0" />
+                <element signature="e#19415#19754#0" />
+                <element signature="e#19756#20021#0" />
+                <element signature="e#20023#20245#0" />
+                <element signature="e#20247#20456#0" />
+                <element signature="e#20458#20961#0" />
               </folding>
             </state>
           </provider>
@@ -96,96 +123,128 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/visitor/ExpressionVisitor.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="117" column="24" selection-start-line="117" selection-start-column="24" selection-end-line="117" selection-end-column="24" />
+            <state relative-caret-position="140">
+              <caret line="190" column="81" selection-start-line="190" selection-start-column="81" selection-end-line="190" selection-end-column="81" />
               <folding>
-                <element signature="e#40#60#0" expanded="true" />
-                <element signature="e#406#569#0" />
-                <element signature="e#571#755#0" />
-                <element signature="e#757#944#0" />
-                <element signature="e#1088#3408#0" />
-                <element signature="e#3532#4026#0" />
-                <element signature="e#5452#5606#0" />
-                <element signature="e#5768#7413#0" />
-                <element signature="e#7415#8232#0" />
+                <element signature="e#0#2#0" />
+                <element signature="e#148#249#0" />
+                <element signature="e#327#487#0" />
+                <element signature="e#489#652#0" />
+                <element signature="e#654#838#0" />
+                <element signature="e#840#1027#0" />
+                <element signature="e#1030#3420#0" />
+                <element signature="e#1106#1153#0" expanded="true" />
+                <element signature="e#3422#3834#0" />
+                <element signature="e#4044#4099#0" expanded="true" />
+                <element signature="e#3836#4388#0" />
+                <element signature="e#4444#4492#0" expanded="true" />
+                <element signature="e#4390#6250#0" />
+                <element signature="e#4988#5048#0" expanded="true" />
+                <element signature="e#6252#6476#0" />
+                <element signature="e#6819#6864#0" expanded="true" />
+                <element signature="e#6478#6708#0" />
+                <element signature="e#7047#7094#0" expanded="true" />
+                <element signature="e#7277#7322#0" expanded="true" />
+                <element signature="e#8384#9236#0" />
+                <element signature="e#9051#9098#0" expanded="true" />
+                <element signature="e#9238#10285#0" />
+                <element signature="e#9906#9954#0" expanded="true" />
+                <element signature="e#10287#10451#0" />
+                <element signature="e#10963#11020#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/visitor/FunReturnVisitor.h">
+        <entry file="file://$PROJECT_DIR$/ASTNode.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+            <state relative-caret-position="120">
+              <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/visitor/ExpressionVisitor.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-240">
+              <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
               <folding>
-                <element signature="e#104#124#0" expanded="true" />
+                <element signature="e#152#176#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/visitor/PrintVisitor.h">
+        <entry file="file://$PROJECT_DIR$/Expression.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="471">
-              <caret line="71" column="30" selection-start-line="70" selection-end-line="71" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/visitor/PrintVisitor.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="252" column="26" selection-start-line="252" selection-start-column="26" selection-end-line="252" selection-end-column="26" />
+            <state relative-caret-position="345">
+              <caret line="142" selection-start-line="142" selection-end-line="142" />
               <folding>
-                <element signature="e#40#60#0" expanded="true" />
+                <element signature="e#0#2#0" />
+                <element signature="e#220#356#1" />
+                <element signature="e#421#476#1" />
+                <element signature="e#714#790#0" />
+                <element signature="e#796#1293#1" />
+                <element signature="e#1093#1290#0" />
+                <element signature="e#1296#1594#1" />
+                <element signature="e#1452#1592#0" />
+                <element signature="e#1597#1835#1" />
+                <element signature="e#1693#1833#0" />
+                <element signature="e#1838#2188#1" />
+                <element signature="e#2000#2186#0" />
+                <element signature="e#2193#2558#1" />
+                <element signature="e#2561#2721#1" />
+                <element signature="e#2642#2719#0" />
+                <element signature="e#2724#2895#1" />
+                <element signature="e#3086#3323#0" />
+                <element signature="e#3329#3373#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/type.h">
+        <entry file="file://$PROJECT_DIR$/visitor/TypeVisitor.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="60" selection-start-line="60" selection-end-line="60" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ast.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="145">
+              <caret line="279" column="3" selection-start-line="279" selection-start-column="3" selection-end-line="279" selection-end-column="3" />
               <folding>
-                <element signature="e#118#141#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/visitor/FunReturnVisitor.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="34" column="28" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
-              <folding>
-                <element signature="e#40#60#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HighLevelDef.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="52" column="7" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="7" />
-              <folding>
-                <element signature="e#1833#1841#0" expanded="true" />
+                <element signature="e#0#2#0" />
+                <element signature="e#186#381#0" />
+                <element signature="e#384#644#0" />
+                <element signature="e#646#898#0" />
+                <element signature="e#900#1122#0" />
+                <element signature="e#1124#1274#0" />
+                <element signature="e#1276#1640#0" />
+                <element signature="e#1356#1406#0" expanded="true" />
+                <element signature="e#1641#2297#0" />
+                <element signature="e#1699#1745#0" expanded="true" />
+                <element signature="e#2298#4083#0" />
+                <element signature="e#2356#2402#0" expanded="true" />
+                <element signature="e#4084#4216#0" />
+                <element signature="e#4143#4190#0" expanded="true" />
+                <element signature="e#4218#4350#0" />
+                <element signature="e#4277#4324#0" expanded="true" />
+                <element signature="e#4352#6075#0" />
+                <element signature="e#4438#4496#0" expanded="true" />
+                <element signature="e#6076#6707#0" />
+                <element signature="e#6146#6200#0" expanded="true" />
+                <element signature="e#6708#7281#0" />
+                <element signature="e#6785#6846#0" expanded="true" />
+                <element signature="e#7408#7456#0" expanded="true" />
+                <element signature="e#8562#8616#0" expanded="true" />
+                <element signature="e#9133#9179#0" expanded="true" />
+                <element signature="e#9378#9426#0" expanded="true" />
+                <element signature="e#9779#9831#0" expanded="true" />
+                <element signature="e#10753#11019#0" />
+                <element signature="e#10819#10868#0" expanded="true" />
+                <element signature="e#11021#11303#0" />
+                <element signature="e#11094#11144#0" expanded="true" />
+                <element signature="e#11365#11414#0" expanded="true" />
+                <element signature="e#11550#11596#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -194,8 +253,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Statement.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="214">
-              <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
+            <state relative-caret-position="-456">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
             </state>
           </provider>
         </entry>
@@ -204,20 +263,11 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>YYSTYPE</find>
-      <find>parse</find>
-      <find>Expression</find>
-      <find>nor</find>
-      <find>transDec</find>
-      <find>transExp</find>
-      <find>*transDec</find>
-      <find>SymbolI</find>
       <find>*transB</find>
       <find>AllFalseVisitor</find>
       <find>VisitFalse</find>
       <find>Element</find>
       <find>pg</find>
-      <find>Expression</find>
       <find>operate</find>
       <find>fieldId</find>
       <find>AllTrueVisitor</find>
@@ -230,6 +280,19 @@
       <find>expression</find>
       <find>PrintVisitor::</find>
       <find>visit</find>
+      <find>printError(7</find>
+      <find>printError(5</find>
+      <find>cout &lt;&lt;</find>
+      <find>TypeVisitor::visit</find>
+      <find>printError(6</find>
+      <find>fsw</find>
+      <find>lval</find>
+      <find>tostrin</find>
+      <find>printError</find>
+      <find>printError(11</find>
+      <find>ExpVisitor::ID</find>
+      <find>ExpVisitor::</find>
+      <find>transWhileStmt</find>
     </findStrings>
     <replaceStrings>
       <replace>MultiNode</replace>
@@ -241,7 +304,6 @@
       <replace>SymbolHead</replace>
       <replace>System</replace>
       <replace>program</replace>
-      <replace>Exp</replace>
       <replace>infixOp</replace>
       <replace>arrayExp</replace>
       <replace>arrayIndex</replace>
@@ -264,16 +326,12 @@
         <option value="$PROJECT_DIR$/VisitorType.h" />
         <option value="$PROJECT_DIR$/ASTNode.h" />
         <option value="$PROJECT_DIR$/TypeSystem.h" />
-        <option value="$PROJECT_DIR$/TypeSystem.cpp" />
         <option value="$PROJECT_DIR$/VisitorType.cpp" />
         <option value="$PROJECT_DIR$/visitor/VisitorType.cpp" />
         <option value="$PROJECT_DIR$/visitor/VisitorType.h" />
         <option value="$PROJECT_DIR$/HighLevelDef.h" />
-        <option value="$PROJECT_DIR$/ast.h" />
-        <option value="$PROJECT_DIR$/Statement.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/visitor/TypeVisitor.h" />
-        <option value="$PROJECT_DIR$/Expression.h" />
         <option value="$PROJECT_DIR$/Declarator.h" />
         <option value="$PROJECT_DIR$/visitor/ExpressionVisitor.h" />
         <option value="$PROJECT_DIR$/utils/utils.h" />
@@ -281,22 +339,26 @@
         <option value="$PROJECT_DIR$/visitor/Visitor.h" />
         <option value="$PROJECT_DIR$/SymbolHead.h" />
         <option value="$PROJECT_DIR$/Symbol.h" />
-        <option value="$PROJECT_DIR$/visitor/TypeVisitor.cpp" />
-        <option value="$PROJECT_DIR$/visitor/ExpressionVisitor.cpp" />
         <option value="$PROJECT_DIR$/visitor/FunReturnVisitor.cpp" />
         <option value="$PROJECT_DIR$/visitor/FunReturnVisitor.h" />
         <option value="$PROJECT_DIR$/visitor/PrintVisitor.h" />
         <option value="$PROJECT_DIR$/type.h" />
-        <option value="$PROJECT_DIR$/Transform.cpp" />
         <option value="$PROJECT_DIR$/visitor/PrintVisitor.cpp" />
+        <option value="$PROJECT_DIR$/TypeSystem.cpp" />
+        <option value="$PROJECT_DIR$/ast.h" />
+        <option value="$PROJECT_DIR$/visitor/TypeVisitor.cpp" />
+        <option value="$PROJECT_DIR$/Statement.h" />
+        <option value="$PROJECT_DIR$/Expression.h" />
+        <option value="$PROJECT_DIR$/visitor/ExpressionVisitor.cpp" />
+        <option value="$PROJECT_DIR$/Transform.cpp" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="794" />
-    <option name="y" value="23" />
+    <option name="x" value="634" />
+    <option name="y" value="37" />
     <option name="width" value="1007" />
-    <option name="height" value="981" />
+    <option name="height" value="603" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -312,16 +374,6 @@
             <path>
               <item name="ast" type="b2602c69:ProjectViewProjectNode" />
               <item name="ast" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ast" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ast" type="462c0819:PsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ast" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ast" type="462c0819:PsiDirectoryNode" />
-              <item name="visitor" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -375,12 +427,13 @@
       <workItem from="1556451532570" duration="26251000" />
       <workItem from="1556538437542" duration="13007000" />
       <workItem from="1557644085146" duration="4525000" />
-      <workItem from="1557814468141" duration="21044000" />
+      <workItem from="1557814468141" duration="21706000" />
+      <workItem from="1558055908263" duration="10156000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67190000" />
+    <option name="totallyTimeSpent" value="78008000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -392,10 +445,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="794" y="23" width="1007" height="981" extended-state="0" />
+    <frame x="634" y="37" width="1007" height="603" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20932643" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2134715" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.20386904" />
@@ -449,7 +502,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Transform.cpp</url>
-          <line>730</line>
+          <line>748</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -464,86 +517,11 @@
     <entry file="file://$PROJECT_DIR$/types.h" />
     <entry file="file://$PROJECT_DIR$/ExpressionVisitor.cpp" />
     <entry file="file://$PROJECT_DIR$/VisitorExpression.h" />
-    <entry file="file://$PROJECT_DIR$/Visitor.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
-          <folding>
-            <element signature="e#114#2121#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TypeSystem.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="101" column="20" selection-start-line="101" selection-start-column="20" selection-end-line="101" selection-end-column="20" />
-          <folding>
-            <element signature="e#90#113#0" expanded="true" />
-            <element signature="e#807#1150#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VisitorType.h">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VisitorType.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-281">
-          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-          <folding>
-            <element signature="e#220#583#0" />
-            <element signature="e#585#845#0" />
-            <element signature="e#847#1099#0" />
-            <element signature="e#1101#1323#0" />
-            <element signature="e#1767#2354#0" />
-            <element signature="e#2355#4061#0" />
-            <element signature="e#4062#4122#0" />
-            <element signature="e#4123#4183#0" />
-            <element signature="e#4185#5829#0" />
-            <element signature="e#5830#6382#0" />
-            <element signature="e#6383#6870#0" />
-            <element signature="e#6919#8006#0" />
-            <element signature="e#8007#8506#0" />
-            <element signature="e#8507#8678#0" />
-            <element signature="e#8679#9002#0" />
-            <element signature="e#9003#9968#0" />
-            <element signature="e#9969#10016#0" />
-            <element signature="e#10172#10335#0" />
-            <element signature="e#10336#10448#0" />
-            <element signature="e#10449#10967#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visitor/VisitorType.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-          <folding>
-            <element signature="e#40#64#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visitor/VisitorType.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="4" lean-forward="true" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TypeSystem.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-          <folding>
-            <element signature="e#40#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Visitor.h" />
+    <entry file="file://$PROJECT_DIR$/VisitorType.h" />
+    <entry file="file://$PROJECT_DIR$/VisitorType.cpp" />
+    <entry file="file://$PROJECT_DIR$/visitor/VisitorType.cpp" />
+    <entry file="file://$PROJECT_DIR$/visitor/VisitorType.h" />
     <entry file="file://$PROJECT_DIR$/Definition.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-793" />
@@ -573,16 +551,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Expression.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-33">
-          <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-          <folding>
-            <element signature="e#93#113#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/utils.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -590,20 +558,6 @@
           <folding>
             <element signature="e#40#58#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Transform.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ASTNode.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
         </state>
       </provider>
     </entry>
@@ -624,92 +578,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SymbolHead.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="21" column="39" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Symbol.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visitor/TypeVisitor.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="115" column="25" selection-start-line="115" selection-start-column="25" selection-end-line="115" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#2#0" />
-            <element signature="e#40#64#0" expanded="true" />
-            <element signature="e#4482#6205#0" />
-            <element signature="e#6206#6837#0" />
-            <element signature="e#6838#7411#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/visitor/Visitor.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="143">
           <caret line="97" column="7" selection-start-line="97" selection-start-column="7" selection-end-line="97" selection-end-column="7" />
           <folding>
             <element signature="e#95#115#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visitor/ExpressionVisitor.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-259">
-          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visitor/ExpressionVisitor.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="117" column="24" selection-start-line="117" selection-start-column="24" selection-end-line="117" selection-end-column="24" />
-          <folding>
-            <element signature="e#40#60#0" expanded="true" />
-            <element signature="e#406#569#0" />
-            <element signature="e#571#755#0" />
-            <element signature="e#757#944#0" />
-            <element signature="e#1088#3408#0" />
-            <element signature="e#3532#4026#0" />
-            <element signature="e#5452#5606#0" />
-            <element signature="e#5768#7413#0" />
-            <element signature="e#7415#8232#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Statement.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="55" column="25" selection-start-line="55" selection-start-column="25" selection-end-line="55" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HighLevelDef.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="52" column="7" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="7" />
-          <folding>
-            <element signature="e#1833#1841#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visitor/FunReturnVisitor.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="34" column="28" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
-          <folding>
-            <element signature="e#40#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -724,46 +598,267 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/visitor/PrintVisitor.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1095">
+          <caret line="73" column="30" selection-start-line="72" selection-end-line="73" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/type.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
+        <state relative-caret-position="900">
           <caret line="60" selection-start-line="60" selection-end-line="60" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ast.h">
+    <entry file="file://$PROJECT_DIR$/visitor/FunReturnVisitor.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="510">
+          <caret line="34" column="28" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
           <folding>
-            <element signature="e#118#141#0" expanded="true" />
+            <element signature="e#40#60#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Transform.cpp">
+    <entry file="file://$PROJECT_DIR$/HighLevelDef.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="780">
+          <caret line="52" column="7" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="7" />
           <folding>
-            <element signature="e#106#132#0" expanded="true" />
+            <element signature="e#1833#1841#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visitor/PrintVisitor.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="71" column="30" selection-start-line="70" selection-end-line="71" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/visitor/PrintVisitor.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="252" column="26" selection-start-line="252" selection-start-column="26" selection-end-line="252" selection-end-column="26" />
+        <state relative-caret-position="32">
+          <caret line="224" column="6" lean-forward="true" selection-start-line="224" selection-start-column="6" selection-end-line="224" selection-end-column="6" />
           <folding>
             <element signature="e#40#60#0" expanded="true" />
+            <element signature="e#5465#5517#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Transform.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-412">
+          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ast.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Statement.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-456">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visitor/TypeVisitor.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="279" column="3" selection-start-line="279" selection-start-column="3" selection-end-line="279" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#2#0" />
+            <element signature="e#186#381#0" />
+            <element signature="e#384#644#0" />
+            <element signature="e#646#898#0" />
+            <element signature="e#900#1122#0" />
+            <element signature="e#1124#1274#0" />
+            <element signature="e#1276#1640#0" />
+            <element signature="e#1356#1406#0" expanded="true" />
+            <element signature="e#1641#2297#0" />
+            <element signature="e#1699#1745#0" expanded="true" />
+            <element signature="e#2298#4083#0" />
+            <element signature="e#2356#2402#0" expanded="true" />
+            <element signature="e#4084#4216#0" />
+            <element signature="e#4143#4190#0" expanded="true" />
+            <element signature="e#4218#4350#0" />
+            <element signature="e#4277#4324#0" expanded="true" />
+            <element signature="e#4352#6075#0" />
+            <element signature="e#4438#4496#0" expanded="true" />
+            <element signature="e#6076#6707#0" />
+            <element signature="e#6146#6200#0" expanded="true" />
+            <element signature="e#6708#7281#0" />
+            <element signature="e#6785#6846#0" expanded="true" />
+            <element signature="e#7408#7456#0" expanded="true" />
+            <element signature="e#8562#8616#0" expanded="true" />
+            <element signature="e#9133#9179#0" expanded="true" />
+            <element signature="e#9378#9426#0" expanded="true" />
+            <element signature="e#9779#9831#0" expanded="true" />
+            <element signature="e#10753#11019#0" />
+            <element signature="e#10819#10868#0" expanded="true" />
+            <element signature="e#11021#11303#0" />
+            <element signature="e#11094#11144#0" expanded="true" />
+            <element signature="e#11365#11414#0" expanded="true" />
+            <element signature="e#11550#11596#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Symbol.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SymbolHead.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="21" column="39" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeSystem.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="665">
+          <caret line="101" column="20" selection-start-line="101" selection-start-column="20" selection-end-line="101" selection-end-column="20" />
+          <folding>
+            <element signature="e#90#113#0" expanded="true" />
+            <element signature="e#807#1150#1" />
+            <element signature="e#1153#1684#1" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeSystem.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="131" column="1" lean-forward="true" selection-start-line="131" selection-start-column="1" selection-end-line="131" selection-end-column="1" />
+          <folding>
+            <element signature="e#40#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Expression.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="142" selection-start-line="142" selection-end-line="142" />
+          <folding>
+            <element signature="e#0#2#0" />
+            <element signature="e#220#356#1" />
+            <element signature="e#421#476#1" />
+            <element signature="e#714#790#0" />
+            <element signature="e#796#1293#1" />
+            <element signature="e#1093#1290#0" />
+            <element signature="e#1296#1594#1" />
+            <element signature="e#1452#1592#0" />
+            <element signature="e#1597#1835#1" />
+            <element signature="e#1693#1833#0" />
+            <element signature="e#1838#2188#1" />
+            <element signature="e#2000#2186#0" />
+            <element signature="e#2193#2558#1" />
+            <element signature="e#2561#2721#1" />
+            <element signature="e#2642#2719#0" />
+            <element signature="e#2724#2895#1" />
+            <element signature="e#3086#3323#0" />
+            <element signature="e#3329#3373#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visitor/ExpressionVisitor.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="190" column="81" selection-start-line="190" selection-start-column="81" selection-end-line="190" selection-end-column="81" />
+          <folding>
+            <element signature="e#0#2#0" />
+            <element signature="e#148#249#0" />
+            <element signature="e#327#487#0" />
+            <element signature="e#489#652#0" />
+            <element signature="e#654#838#0" />
+            <element signature="e#840#1027#0" />
+            <element signature="e#1030#3420#0" />
+            <element signature="e#1106#1153#0" expanded="true" />
+            <element signature="e#3422#3834#0" />
+            <element signature="e#4044#4099#0" expanded="true" />
+            <element signature="e#3836#4388#0" />
+            <element signature="e#4444#4492#0" expanded="true" />
+            <element signature="e#4390#6250#0" />
+            <element signature="e#4988#5048#0" expanded="true" />
+            <element signature="e#6252#6476#0" />
+            <element signature="e#6819#6864#0" expanded="true" />
+            <element signature="e#6478#6708#0" />
+            <element signature="e#7047#7094#0" expanded="true" />
+            <element signature="e#7277#7322#0" expanded="true" />
+            <element signature="e#8384#9236#0" />
+            <element signature="e#9051#9098#0" expanded="true" />
+            <element signature="e#9238#10285#0" />
+            <element signature="e#9906#9954#0" expanded="true" />
+            <element signature="e#10287#10451#0" />
+            <element signature="e#10963#11020#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visitor/ExpressionVisitor.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-240">
+          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+          <folding>
+            <element signature="e#152#176#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ASTNode.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Transform.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="41" column="61" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
+          <folding>
+            <element signature="e#300#565#0" />
+            <element signature="e#2455#3469#0" />
+            <element signature="e#3471#4068#0" />
+            <element signature="e#4070#4577#0" />
+            <element signature="e#4579#5288#0" />
+            <element signature="e#5290#6132#0" />
+            <element signature="e#6134#6454#0" />
+            <element signature="e#6456#6660#0" />
+            <element signature="e#6662#7302#0" />
+            <element signature="e#7304#7750#0" />
+            <element signature="e#7752#8330#0" />
+            <element signature="e#8332#8697#0" />
+            <element signature="e#8700#9086#0" />
+            <element signature="e#9088#9543#0" />
+            <element signature="e#9545#10531#0" />
+            <element signature="e#10533#10796#0" />
+            <element signature="e#10798#11077#0" />
+            <element signature="e#11079#11598#0" />
+            <element signature="e#11600#11950#0" />
+            <element signature="e#11952#12465#0" />
+            <element signature="e#12467#12850#0" />
+            <element signature="e#12852#13425#0" />
+            <element signature="e#13427#14132#0" />
+            <element signature="e#14135#16439#0" />
+            <element signature="e#16441#17527#0" />
+            <element signature="e#17529#17865#0" />
+            <element signature="e#17867#18490#0" />
+            <element signature="e#18492#19076#0" />
+            <element signature="e#19078#19413#0" />
+            <element signature="e#19415#19754#0" />
+            <element signature="e#19756#20021#0" />
+            <element signature="e#20023#20245#0" />
+            <element signature="e#20247#20456#0" />
+            <element signature="e#20458#20961#0" />
           </folding>
         </state>
       </provider>

@@ -18,7 +18,9 @@ ArrayType::ArrayType(TypeSystem *base, int width)
 }
 
 
-TypeSystem::TypeSystem(BaseType type) : type(type) {}
+TypeSystem::TypeSystem(BaseType type) : type(type) {
+    this->size  = 4;
+}
 
 string TypeSystem::toString() {
     return string("BaseType: ") + BaseTypeString[this->type] + string("  size: ") + to_string(this->size);

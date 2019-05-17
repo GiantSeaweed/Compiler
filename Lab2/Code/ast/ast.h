@@ -22,7 +22,7 @@
 using namespace std;
 
 
-#define DEBUG
+//  #define DEBUG
 
 Program *transToAST(MultiNode *root);
 

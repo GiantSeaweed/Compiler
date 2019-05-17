@@ -13,6 +13,7 @@
 #define ERR_VARDEC 6
 #define ERR_DEC 10
 #define ERR_INDEX 12
+#define ERR_FUNDEC 16
 
 #define ERR_EXPECT_EXP 11
 
