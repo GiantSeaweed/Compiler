@@ -14,12 +14,23 @@
 #include <cstring>
 using namespace std;
 
-enum InfixOperator{
+enum InfixOperator
+{
     INFIX_ASSIGN = 0,
-    INFIX_AND, INFIX_OR,
-    INFIX_RELOP,
-    INFIX_PLUS, INFIX_MINUS, INFIX_STAR, INFIX_DIV
-};//INFIX_GT,  INFIX_LT, INFIX_GE, INFIX_LE, INFIX_EQ, INFIX_NE,
+    INFIX_AND,
+    INFIX_OR,
+    INFIX_PLUS,
+    INFIX_MINUS,
+    INFIX_STAR, //5
+    INFIX_DIV,
+    INFIX_GT, //> 7
+    INFIX_LT, //< 8
+    INFIX_GE, //>= 9
+    INFIX_LE, //<= 10
+    INFIX_EQ, //== 11
+    INFIX_NE, //!= 12
+    INFIX_RELOP
+};
 
 enum PrefixOperator{
     PREFIX_MINUS = 0, PREFIX_NOT
@@ -52,6 +63,7 @@ struct InfixExp : Exp {
                                                                       infixOp(infixOp), rightSide(rightSide) {}
 
     void accept(Visitor &visitor) override {
+        // cout << "FSW " << infixOp << endl;
         if (visitor.visit(*this)) {
             ((ASTNode *)leftSide)->accept(visitor);
             ((ASTNode *)rightSide)->accept(visitor);

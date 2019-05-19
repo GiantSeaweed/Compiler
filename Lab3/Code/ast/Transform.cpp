@@ -48,6 +48,7 @@ Program *transToAST(MultiNode *root)
         cout << "Symbol: " << symbol->id << "\ttype: " << symbol->typeSystem->toString() << " lineno:"
              << symbol->firstLine << endl;
     }
+
 #endif
 #ifdef DEBUG
     cout << "******Finish TypeVisiting! Begin ExpVisiting!******" << endl;
@@ -613,7 +614,21 @@ InfixExp *transInfixExp(MultiNode *node){
     }else if(!strcmp(op,OR_STR)){
         infixOperator = INFIX_OR;
     }else if(!strcmp(op,RELOP_STR)){
-        infixOperator = INFIX_RELOP;
+        char* attr = node->childList[1]->attr;
+        if(!strcmp(attr, ">")){
+            infixOperator = INFIX_GT;
+        }else if(!strcmp(attr, ">=")){
+            infixOperator = INFIX_GE;
+        }else if(!strcmp(attr, "<")){
+            infixOperator = INFIX_LT;
+        }else if(!strcmp(attr, "<=")){
+            infixOperator = INFIX_LE;
+        }else if(!strcmp(attr, "==")){
+            infixOperator = INFIX_EQ;
+        }else if(!strcmp(attr, "!=")){
+            infixOperator = INFIX_NE;
+        }
+        // infixOperator = INFIX_RELOP;
     }else if(!strcmp(op,PLUS_STR)){
         infixOperator = INFIX_PLUS;
     }else if(!strcmp(op,MINUS_STR)){

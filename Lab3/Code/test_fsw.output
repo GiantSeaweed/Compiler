@@ -1,0 +1,9 @@
+Error type 5 at Line 18 : Assign between different types!
+Error type 5 at Line 23 : Assign between different types!
+Error type 7 at Line 25 : Operation between different types!
+Error type 7 at Line 32 : Operation between different types!
+Error type 7 at Line 32 : Operation between different types!
+Error type 12 at Line 32 : Access an array with wrong typed expression
+Error type 7 at Line 43 : Operation between different types!
+Error type 7 at Line 43 : Operation between different types!
+Error type 7 at Line 43 : Operation between unsupported types

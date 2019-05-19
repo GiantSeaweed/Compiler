@@ -26,7 +26,7 @@ float {float_norm}|{float_exp}
 ";" { return SEMI; }
 "," { return COMMA; }
 "=" { return ASSIGNOP; }
-">"|"<"|">="|"<="|"=="|"!=" {  return RELOP; }
+">"|"<"|">="|"<="|"=="|"!=" {  yylval.relop_text[1] = strdup(yytext); return RELOP; }
 "+" { return PLUS; }
 "-" { return MINUS; }
 "*" { return STAR; }

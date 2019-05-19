@@ -3,14 +3,16 @@ struct Node
     float lc[4][6];
     int rc;
 };
-int main()
+
+int main(){
+
+}
+
+int i_func_10(float i_func_10_a2_f_0[2])
 {
     int i1;
+    int i3 = 1;
     struct Node node;
-    float f1 = 1.05e-4;
-    float f2 = 134312.232413E-4;
-    float f3 = 123.342E+4;
-    float f4 = 1243.3432e+3;
     if((i1 + i3 >= 4645 || i3-i1 !=2) && i1 > 0)
     {
         i1 = i3*(i3-1);

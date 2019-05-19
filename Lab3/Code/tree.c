@@ -115,6 +115,9 @@ void printTree(MultiNode *node, int depth){
     else if(node->numChild > 0){//Nonterminals
         printf("%s (%d)\n", node->name, node->firstLine);
     }
+    // else if (strcmp(node->name, "RELOP") == 0){
+    //     printf("RELOP: %s\n", node->attr);
+    // }
     else{
         printf("%s\n", node->name);
     }

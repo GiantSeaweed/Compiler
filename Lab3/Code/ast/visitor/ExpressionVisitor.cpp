@@ -81,13 +81,13 @@ bool ExpressionVisitor::visit(InfixExp &infixExpression) {
         }
     } else {
         delete defaultType;
-        if ( infixExpression.infixOp == INFIX_RELOP){
-//                infixExpression.infixOp == INFIX_NE
-//            || infixExpression.infixOp == INFIX_EQ
-//            || infixExpression.infixOp == INFIX_LT
-//            || infixExpression.infixOp == INFIX_LE
-//            || infixExpression.infixOp == INFIX_GT
-//            || infixExpression.infixOp == INFIX_GE) {
+        if ( //infixExpression.infixOp == INFIX_RELOP){
+               infixExpression.infixOp == INFIX_NE
+           || infixExpression.infixOp == INFIX_EQ
+           || infixExpression.infixOp == INFIX_LT
+           || infixExpression.infixOp == INFIX_LE
+           || infixExpression.infixOp == INFIX_GT
+           || infixExpression.infixOp == INFIX_GE) {
             infixExpression.typeSystem = new TypeSystem(BASE_INT);
         } else {
             infixExpression.typeSystem = infixExpression.leftSide->typeSystem;
@@ -148,8 +148,11 @@ bool ExpressionVisitor::visit(IDExp &expression) {
         // cout <<"ExpFirst:" << expression.beginLine << ",ExpEnd:"<<expression.endLine<<endl;
         if (sym->firstLine <= expression.beginLine
             && (sym->endLine >= expression.endLine ||
-             sym->endLine == GLOBAL ||
-                sym->typeSystem->type == BASE_FUNCTION || sym->typeSystem->type == BASE_STRUCT)) {
+             sym->endLine == GLOBAL ||sym->typeSystem->type != BASE_DEFAULT 
+                // sym->typeSystem->type == BASE_FUNCTION 
+                // || sym->typeSystem->type == BASE_STRUCT
+                // || sym->typeSystem->type == BASE_ARRAY
+            )) {
             expression.typeSystem = sym->typeSystem;
             expression.lval = false;
             if (expression.typeSystem->type != BASE_FUNCTION) {

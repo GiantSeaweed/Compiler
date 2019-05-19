@@ -17,6 +17,7 @@ int HAS_ERROR = 0;
     int ival;
     float fval;
     char* sval;
+    char* relop_text[2];
     struct MultiNode *m_node;
 }
 
@@ -400,7 +401,7 @@ Exp :
     {
         $$ = createMultiTree("Exp");
         insertNon($$, $1);
-        insertTerm($$, "RELOP", @2.first_line);
+        insertTermAttr($$, "RELOP", yylval.relop_text[1], @2.first_line);
         insertNon($$, $3);
     }
     | Exp PLUS Exp

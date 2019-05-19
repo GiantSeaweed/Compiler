@@ -284,7 +284,8 @@ bool TypeVisitor::visit(ArrayDec &declarator) {
     }
     return VisitorFalse::visit(declarator);
 }
-bool TypeVisitor::visit(InitializedDec &declarator) {
+bool TypeVisitor::visit(InitializedDec &declarator) 
+{
 #ifdef DEBUG
     cout << "visiting TypeVisitor::InitializedDec" <<endl;
 #endif
@@ -302,6 +303,7 @@ bool TypeVisitor::visit(InitializedDec &declarator) {
 #endif
     return VisitorFalse::visit(declarator);
 }
+
 bool TypeVisitor::visit(FunDec &declarator) {
 #ifdef DEBUG
     cout << "visiting TypeVisitor::FunDec" <<endl;
@@ -311,6 +313,7 @@ bool TypeVisitor::visit(FunDec &declarator) {
     }
     return VisitorFalse::visit(declarator);
 }
+
 bool TypeVisitor::visit(ParamDec &declarator) {
 #ifdef DEBUG
     cout << "visiting TypeVisitor::ParamDec" <<endl;
@@ -322,6 +325,7 @@ bool TypeVisitor::visit(ParamDec &declarator) {
     declarator.typeSystem = declarator.varDec->typeSystem;
     return VisitorFalse::visit(declarator);
 }
+
 bool TypeVisitor::visit(NormalVarDec &declarator) {
 #ifdef DEBUG
     cout << "visiting TypeVisitor::NormalVarDec" <<endl;
