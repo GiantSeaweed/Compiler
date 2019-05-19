@@ -48,8 +48,7 @@ Program *transToAST(MultiNode *root)
         cout << "Symbol: " << symbol->id << "\ttype: " << symbol->typeSystem->toString() << " lineno:"
              << symbol->firstLine << endl;
     }
-#endif
-#ifdef DEBUG
+
     cout << "******Finish TypeVisiting! Begin ExpVisiting!******" << endl;
 #endif
      ExpressionVisitor expressionVisitor;

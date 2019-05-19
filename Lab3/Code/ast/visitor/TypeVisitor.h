@@ -23,7 +23,7 @@ auto op = [](Symbol *s1, Symbol *s2) -> bool {
 
 struct TypeVisitor : VisitorFalse {
     set<Symbol *, decltype(op)> *symbolTable;
-    set<Symbol *, decltype(op)> *funcTable;
+    set<Symbol *, decltype(op)> *funTable;
 
     TypeVisitor();
 
@@ -63,7 +63,7 @@ private:
 
     Symbol *lookupSymbolTable(Symbol *symbol);
 
-    bool checkAndAddIntoFuncTable(Symbol *symbol);
+    bool checkAndAddIntoFunTable(Symbol *symbol);
 };
 
 #endif //AST_TYPEVISITOR_H

@@ -7,8 +7,6 @@
 
 #include "ast.h"
 
-// using namespace std;
-
 struct Dec : ASTNode{
     void accept(Visitor &visitor) override {
         visitor.visit(*this);

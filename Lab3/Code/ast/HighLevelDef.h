@@ -73,9 +73,6 @@ struct Program : ASTNode{
     Program(vector<ExtDef *> *extDefList) : extDefList(extDefList) {}
 
     void accept(Visitor &visitor) override {
-#ifdef DEBUG
-        cout<<""
-#endif
         if (visitor.visit(*this)) {
             for (ExtDef *def:*extDefList) {
                 ((ASTNode *) def)->accept(visitor);

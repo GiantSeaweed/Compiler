@@ -28,6 +28,8 @@ struct BasicSpecifier : Specifier{
     }
 };
 
+
+
 struct StructSpecifier : Specifier{
     void accept(Visitor &visitor) override {
         visitor.visit(*this);

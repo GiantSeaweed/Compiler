@@ -13,8 +13,7 @@ using namespace std;
 
 string TypeVisitor::genAnonymousName(ASTNode &node) {
     int i = node.beginLine;
-//    int j = node.endLineNo;
-    return string("__ano_name_") + to_string(i) + string("__") ;//+ to_string(j);
+    return string("AnoName") + to_string(i);
 }
 
 
@@ -22,34 +21,32 @@ bool TypeVisitor::checkAndAddIntoSymbolTable(Symbol *symbol) {
     auto sym = this->symbolTable->find(symbol);
     if (sym != this->symbolTable->end()) {
         return false;
-    } else {
-        this->symbolTable->insert(symbol);
-        return true;
     }
+
+    this->symbolTable->insert(symbol);
+    return true;
 }
 
-bool TypeVisitor::checkAndAddIntoFuncTable(Symbol *symbol) {
-    auto sym = this->funcTable->find(symbol);
-    if (sym != this->funcTable->end()) {
+bool TypeVisitor::checkAndAddIntoFunTable(Symbol *symbol) {
+    auto sym = this->funTable->find(symbol);
+    if (sym != this->funTable->end()) {
         return false;
-    } else {
-        this->funcTable->insert(symbol);
-        return true;
     }
+    this->funTable->insert(symbol);
+    return true;
 }
 
 Symbol *TypeVisitor::lookupSymbolTable(Symbol *symbol) {
     auto result = this->symbolTable->find(symbol);
     if (result == this->symbolTable->end()) {
         return nullptr;
-    } else {
-        return *result;
     }
+    return *result;
 }
 
 TypeVisitor::TypeVisitor() {
     this->symbolTable = new set<Symbol *, decltype(op)>(op);
-    this->funcTable = new set<Symbol *, decltype(op)>(op);
+    this->funTable = new set<Symbol *, decltype(op)>(op);
 }
 
 //definition
@@ -59,9 +56,9 @@ bool TypeVisitor::visit(Definition &definition) {
 #endif
     definition.specifier->accept(*this);
 
-    for (Dec *dec1:*definition.decList) {
-        dec1->typeSystem = definition.specifier->typeSystem;
-        dec1->accept(*this);
+    for (Dec *dec : *definition.decList) {
+        dec->typeSystem = definition.specifier->typeSystem;
+        dec->accept(*this);
 
     }
     return VisitorFalse::visit(definition);
@@ -71,9 +68,9 @@ bool TypeVisitor::visit(DecDef &hlDef) {
     cout << "visiting TypeVisitor::DecDef" <<endl;
 #endif
     hlDef.specifier->accept(*this);
-    for (VarDec *d : *hlDef.extDecList) {
-        d->typeSystem = hlDef.specifier->typeSystem;
-        d->accept(*this);
+    for (VarDec *varDec : *hlDef.extDecList) {
+        varDec->typeSystem = hlDef.specifier->typeSystem;
+        varDec->accept(*this);
     }
     for (VarDec *globalDec:*hlDef.extDecList) {
         auto id = globalDec->getID();
@@ -82,7 +79,7 @@ bool TypeVisitor::visit(DecDef &hlDef) {
         if (globalSym != nullptr) {
             globalSym->endLine = GLOBAL;
         } else {
-            cerr << "error at typeVisitor.visit(GlobalDef&)" << endl;
+            cerr << "Error in TypeVisitor::visit(DecDef)" << endl;
         }
 
     }
@@ -93,50 +90,54 @@ bool TypeVisitor::visit(FunDef &hlDef) {
     cout << "visiting TypeVisitor::FunDef" <<endl;
 #endif
     hlDef.retSpecifier->accept(*this);
-    auto retSpecifier = hlDef.retSpecifier->typeSystem;
-    hlDef.funDec->accept(*this);
+    TypeSystem* retSpecifier = hlDef.retSpecifier->typeSystem;
 
+    hlDef.funDec->accept(*this);
     vector<TypeSystem *> paramsType;
-    for (ParamDec *p : *hlDef.funDec->paramList) {
-        string paramId = p->varDec->getID();
-        Symbol tmp(paramId);
-        auto paramSymbol = lookupSymbolTable(&tmp);
+    for (ParamDec *paramDec : *hlDef.funDec->paramList) {
+        string paramID = paramDec->varDec->getID();
+        Symbol tmp(paramID);
+        Symbol* paramSymbol = lookupSymbolTable(&tmp);
         if (paramSymbol != nullptr) {
 //            paramSymbol->endLineno = hlDef.endLineNo;
         } else {
             cerr << "error at typeVisitor.visit(FunDef&)" << endl;
         }
-        paramsType.push_back(p->typeSystem);
+        paramsType.push_back(paramDec->typeSystem);
     }
-        auto myType = new FunctionType(BASE_FUNCTION, retSpecifier, paramsType);
-        hlDef.typeSystem = myType;
-        auto mySymbol = new Symbol(&hlDef, myType, hlDef.funDec->id->id);
-        mySymbol->endLine = GLOBAL;
-        if (!checkAndAddIntoFuncTable(mySymbol)) {
-            //FUNC symbol Error
-            printError(4, "Function " + mySymbol->id + " has been defined!", hlDef.beginLine);
 
-        }
 
-        hlDef.compSt->accept(*this);
-        auto locals = hlDef.compSt->defList;
-        for (Definition *localDef : *locals) {
-            auto localDecs = localDef->decList;
-            for (Dec *localDec:*localDecs) {
-                auto localId = localDec->getVarDec()->getID();
-                Symbol tmp(localId);
-                auto localSym = lookupSymbolTable(&tmp);
-                if (localSym != nullptr) {
+    FunctionType* newType = new FunctionType(BASE_FUNCTION, retSpecifier, paramsType);
+    hlDef.typeSystem = newType;
+    Symbol* newSymbol = new Symbol(&hlDef, newType, hlDef.funDec->id->id);
+    newSymbol->endLine = GLOBAL;
+
+    if (!checkAndAddIntoFunTable(newSymbol)) {
+#ifdef SEMANTIC
+        //FUNC symbol Error
+        printError(4, "Function " + mySymbol->id + " has been defined!", hlDef.beginLine);
+#endif
+    }
+
+    hlDef.compSt->accept(*this);
+    auto locals = hlDef.compSt->defList;
+    for (Definition *localDef : *locals) {
+        auto localDecs = localDef->decList;
+        for (Dec *localDec:*localDecs) {
+            string localId = localDec->getVarDec()->getID();
+            Symbol tmp(localId);
+            Symbol* localSym = lookupSymbolTable(&tmp);
+            if (localSym != nullptr) {
 //                localSym->endLineno = hlDef.endLineNo;
-                } else {
-                    cerr << "error at typeVisitor.visit(FunDef&)" << endl;
-                }
-
+            } else {
+                cerr << "error at typeVisitor.visit(FunDef&)" << endl;
             }
+
         }
-        return VisitorFalse::visit(hlDef);
-    // }
+    }
+    return VisitorFalse::visit(hlDef);
 }
+
 bool TypeVisitor::visit(Program &hlDef) {
 #ifdef DEBUG
     cout << "visiting Typevisitor::Program" <<endl;
@@ -179,8 +180,10 @@ bool TypeVisitor::visit(DefStructSpecifier &specifier) {
             auto sym = new Symbol(var, var->typeSystem, var->getID());
             auto toFind = structSymTable->find(sym);
             if (toFind != structSymTable->end()) {
+#ifdef SEMANTIC
                 //duplicate field
                 printError(15, "Struct field " + sym->id + " is redefined!", sym->firstLine);
+#endif
                 delete sym;
             } else {
                 structSymTable->insert(sym);
@@ -194,8 +197,10 @@ bool TypeVisitor::visit(DefStructSpecifier &specifier) {
 
     auto result = new Symbol(&specifier, type, symbol);
     if (!checkAndAddIntoSymbolTable(result)) {
+#ifdef SEMANTIC
         //duplicate define
         printError(16, "Struct name " + result->id + " redefined!", result->firstLine);
+#endif
         delete result;
     }
 
@@ -232,8 +237,10 @@ bool TypeVisitor::visit(NormalStructSpecifier &specifier) {
     Symbol tmp(&specifier, nullptr, specifier.tag->id);
     auto pSymbol = lookupSymbolTable(&tmp);
     if (pSymbol == nullptr) {
+#ifdef SEMANTIC
         //undefined reference error
         printError(17, "Struct " + tmp.id + " is undefined!", specifier.beginLine);
+#endif
         specifier.typeSystem = new TypeSystem(BASE_DEFAULT);
 
     } else {
@@ -243,7 +250,7 @@ bool TypeVisitor::visit(NormalStructSpecifier &specifier) {
 }
 
 string arrayPlaceHolder;
-TypeSystem *oriType;
+
 
 //declarator
 bool TypeVisitor::visit(ArrayDec &declarator) {
@@ -251,20 +258,25 @@ bool TypeVisitor::visit(ArrayDec &declarator) {
     cout << "visiting TypeVisitor::ArrayDec" <<endl;
 #endif
     bool topLevel = declarator.typeSystem->type != BASE_ARRAY;
+    TypeSystem *oriType;
+
     if (topLevel) {
         oriType = declarator.typeSystem;
     }
     ArrayType tmp(oriType, -1);
     declarator.varDec->typeSystem = &tmp;
     declarator.varDec->accept(*this);
-    auto realType = declarator.varDec->typeSystem;
-    auto myType = new ArrayType(realType, declarator.size);
-    myType->size = declarator.size * realType->size;
-    declarator.typeSystem = myType;
+
+    TypeSystem* realType = declarator.varDec->typeSystem;
+    ArrayType* newType = new ArrayType(realType, declarator.size);
+    newType->size = declarator.size * realType->size;
+    declarator.typeSystem = newType;
     if (topLevel) {
         auto result = new Symbol(&declarator, declarator.typeSystem, arrayPlaceHolder);
         arrayPlaceHolder = "";
         if (!checkAndAddIntoSymbolTable(result)) {
+#ifdef SEMANTIC
+
             if (!this->inStruct) {
                 //redefined vars
                 printError(3, "Var " + result->id + " is redefined!", declarator.beginLine);
@@ -272,10 +284,12 @@ bool TypeVisitor::visit(ArrayDec &declarator) {
                 //redefined field
                 printError(15, "Struct field " + result->id + " is redefined!", declarator.beginLine);
             }
+#endif
         }
     }
     return VisitorFalse::visit(declarator);
 }
+
 bool TypeVisitor::visit(InitializedDec &declarator) {
 #ifdef DEBUG
     cout << "visiting TypeVisitor::InitializedDec" <<endl;
@@ -286,10 +300,12 @@ bool TypeVisitor::visit(InitializedDec &declarator) {
     auto realType = declarator.varDec->typeSystem;
 
     declarator.typeSystem = realType;
+#ifdef SEMANTIC
     if (this->inStruct) {
         //redefined vars
         printError(15, "Init field " + declarator.varDec->getID() + " in struct", declarator.beginLine);
     }
+#endif
     return VisitorFalse::visit(declarator);
 }
 bool TypeVisitor::visit(FunDec &declarator) {
@@ -327,16 +343,11 @@ bool TypeVisitor::visit(NormalVarDec &declarator) {
     Symbol* result = new Symbol(&declarator, type, declarator.id->id);
     if (!this->inStruct) {
         if (!checkAndAddIntoSymbolTable(result)) {
+#ifdef SEMANTIC
             //redefined vars
             printError(3, "Var " + result->id + " is redefined!", declarator.beginLine);
+#endif
         }
-    } else {
-//        now struct has its own sym table
-//        auto sym = lookupSymbolTable(result);
-//        if (sym != nullptr) {
-//            //redefined field
-//            printError(15, "Struct field " + result->id + " redefined!", declarator.beginLineNo);
-//        }
     }
 
     return VisitorFalse::visit(declarator);
@@ -379,9 +390,9 @@ bool TypeVisitor::visit(CompSt &stmt) {
         d->accept(*this);
         auto decs = d->decList;
         for (Dec *dec1:*decs) {
-            auto id = dec1->getVarDec()->getID();
+            string id = dec1->getVarDec()->getID();
             Symbol tmp(id);
-            auto sym = lookupSymbolTable(&tmp);
+            Symbol* sym = lookupSymbolTable(&tmp);
             if (sym != nullptr) {
 //                sym->endLineno = stmt.endLineNo;
             }

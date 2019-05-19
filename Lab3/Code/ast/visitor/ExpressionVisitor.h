@@ -16,7 +16,7 @@ struct ExpressionVisitor : VisitorTrue {
 //    ExpressionVisitor(set<Symbol *, decltype(op)> *symTable);
 
     set<Symbol *, decltype(op)> *symTable;
-    set<Symbol *, decltype(op)> *funcTable;
+    set<Symbol *, decltype(op)> *funTable;
 
     bool inSymTable(const string &id);
 
@@ -47,8 +47,8 @@ struct ExpressionVisitor : VisitorTrue {
 
     bool visit(DefStructSpecifier &specifier) override;
 
-    bool inFuncTable(const string &id);
+    bool inFunTable(const string &id);
 
-    Symbol *findInFuncTable(const string &id);
+    Symbol *findInFunTable(const string &id);
 };
 #endif //AST_VISITOREXPRESSION_H

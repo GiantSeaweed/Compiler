@@ -13,6 +13,7 @@ bool FunReturnVisitor::visit(ReturnStmt &stmt) {
 #ifdef DEBUG
     cout << "visiting FunReturnVisitor::ReturnStmt" << endl;
 #endif
+#ifdef SEMANTIC
     if (inFunction) {
         // cout << this->retType->type << " " << stmt.exp->typeSystem->type <<endl;
         if (*this->retType != *stmt.exp->typeSystem)
@@ -20,6 +21,7 @@ bool FunReturnVisitor::visit(ReturnStmt &stmt) {
             printError(8, "Return type cannot match function return type!", stmt.beginLine);
         }
     }
+#endif
     return false;
 }
 
