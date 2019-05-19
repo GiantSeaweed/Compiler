@@ -22,8 +22,8 @@
 using namespace std;
 
 
-//#define DEBUG
-//#define SEMANTIC
+//  #define DEBUG
+// #define SEMANTIC
 Program *transToAST(MultiNode *root);
 
 #endif //AST_AST_H

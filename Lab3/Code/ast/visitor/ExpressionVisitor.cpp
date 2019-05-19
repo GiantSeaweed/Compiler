@@ -45,11 +45,10 @@ bool ExpressionVisitor::visit(InfixExp &infixExpression) {
     infixExpression.typeSystem = defaultType;
     bool lTypeCheck = lType->type != BASE_INT && lType->type != BASE_FLOAT && lType->type != BASE_DEFAULT;
     bool rTypeCheck = rType->type != BASE_INT && rType->type != BASE_FLOAT && lType->type != BASE_DEFAULT;
-#ifdef DEBUG
-    cout << infixExpression.leftSide->typeSystem->toString()<<" at line" << infixExpression.beginLine << endl;
-    cout << infixExpression.rightSide->typeSystem->toString()<<endl;
-    cout << infixExpression.infixOp << ","<<infixExpression.leftSide->lval <<endl;
-#endif
+//    cout << "FSW:" << lTypeCheck <<","<<rTypeCheck <<","<<infixExpression.infixOp<<endl;
+//    cout << infixExpression.leftSide->typeSystem->toString()<<" at line" << infixExpression.beginLine << endl;
+//    cout << infixExpression.rightSide->typeSystem->toString()<<endl;
+//    cout << infixExpression.infixOp << ","<<infixExpression.leftSide->lval <<endl;
     if ((lTypeCheck || rTypeCheck) && infixExpression.infixOp != INFIX_ASSIGN) {
 #ifdef SEMANTIC
         //operation type error
@@ -57,8 +56,8 @@ bool ExpressionVisitor::visit(InfixExp &infixExpression) {
 #endif
     } else if (infixExpression.infixOp == INFIX_ASSIGN &&
                !infixExpression.leftSide->lval  ) {
-#ifdef SEMANTIC
         //lval Error
+#ifdef SEMANTIC
         printError(6, "Assign to a right-value!", infixExpression.beginLine);
 #endif
     } else if (*lType != *rType) {
@@ -71,7 +70,6 @@ bool ExpressionVisitor::visit(InfixExp &infixExpression) {
             printError(7, "Operation between different types!", infixExpression.beginLine);
         }
 #endif
-
     } else if (infixExpression.infixOp == INFIX_AND || infixExpression.infixOp == INFIX_OR) {
         if (!(lType->type == BASE_INT && rType->type == BASE_INT)) {
 #ifdef SEMANTIC
@@ -84,6 +82,12 @@ bool ExpressionVisitor::visit(InfixExp &infixExpression) {
     } else {
         delete defaultType;
         if ( infixExpression.infixOp == INFIX_RELOP){
+//                infixExpression.infixOp == INFIX_NE
+//            || infixExpression.infixOp == INFIX_EQ
+//            || infixExpression.infixOp == INFIX_LT
+//            || infixExpression.infixOp == INFIX_LE
+//            || infixExpression.infixOp == INFIX_GT
+//            || infixExpression.infixOp == INFIX_GE) {
             infixExpression.typeSystem = new TypeSystem(BASE_INT);
         } else {
             infixExpression.typeSystem = infixExpression.leftSide->typeSystem;
@@ -110,12 +114,11 @@ bool ExpressionVisitor::visit(PrefixExp &prefixExpression) {
     prefixExpression.exp->accept(*this);
     prefixExpression.lval = false;
     prefixExpression.typeSystem = prefixExpression.exp->typeSystem;
-
 #ifdef SEMANTIC
     if (prefixExpression.prefixOp == PREFIX_NOT) {
         if (prefixExpression.exp->typeSystem->type != BASE_INT) {
             //logic Error
-            printError(7, "Use logical operation to non-integers!", prefixExpression.beginLine);
+            printError(7, "Use logical operation to non-integer!", prefixExpression.beginLine);
         }
     }
 #endif
@@ -131,7 +134,8 @@ bool ExpressionVisitor::visit(IDExp &expression) {
     if (!isInSymTable && !isInFunTable) {
 #ifdef SEMANTIC
         //undefined Error
-        if (expression.typeSystem == nullptr || expression.typeSystem->type != BASE_FunTION) {
+        if (expression.typeSystem == nullptr || expression.typeSystem->type != BASE_FUNCTION) {
+            // cout << "FSW" << expression.id << ", length=" << expression.id.length() << ", type="<< expression.typeSystem->type<<"("<<BASE_FUNCTION<<")" << endl;
             printError(1, "id " + expression.id + " is not defined", expression.beginLine);
         }
 #endif
@@ -139,13 +143,16 @@ bool ExpressionVisitor::visit(IDExp &expression) {
         expression.typeSystem = new TypeSystem(BASE_DEFAULT);
     } else {
         auto sym = isInSymTable ? findInSymTable(expression.id) : findInFunTable(expression.id);
+        // cout <<"***"<<expression.id<<"***"<<endl;
+        // cout << "SymFirst:"<<sym->firstLine<<",SymEnd:"<<sym->endLine<<endl;
+        // cout <<"ExpFirst:" << expression.beginLine << ",ExpEnd:"<<expression.endLine<<endl;
         if (sym->firstLine <= expression.beginLine
             && (sym->endLine >= expression.endLine ||
              sym->endLine == GLOBAL ||
-                sym->typeSystem->type == BASE_FunTION || sym->typeSystem->type == BASE_STRUCT)) {
+                sym->typeSystem->type == BASE_FUNCTION || sym->typeSystem->type == BASE_STRUCT)) {
             expression.typeSystem = sym->typeSystem;
             expression.lval = false;
-            if (expression.typeSystem->type != BASE_FunTION) {
+            if (expression.typeSystem->type != BASE_FUNCTION) {
                 expression.lval = true;
             }
         } else {
@@ -182,7 +189,7 @@ bool ExpressionVisitor::visit(FunExp &expression) {
 #ifdef DEBUG
     cout << "visiting ExpVisitor::FunExp" <<endl;
 #endif
-    expression.funID->typeSystem = new TypeSystem(BASE_FunTION);
+    expression.funID->typeSystem = new TypeSystem(BASE_FUNCTION);
     expression.funID->accept(*this);
 
     auto funcSym = findInFunTable(expression.funID->id);
@@ -190,15 +197,15 @@ bool ExpressionVisitor::visit(FunExp &expression) {
     if (expression.funID->typeSystem->type == BASE_DEFAULT) {
 #ifdef SEMANTIC
         //undefined method Error
-        printError(2, "FunTion " + expression.funID->id + " undefined!", expression.beginLine);
+        printError(2, "Function " + expression.funID->id + " undefined!", expression.beginLine);
 #endif
     } else if (funcSym == nullptr) {
 #ifdef SEMANTIC
         //invocation Error
-        printError(11, "Name " + expression.funID->id + " is not a funTion!", expression.beginLine);
+        printError(11, "Name " + expression.funID->id + " is not a function!", expression.beginLine);
 #endif
     } else {
-        auto methodType = (FunTionType *) funcSym->typeSystem;
+        FunctionType* methodType = (FunctionType *)funcSym->typeSystem;
         if (expression.args->size() != methodType->args->size()) {
 #ifdef SEMANTIC
             //param and args Error
@@ -213,7 +220,7 @@ bool ExpressionVisitor::visit(FunExp &expression) {
 #ifdef SEMANTIC
                     //params and args Error
                     printError(9, "Argument " + to_string(i) + " has unmatched argument type!", expression.beginLine);
-#endif
+#endif    
                     break;
                 }
             }

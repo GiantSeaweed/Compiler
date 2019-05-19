@@ -1,11 +1,7 @@
-struct Position
+float function() 
 {
-    float x, y;
-};
-
-int main()
-{
-    struct Position p;
-    if (p.n == 3.7)
-        return 0;
+    float a = 23.43E+3; 
+    float b = 23.43E+.3; 
+    float c = .e34; 
+    return a;
 }
