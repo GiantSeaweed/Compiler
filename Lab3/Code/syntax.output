@@ -1,7 +1,5 @@
 State 36 conflicts: 1 shift/reduce
 State 37 conflicts: 1 shift/reduce
-State 72 conflicts: 1 shift/reduce
-State 73 conflicts: 1 shift/reduce
 State 124 conflicts: 1 shift/reduce
 State 130 conflicts: 1 shift/reduce
 State 131 conflicts: 1 shift/reduce
@@ -47,7 +45,7 @@ Grammar
 
    25 VarList: ParamDec COMMA VarList
    26        | ParamDec
-   27        | VarList error VarList
+   27        | ParamDec error VarList
 
    28 FunDec: ID LP VarList RP
    29       | ID LP RP
@@ -167,7 +165,7 @@ Tag (39)
 VarDec (40)
     on left: 20 21 22 23, on right: 8 9 21 22 23 24 50 51 52
 ParamDec (41)
-    on left: 24, on right: 25 26
+    on left: 24, on right: 25 26 27
 VarList (42)
     on left: 25 26 27, on right: 25 27 28
 FunDec (43)
@@ -537,19 +535,19 @@ State 33
 
    25 VarList: ParamDec . COMMA VarList
    26        | ParamDec .
+   27        | ParamDec . error VarList
 
-    COMMA  shift, and go to state 49
+    error  shift, and go to state 49
+    COMMA  shift, and go to state 50
 
-    $default  reduce using rule 26 (VarList)
+    RP  reduce using rule 26 (VarList)
 
 
 State 34
 
-   27 VarList: VarList . error VarList
    28 FunDec: ID LP VarList . RP
 
-    error  shift, and go to state 50
-    RP     shift, and go to state 51
+    RP  shift, and go to state 51
 
 
 State 35
@@ -697,7 +695,7 @@ State 48
 
 State 49
 
-   25 VarList: ParamDec COMMA . VarList
+   27 VarList: ParamDec error . VarList
 
     TYPE    shift, and go to state 1
     STRUCT  shift, and go to state 2
@@ -710,7 +708,7 @@ State 49
 
 State 50
 
-   27 VarList: VarList error . VarList
+   25 VarList: ParamDec COMMA . VarList
 
     TYPE    shift, and go to state 1
     STRUCT  shift, and go to state 2
@@ -963,24 +961,16 @@ State 71
 
 State 72
 
-   25 VarList: ParamDec COMMA VarList .
-   27        | VarList . error VarList
+   27 VarList: ParamDec error VarList .
 
-    error  shift, and go to state 50
-
-    error  [reduce using rule 25 (VarList)]
-    RP     reduce using rule 25 (VarList)
+    $default  reduce using rule 27 (VarList)
 
 
 State 73
 
-   27 VarList: VarList . error VarList
-   27        | VarList error VarList .
+   25 VarList: ParamDec COMMA VarList .
 
-    error  shift, and go to state 50
-
-    error  [reduce using rule 27 (VarList)]
-    RP     reduce using rule 27 (VarList)
+    $default  reduce using rule 25 (VarList)
 
 
 State 74

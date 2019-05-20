@@ -48,16 +48,6 @@
       <change beforePath="$PROJECT_DIR$/../../../Lab2/Code/ast/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab2/Code/ast/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab2/Test/test1.cmm" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab2/Test/test1.cmm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Expression.h" beforeDir="false" afterPath="$PROJECT_DIR$/Expression.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Transform.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Transform.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ast.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visitor/ExpressionVisitor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/ExpressionVisitor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visitor/TypeVisitor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/TypeVisitor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../lexical.l" beforeDir="false" afterPath="$PROJECT_DIR$/../lexical.l" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../syntax.y" beforeDir="false" afterPath="$PROJECT_DIR$/../syntax.y" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test_fsw.output" beforeDir="false" afterPath="$PROJECT_DIR$/../test_fsw.output" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tree.c" beforeDir="false" afterPath="$PROJECT_DIR$/../tree.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Test/test2.cmm" beforeDir="false" afterPath="$PROJECT_DIR$/../../Test/test2.cmm" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -280,10 +270,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="799" />
-    <option name="y" value="43" />
-    <option name="width" value="1007" />
-    <option name="height" value="903" />
+    <option name="x" value="8" />
+    <option name="y" value="55" />
+    <option name="width" value="835" />
+    <option name="height" value="904" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -385,10 +375,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="799" y="43" width="1007" height="903" extended-state="0" />
+    <frame x="8" y="55" width="835" height="904" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22176166" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26986128" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="0" weight="0.20386904" />
@@ -402,7 +392,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="TeamCity" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.056047197" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.24014778" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="CMake" order="13" weight="0.32743362" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />

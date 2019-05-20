@@ -17,6 +17,7 @@ LFC = $(shell find ./ -name "*.l" | sed s/[^/]*\\.l/lex.yy.c/)
 YFC = $(shell find ./ -name "*.y" | sed s/[^/]*\\.y/syntax.tab.c/)
 LFO = $(LFC:.c=.o)
 YFO = $(YFC:.c=.o)
+T2SUPER = $(shell find ../Test_2_Super/ -name "single-*.cmm")
 
 cleanC:
 	rm -rf ast/cmake-build-debug/
@@ -116,17 +117,18 @@ test:
 	# ./parser ../Test_2_Normal/Tests/E_2.cmm
 	# ./parser ../Test_2_Normal/Tests/E_3.cmm
 
-	./parser ../Test_2_Super/single-errid-6-times-1.0.cmm
-	./parser ../Test_2_Super/single-errid-6-times-2.0.cmm
-	./parser ../Test_2_Super/single-errid-6-times-3.0.cmm
-	./parser ../Test_2_Super/single-errid-6-times-4.0.cmm
-	./parser ../Test_2_Super/single-errid-6-times-5.0.cmm
-	./parser ../Test_2_Super/single-errid-6-times-6.0.cmm
-	./parser ../Test_2_Super/single-errid-6-times-7.0.cmm
-	./parser ../Test_2_Super/single-errid-6-times-8.0.cmm
-	./parser ../Test_2_Super/single-errid-6-times-9.0.cmm
-	./parser ../Test_2_Super/single-errid-6.0.cmm
-	
+	# ./parser ../Test_2_Super/single-errid-6-times-1.0.cmm
+	# ./parser ../Test_2_Super/single-errid-6-times-2.0.cmm
+	# ./parser ../Test_2_Super/single-errid-6-times-3.0.cmm
+	# ./parser ../Test_2_Super/single-errid-6-times-4.0.cmm
+	# ./parser ../Test_2_Super/single-errid-6-times-5.0.cmm
+	# ./parser ../Test_2_Super/single-errid-6-times-6.0.cmm
+	# ./parser ../Test_2_Super/single-errid-6-times-7.0.cmm
+	# ./parser ../Test_2_Super/single-errid-6-times-8.0.cmm
+	# ./parser ../Test_2_Super/single-errid-6-times-9.0.cmm
+	# ./parser ../Test_2_Super/single-errid-6.0.cmm
+
+
 debug: lexical syntax-c $(CFILES) $(CPPFILES)
 	gcc -DDEBUG -c -g main.c syntax.tab.c  -lfl -ly
 	g++ -g $(CPPFILES) main.o syntax.tab.o -lfl -ly -o parser
