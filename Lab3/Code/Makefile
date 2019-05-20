@@ -25,7 +25,7 @@ cleanC:
 parser: cleanC syntax lexical $(CFILES) $(CPPFILES)
 	gcc -c -g main.c syntax.tab.c tree.c error.c -lfl -ly
 	g++ -std=c++11 -g $(CPPFILES) main.o syntax.tab.o tree.o error.o -lfl -ly -o parser
-	@clear
+	# @clear
 	@echo  "Successfully get the parser!"
 
 
@@ -43,7 +43,7 @@ syntax-c: $(YFILE)
 # 定义的一些伪目标
 .PHONY: clean test
 test: 
-	# ./parser ../Test/test2.cmm
+	
 	# ./parser ../Test_1_Super/test_1.cmm  > test_fsw.output
 	# diff ../Test_1_Super/test_1.output test_fsw.output
 	# ./parser ../Test_1_Super/test_3.cmm  > test_fsw.output
@@ -127,7 +127,7 @@ test:
 	# ./parser ../Test_2_Super/single-errid-6-times-8.0.cmm
 	# ./parser ../Test_2_Super/single-errid-6-times-9.0.cmm
 	# ./parser ../Test_2_Super/single-errid-6.0.cmm
-
+	./parser ../Test/test1.cmm
 
 debug: lexical syntax-c $(CFILES) $(CPPFILES)
 	gcc -DDEBUG -c -g main.c syntax.tab.c  -lfl -ly

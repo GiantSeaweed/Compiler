@@ -4,11 +4,11 @@ struct Node
     int rc;
 };
 
-int main(){
-
+int main(int argc){
+    return 0;
 }
 
-int i_func_10(float i_func_10_a2_f_0[2])
+int i_func_10(float i_func_10_a2_f_0)
 {
     int i1;
     int i3 = 1;

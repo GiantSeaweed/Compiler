@@ -64,8 +64,24 @@ string IRInstruction::toString() {
         case IR_ASSIGN_DIV:
             str = dest + " := " + src1 + " / " + src2;
             break;
-        case IR_IF://TODO
-            str = "IF " + src1 + " op " + src2 + " GOTO " + dest;
+
+        case IR_IF_GE:
+            str = "IF " + src1 + " >= " + src2 + " GOTO " + dest;
+            break;
+        case IR_IF_GT:
+            str = "IF " + src1 + " > " + src2 + " GOTO " + dest;
+            break;
+        case IR_IF_LE:
+            str = "IF " + src1 + " <= " + src2 + " GOTO " + dest;
+            break;
+        case IR_IF_LT:
+            str = "IF " + src1 + " < " + src2 + " GOTO " + dest;
+            break;
+        case IR_IF_NE:
+            str = "IF " + src1 + " != " + src2 + " GOTO " + dest;
+            break;
+        case IR_IF_EQ:
+            str = "IF " + src1 + " == " + src2 + " GOTO " + dest;
             break;
 
         default:
@@ -74,3 +90,5 @@ string IRInstruction::toString() {
     }
     return str;
 }
+
+

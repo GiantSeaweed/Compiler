@@ -13,6 +13,8 @@ using namespace std;
 
 const int GLOBAL = -1;
 
+
+
 struct Symbol : SymbolHead {
     int firstLine;
     int endLine;
@@ -61,13 +63,9 @@ struct Symbol : SymbolHead {
 
 };
 
-
-
-
-
-
-
-
+auto op = [](Symbol *s1, Symbol *s2) -> bool {
+    return s1->id < s2->id;
+};
 
 
 

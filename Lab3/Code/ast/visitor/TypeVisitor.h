@@ -17,9 +17,9 @@
 
 using namespace std;
 
-auto op = [](Symbol *s1, Symbol *s2) -> bool {
-    return s1->id < s2->id;
-};
+// auto op = [](Symbol *s1, Symbol *s2) -> bool {
+//     return s1->id < s2->id;
+// };
 
 struct TypeVisitor : VisitorFalse {
     set<Symbol *, decltype(op)> *symbolTable;

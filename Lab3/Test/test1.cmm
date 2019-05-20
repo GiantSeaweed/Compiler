@@ -1,7 +1,5 @@
-float function() 
+int main(int a) 
 {
-    float a = 23.43E+3; 
-    float b = 23.43E+.3; 
-    float c = .e34; 
+    a = 0;
     return a;
 }

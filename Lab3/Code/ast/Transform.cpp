@@ -10,6 +10,9 @@
 #include "visitor/FunReturnVisitor.h"
 #include "visitor/PrintVisitor.h"
 
+#include "ir/IRBuilderVisitor.h"
+#include "ir/IRInstruction.h"
+
 using namespace std;
 
 void printNode(MultiNode* node){
@@ -49,8 +52,6 @@ Program *transToAST(MultiNode *root)
              << symbol->firstLine << endl;
     }
 
-#endif
-#ifdef DEBUG
     cout << "******Finish TypeVisiting! Begin ExpVisiting!******" << endl;
 #endif
      ExpressionVisitor expressionVisitor;
@@ -61,8 +62,15 @@ Program *transToAST(MultiNode *root)
     cout << "******Finish ExpVisiting! Begin FunVisiting!********" << endl;
 #endif
 
-     FunReturnVisitor funReturnVisitor;
-     program->accept(funReturnVisitor);
+    FunReturnVisitor funReturnVisitor;
+    program->accept(funReturnVisitor);
+
+    IRBuilderVisitor irBuilderVisitor;
+    irBuilderVisitor.symbolTable = visitor.symbolTable;
+    irBuilderVisitor.funTable = visitor.funTable;
+    program->accept(irBuilderVisitor);
+    // cout<<irBuilderVisitor.irList->size()<<endl;
+    irBuilderVisitor.printIRList();
 
     // PrintVisitor printVisitor;
     // program->accept(printVisitor);

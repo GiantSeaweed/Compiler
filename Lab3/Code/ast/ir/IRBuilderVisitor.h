@@ -8,18 +8,22 @@
 #include "../visitor/Visitor.h"
 #include "IRInstruction.h"
 #include "../Symbol.h"
+#include "../type.h"
+#include "../ast.h"
+#include "../TypeSystem.h"
 
 #include <vector>
+#include <map>
+// auto op = [](Symbol *s1, Symbol *s2) -> bool {
+//     return s1->id < s2->id;
+// };
 
-auto op = [](Symbol *s1, Symbol *s2) -> bool {
-    return s1->id < s2->id;
-};
-
-struct IRBuilderVisitor : VisitorFalse {
+struct IRBuilderVisitor : VisitorTrue {
     set<Symbol *, decltype(op)> *symbolTable;
     set<Symbol *, decltype(op)> *funTable;
 
     vector<IRInstruction*> *irList;
+    map<string,string> *irSymbolTable;
 
     // serve as parameters
     string place;
@@ -29,6 +33,12 @@ struct IRBuilderVisitor : VisitorFalse {
     int placeCounter = 0;
     int tempCounter = 0;
 
+    IRBuilderVisitor() {
+        place = "t0";
+        irList = new vector<IRInstruction*>();
+        irSymbolTable = new map<string,string>();
+    }
+
     string newPlace() {
         return "t" + to_string(++tempCounter);
     }
@@ -37,6 +47,9 @@ struct IRBuilderVisitor : VisitorFalse {
         return "LABEL" + to_string(++placeCounter);
     }
 
+
+    void printIRList();
+    string findInIRSymTable(string key);
     // Declarator.h 6
     virtual bool visit(Declarator &declarator) override ;
 

@@ -3,149 +3,225 @@
 //
 
 #include "IRBuilderVisitor.h"
+#include <iostream>
+#include <string>
 using namespace std;
+
+string IRBuilderVisitor::findInIRSymTable(string key){
+    return this->irSymbolTable->find(key)->second;
+}
+
+void IRBuilderVisitor::printIRList() {
+    for(IRInstruction* irInstr : *irList){
+        cout<<irInstr->toString()<<endl;
+    }
+}
 
 bool IRBuilderVisitor::visit(Declarator &declarator) {
 
-    return VisitorFalse::visit(declarator);
+    return VisitorTrue::visit(declarator);
 }
 
 bool IRBuilderVisitor::visit(VarDec &varDec) {
-    return VisitorFalse::visit(varDec);
+    return VisitorTrue::visit(varDec);
 }
 
 bool IRBuilderVisitor::visit(NormalVarDec &normalVarDec) {
-    return VisitorFalse::visit(normalVarDec);
+    return VisitorTrue::visit(normalVarDec);
 }
 
 bool IRBuilderVisitor::visit(ParamDec &paramDec) {
-    return VisitorFalse::visit(paramDec);
+#ifdef BUILD_IR
+    cout <<"Build IR ParamDec"<<endl;
+#endif
+    string myPlace = newPlace();
+    IRInstruction *newInstr = new IRInstruction(IR_PARAM, myPlace);
+    this->irList->push_back(newInstr);
+    this->irSymbolTable->insert(pair<string,string>(paramDec.varDec->getID(), myPlace));
+    return false;
 }
 
 bool IRBuilderVisitor::visit(FunDec &funDec) {
-    return VisitorFalse::visit(funDec);
+#ifdef BUILD_IR
+    cout <<"Build IR FunDec"<<endl;
+#endif
+    IRInstruction* newInstr = new IRInstruction(IR_FUN, (funDec.id)->id);
+    this->irList->push_back(newInstr);
+    for(ParamDec *paramDec : *funDec.paramList){
+        paramDec->accept(*this);
+    }
+//    cout<< irList->size() <<endl;
+    return false;
 }
 
 bool IRBuilderVisitor::visit(ArrayDec &arrayDec) {
-    return VisitorFalse::visit(arrayDec);
+    return VisitorTrue::visit(arrayDec);
 }
 
 bool IRBuilderVisitor::visit(Definition &definition) {
-    return VisitorFalse::visit(definition);
+    return VisitorTrue::visit(definition);
 }
 
 bool IRBuilderVisitor::visit(Dec &Dec) {
-    return VisitorFalse::visit(Dec);
+    return VisitorTrue::visit(Dec);
 }
 
 bool IRBuilderVisitor::visit(NormalDec &normalDec) {
-    return VisitorFalse::visit(normalDec);
+    return VisitorTrue::visit(normalDec);
 }
 
 bool IRBuilderVisitor::visit(InitializedDec &initializedDec) {
-    return VisitorFalse::visit(initializedDec);
+    return VisitorTrue::visit(initializedDec);
 }
 
 bool IRBuilderVisitor::visit(Exp &exp) {
-    return VisitorFalse::visit(exp);
+    return VisitorTrue::visit(exp);
 }
 
 bool IRBuilderVisitor::visit(InfixExp &infixExp) {
-    return VisitorFalse::visit(infixExp);
+#ifdef BUILD_IR
+    cout <<"Build IR InfixExp"<<endl;
+#endif
+    if(infixExp.leftSide->typeSystem->type == BASE_STRUCT){
+        cout << "LHS is struct" <<endl;
+    }else if(infixExp.leftSide->typeSystem->type == BASE_ARRAY){
+        cout << "RHS is array" <<endl;
+    }else{
+        // ID
+        if(infixExp.infixOp == INFIX_ASSIGN){
+            string var = irSymbolTable->find( ((IDExp*)infixExp.leftSide)->id )->second;
+
+            string placeTemp = this->place;
+            string myPlace = this->place = newPlace();
+            infixExp.rightSide->accept(*this);
+
+            IRInstruction* irInstruction = new IRInstruction(IR_ASSIGN_SINGLE, myPlace, var);
+            irList->push_back(irInstruction);
+            irInstruction = new IRInstruction(IR_ASSIGN_SINGLE, var, placeTemp);
+            irList->push_back(irInstruction);
+        }
+
+    }
+    return false;
 }
 
 bool IRBuilderVisitor::visit(PrefixExp &prefixExp) {
-    return VisitorFalse::visit(prefixExp);
+    return VisitorTrue::visit(prefixExp);
 }
 
 bool IRBuilderVisitor::visit(ParenthesizedExp &parenthesizedExp) {
-    return VisitorFalse::visit(parenthesizedExp);
+    return VisitorTrue::visit(parenthesizedExp);
 }
 
 bool IRBuilderVisitor::visit(ArrayExp &arrayExp) {
-    return VisitorFalse::visit(arrayExp);
+    return VisitorTrue::visit(arrayExp);
 }
 
 bool IRBuilderVisitor::visit(IDExp &idExp) {
-    return VisitorFalse::visit(idExp);
+#ifdef BUILD_IR
+    cout <<"Build IR IDExp : " << idExp.id <<endl;
+#endif
+    map<string, string>::iterator it = irSymbolTable->find(idExp.id);
+    if (it == irSymbolTable->end()) {
+        irSymbolTable->insert(pair<string, string>(idExp.id, newPlace()));
+    } else {
+        string var = it->second;
+        IRInstruction *newInstr = new IRInstruction(IR_ASSIGN_SINGLE, var, this->place);
+        this->irList->push_back(newInstr);//TODO
+    }
+    return false;
 }
 
 bool IRBuilderVisitor::visit(StructExp &structExp) {
-    return VisitorFalse::visit(structExp);
+    return VisitorTrue::visit(structExp);
 }
 
 bool IRBuilderVisitor::visit(IntExp &intExp) {
-    return VisitorFalse::visit(intExp);
+#ifdef BUILD_IR
+    cout <<"Build IR IntExp : "<<intExp.value<<endl;
+#endif
+    int value = intExp.value;
+    IRInstruction* newInstr = new IRInstruction(IR_ASSIGN_SINGLE, "#"+to_string(value), this->place);
+    irList->push_back(newInstr);
+    return false;
 }
 
 bool IRBuilderVisitor::visit(FloatExp &floatExp) {
-    return VisitorFalse::visit(floatExp);
+    return VisitorTrue::visit(floatExp);
 }
 
 bool IRBuilderVisitor::visit(FunExp &funExp) {
-    return VisitorFalse::visit(funExp);
+    return VisitorTrue::visit(funExp);
 }
 
 bool IRBuilderVisitor::visit(Program &program) {
-    return VisitorFalse::visit(program);
+    return VisitorTrue::visit(program);
 }
 
 bool IRBuilderVisitor::visit(ExtDef &extDef) {
-    return VisitorFalse::visit(extDef);
+    return VisitorTrue::visit(extDef);
 }
 
 bool IRBuilderVisitor::visit(DecDef &decDef) {
-    return VisitorFalse::visit(decDef);
+    return VisitorTrue::visit(decDef);
 }
 
 bool IRBuilderVisitor::visit(TypeDef &typeDef) {
-    return VisitorFalse::visit(typeDef);
+    return VisitorTrue::visit(typeDef);
 }
 
 bool IRBuilderVisitor::visit(FunDef &funDef) {
-    return VisitorFalse::visit(funDef);
+    return VisitorTrue::visit(funDef);
 }
 
 bool IRBuilderVisitor::visit(Specifier &specifier) {
-    return VisitorFalse::visit(specifier);
+    return VisitorTrue::visit(specifier);
 }
 
 bool IRBuilderVisitor::visit(BasicSpecifier &basicSpecifier) {
-    return VisitorFalse::visit(basicSpecifier);
+    return VisitorTrue::visit(basicSpecifier);
 }
 
 bool IRBuilderVisitor::visit(StructSpecifier &structSpecifier) {
-    return VisitorFalse::visit(structSpecifier);
+    return VisitorTrue::visit(structSpecifier);
 }
 
 bool IRBuilderVisitor::visit(NormalStructSpecifier &normalStructSpecifier) {
-    return VisitorFalse::visit(normalStructSpecifier);
+    return VisitorTrue::visit(normalStructSpecifier);
 }
 
 bool IRBuilderVisitor::visit(DefStructSpecifier &defStructSpecifier) {
-    return VisitorFalse::visit(defStructSpecifier);
+    return VisitorTrue::visit(defStructSpecifier);
 }
 
 bool IRBuilderVisitor::visit(Stmt &stmt) {
-    return VisitorFalse::visit(stmt);
+    return VisitorTrue::visit(stmt);
 }
 
 bool IRBuilderVisitor::visit(CompSt &compSt) {
-    return VisitorFalse::visit(compSt);
+    return VisitorTrue::visit(compSt);
 }
 
 bool IRBuilderVisitor::visit(ExpStmt &expStmt) {
-    return VisitorFalse::visit(expStmt);
+    return VisitorTrue::visit(expStmt);
 }
 
 bool IRBuilderVisitor::visit(ReturnStmt &returnStmt) {
-    return VisitorFalse::visit(returnStmt);
+#ifdef BUILD_IR
+    cout <<"Build IR RetunStatment"<<endl;
+#endif
+    string placeTemp = this->place = newPlace();
+    returnStmt.exp->accept(*this);
+
+    IRInstruction* newInstr = new IRInstruction(IR_RETURN, placeTemp);
+    this->irList->push_back(newInstr);
+    return false;
 }
 
 bool IRBuilderVisitor::visit(IfElseStmt &ifElseStmt) {
-    return VisitorFalse::visit(ifElseStmt);
+    return VisitorTrue::visit(ifElseStmt);
 }
 
 bool IRBuilderVisitor::visit(WhileStmt &whileStmt) {
-    return VisitorFalse::visit(whileStmt);
+    return VisitorTrue::visit(whileStmt);
 }
