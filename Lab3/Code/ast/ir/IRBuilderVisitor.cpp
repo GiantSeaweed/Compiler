@@ -86,27 +86,77 @@ bool IRBuilderVisitor::visit(InfixExp &infixExp) {
         cout << "LHS is struct" <<endl;
     }else if(infixExp.leftSide->typeSystem->type == BASE_ARRAY){
         cout << "RHS is array" <<endl;
-    }else{
+    }else {
         // ID
-        if(infixExp.infixOp == INFIX_ASSIGN){
-            string var = irSymbolTable->find( ((IDExp*)infixExp.leftSide)->id )->second;
+        if (infixExp.infixOp == INFIX_ASSIGN) {
+            string var = irSymbolTable->find(((IDExp *) infixExp.leftSide)->id)->second;
 
             string placeTemp = this->place;
             string myPlace = this->place = newPlace();
             infixExp.rightSide->accept(*this);
 
-            IRInstruction* irInstruction = new IRInstruction(IR_ASSIGN_SINGLE, myPlace, var);
+            IRInstruction *irInstruction = new IRInstruction(IR_ASSIGN_SINGLE, myPlace, var);
             irList->push_back(irInstruction);
             irInstruction = new IRInstruction(IR_ASSIGN_SINGLE, var, placeTemp);
             irList->push_back(irInstruction);
-        }
+        } else if (infixExp.infixOp == INFIX_PLUS
+                   || infixExp.infixOp == INFIX_MINUS
+                   || infixExp.infixOp == INFIX_STAR
+                   || infixExp.infixOp == INFIX_DIV) {
+            string placeTemp = this->place;
+            string myPlace1 = this->place = newPlace();
+            infixExp.leftSide->accept(*this);
+            string myPlace2 = this->place = newPlace();
+            infixExp.rightSide->accept(*this);
 
+            IROperator op;
+            switch (infixExp.infixOp) {
+                case INFIX_PLUS:
+                    op = IR_ASSIGN_PLUS;
+                    break;
+                case INFIX_MINUS:
+                    op = IR_ASSIGN_MINUS;
+                    break;
+                case INFIX_STAR:
+                    op = IR_ASSIGN_MUL;
+                    break;
+                case INFIX_DIV:
+                    op = IR_ASSIGN_DIV;
+                    break;
+                default:
+                    cerr << "Illegal operator at IRBuilderVisitor::InfixExp" << endl;
+                    break;
+            }
+            IRInstruction *irInstr = new IRInstruction(op, myPlace1, myPlace2, placeTemp);
+
+            this->irList->push_back(irInstr);
+        } else if (infixExp.infixOp == INFIX_AND || infixExp.infixOp == INFIX_OR
+                   || infixExp.infixOp == INFIX_GE || infixExp.infixOp == INFIX_GT
+                   || infixExp.infixOp == INFIX_LE || infixExp.infixOp == INFIX_LT
+                   || infixExp.infixOp == INFIX_NE || infixExp.infixOp == INFIX_EQ){
+            //TODO
+        }
     }
     return false;
 }
 
 bool IRBuilderVisitor::visit(PrefixExp &prefixExp) {
-    return VisitorTrue::visit(prefixExp);
+#ifdef BUILD_IR
+    cout <<"Build IR PrefixExp"<<endl;
+#endif
+    if(prefixExp.prefixOp == PREFIX_MINUS){
+        string placeTemp = this->place;
+        string myPlace = this->place = newPlace();
+        prefixExp.exp->accept(*this);
+
+        IRInstruction* irInstr = new IRInstruction(IR_ASSIGN_MINUS, "#0", myPlace, placeTemp);
+        this->irList->push_back(irInstr);
+    }else if(prefixExp.prefixOp == PREFIX_NOT){
+
+    }else{
+        cerr << "Illegal operator at IRBuilderVisitor::PrefixExp" << endl;
+    }
+    return false;
 }
 
 bool IRBuilderVisitor::visit(ParenthesizedExp &parenthesizedExp) {
