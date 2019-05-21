@@ -26,6 +26,9 @@ void IRBuilderVisitor::translateCond(Exp &exp, string label_true, string label_f
     if( infixOp == INFIX_GT || infixOp == INFIX_GE
       ||infixOp == INFIX_LT || infixOp == INFIX_LE
       ||infixOp == INFIX_NE || infixOp == INFIX_EQ){
+#ifdef BUILD_IR
+        cout <<"\ttranslateCond-Infix-RELOP"<<endl;
+#endif
         string myPlace1 = this->place = newPlace();
         ((InfixExp*)&exp)->leftSide->accept(*this);//code1
         string myPlace2 = this->place = newPlace();
@@ -46,6 +49,9 @@ void IRBuilderVisitor::translateCond(Exp &exp, string label_true, string label_f
         this->irList->push_back(irInstr); //goto
 
     }else if( infixOp == INFIX_AND){
+#ifdef BUILD_IR
+        cout <<"\ttranslateCond-Infix-AND"<<endl;
+#endif
         string label1 = newLabel();
         translateCond( (Exp&)(*((InfixExp*)&exp)->leftSide), label1, label_false);
 
@@ -55,6 +61,9 @@ void IRBuilderVisitor::translateCond(Exp &exp, string label_true, string label_f
         translateCond( (Exp&)(*((InfixExp*)&exp)->rightSide), label_true, label_false);
 
     }else if( infixOp == INFIX_OR){
+#ifdef BUILD_IR
+        cout <<"\ttranslateCond-Infix-OR"<<endl;
+#endif
         string label1 = newLabel();
         translateCond( (Exp&)(*((InfixExp*)&exp)->leftSide), label_true, label1);
 
@@ -63,12 +72,20 @@ void IRBuilderVisitor::translateCond(Exp &exp, string label_true, string label_f
 
         translateCond( (Exp&)(*((InfixExp*)&exp)->rightSide), label_true, label_false );
 
-    }else if( ((PrefixExp*)&exp)->prefixOp == PREFIX_NOT){
-        translateCond((Exp&)(*((PrefixExp*)&exp)->exp), label_false, label_true );
-    }else{
+    }
+//    else if( ((PrefixExp*)&exp)->prefixOp == PREFIX_NOT){
+//#ifdef BUILD_IR
+//        cout <<"\ttranslateCond-Prefix-NOT"<<endl;
+//#endif
+//        cout << (((IDExp*)&exp)->id) << endl;
+//        translateCond((Exp&)(*((PrefixExp*)&exp)->exp), label_false, label_true );
+//    }
+    else{
+#ifdef BUILD_IR
+        cout <<"\ttranslateCond-else"<<endl;
+#endif
         string myPlace = this->place = newPlace();
-        exp.accept(*this);//code1
-
+        (&exp)->accept(*this);//code1
         IRInstruction* irInstr = new IRInstruction(IR_IF_NE, myPlace, "#0", label_true);
         this->irList->push_back(irInstr); // code2
         irInstr = new IRInstruction(IR_GOTO, label_false);
@@ -143,6 +160,9 @@ bool IRBuilderVisitor::visit(InitializedDec &initializedDec) {
 }
 
 bool IRBuilderVisitor::visit(Exp &exp) {
+#ifdef BUILD_IR
+    cout <<"Build IR Exp"<<endl;
+#endif
     return VisitorTrue::visit(exp);
 }
 
@@ -227,10 +247,11 @@ bool IRBuilderVisitor::visit(InfixExp &infixExp) {
 }
 
 bool IRBuilderVisitor::visit(PrefixExp &prefixExp) {
-#ifdef BUILD_IR
-    cout <<"Build IR PrefixExp"<<endl;
-#endif
+
     if(prefixExp.prefixOp == PREFIX_MINUS){
+#ifdef BUILD_IR
+        cout <<"Build IR PrefixExp::MINUS"<<endl;
+#endif
         string placeTemp = this->place;
         string myPlace = this->place = newPlace();
         prefixExp.exp->accept(*this);
@@ -238,18 +259,22 @@ bool IRBuilderVisitor::visit(PrefixExp &prefixExp) {
         IRInstruction* irInstr = new IRInstruction(IR_ASSIGN_MINUS, "#0", myPlace, placeTemp);
         this->irList->push_back(irInstr);
     }else if(prefixExp.prefixOp == PREFIX_NOT){
-        //TODO
+#ifdef BUILD_IR
+        cout <<"Build IR PrefixExp::NOT"<<endl;
+#endif
         string label1 = newLabel();
         string label2 = newLabel();
-        IRInstruction* irInstr = new IRInstruction(IR_ASSIGN_SINGLE, "#0", this->place);
+
+        string placeTemp = this->place;
+        IRInstruction* irInstr = new IRInstruction(IR_ASSIGN_SINGLE, "#0", placeTemp);
         this->irList->push_back(irInstr);//code0
 
-        translateCond(prefixExp, label1, label2);//code1
+        translateCond(*(prefixExp.exp), label2, label1);//code1
 
         //code2
         irInstr = new IRInstruction(IR_LABEL, label1);
         this->irList->push_back(irInstr);
-        irInstr = new IRInstruction(IR_ASSIGN_SINGLE, "#1", this->place);
+        irInstr = new IRInstruction(IR_ASSIGN_SINGLE, "#1", placeTemp);
         this->irList->push_back(irInstr);
         irInstr = new IRInstruction(IR_LABEL, label2);
         this->irList->push_back(irInstr);
@@ -273,9 +298,16 @@ bool IRBuilderVisitor::visit(IDExp &idExp) {
 #endif
     map<string, string>::iterator it = irSymbolTable->find(idExp.id);
     if (it == irSymbolTable->end()) {
-        irSymbolTable->insert(pair<string, string>(idExp.id, newPlace()));
+#ifdef BUILD_IR
+        cout <<"\tNo " << idExp.id << " before. Newly inserted in irSymTable!" <<endl;
+#endif
+        irSymbolTable->insert(pair<string, string>(idExp.id, this->place));
     } else {
+#ifdef BUILD_IR
+        cout <<"\tWe already have " << idExp.id << " in irSymTable." <<endl;
+#endif
         string var = it->second;
+
         IRInstruction *newInstr = new IRInstruction(IR_ASSIGN_SINGLE, var, this->place);
         this->irList->push_back(newInstr);//TODO
     }
@@ -305,6 +337,9 @@ bool IRBuilderVisitor::visit(FunExp &funExp) {
 }
 
 bool IRBuilderVisitor::visit(Program &program) {
+//    for(Symbol* sym: *symbolTable) {
+//        irSymbolTable->insert(pair<string,string>(sym->id, newPlace()));
+//    }
     return VisitorTrue::visit(program);
 }
 
@@ -375,3 +410,4 @@ bool IRBuilderVisitor::visit(IfElseStmt &ifElseStmt) {
 bool IRBuilderVisitor::visit(WhileStmt &whileStmt) {
     return VisitorTrue::visit(whileStmt);
 }
+

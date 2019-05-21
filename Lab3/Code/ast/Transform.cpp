@@ -65,7 +65,7 @@ Program *transToAST(MultiNode *root)
     FunReturnVisitor funReturnVisitor;
     program->accept(funReturnVisitor);
 
-    IRBuilderVisitor irBuilderVisitor;
+    IRBuilderVisitor irBuilderVisitor;//(visitor.symbolTable, visitor.funTable);
     irBuilderVisitor.symbolTable = visitor.symbolTable;
     irBuilderVisitor.funTable = visitor.funTable;
     program->accept(irBuilderVisitor);
