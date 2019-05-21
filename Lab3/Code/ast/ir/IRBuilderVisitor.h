@@ -44,12 +44,19 @@ struct IRBuilderVisitor : VisitorTrue {
     }
 
     string newLabel() {
-        return "LABEL" + to_string(++placeCounter);
+        return "label" + to_string(++placeCounter);
     }
 
 
     void printIRList();
     string findInIRSymTable(string key);
+
+    void translateCond(Exp &exp, string label_true, string label_false);
+
+//    void translateCond(InfixExp &infixExp, string label_true, string label_false);
+//
+//    void translateCond(PrefixExp &prefixExp, string label_true, string label_false);
+
     // Declarator.h 6
     virtual bool visit(Declarator &declarator) override ;
 

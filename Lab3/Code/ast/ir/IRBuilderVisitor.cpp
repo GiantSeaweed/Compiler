@@ -17,6 +17,74 @@ void IRBuilderVisitor::printIRList() {
     }
 }
 
+void IRBuilderVisitor::translateCond(Exp &exp, string label_true, string label_false) {
+#ifdef BUILD_IR
+    cout <<"Build IR translateCond"<<endl;
+#endif
+    InfixOperator infixOp = ((InfixExp*)&exp)->infixOp;
+
+    if( infixOp == INFIX_GT || infixOp == INFIX_GE
+      ||infixOp == INFIX_LT || infixOp == INFIX_LE
+      ||infixOp == INFIX_NE || infixOp == INFIX_EQ){
+        string myPlace1 = this->place = newPlace();
+        ((InfixExp*)&exp)->leftSide->accept(*this);//code1
+        string myPlace2 = this->place = newPlace();
+        ((InfixExp*)&exp)->rightSide->accept(*this);//code2
+        IROperator op;
+        switch (infixOp) {
+            case INFIX_GT: op = IR_IF_GT; break;
+            case INFIX_GE: op = IR_IF_GE; break;
+            case INFIX_LT: op = IR_IF_LT; break;
+            case INFIX_LE: op = IR_IF_LE; break;
+            case INFIX_NE: op = IR_IF_NE; break;
+            case INFIX_EQ: op = IR_IF_EQ; break;
+//          default: cerr << "Illegal operator at IRBuilderVisitor::InfixExp" << endl; break;
+        }
+        IRInstruction* irInstr = new IRInstruction(op, myPlace1,myPlace2,label_true );
+        this->irList->push_back(irInstr); //code3
+        irInstr = new IRInstruction(IR_GOTO, label_false);
+        this->irList->push_back(irInstr); //goto
+
+    }else if( infixOp == INFIX_AND){
+        string label1 = newLabel();
+        translateCond( (Exp&)(*((InfixExp*)&exp)->leftSide), label1, label_false);
+
+        IRInstruction* irInstr = new IRInstruction(IR_LABEL, label1);
+        this->irList->push_back(irInstr);
+
+        translateCond( (Exp&)(*((InfixExp*)&exp)->rightSide), label_true, label_false);
+
+    }else if( infixOp == INFIX_OR){
+        string label1 = newLabel();
+        translateCond( (Exp&)(*((InfixExp*)&exp)->leftSide), label_true, label1);
+
+        IRInstruction* irInstr = new IRInstruction(IR_LABEL, label1);
+        this->irList->push_back(irInstr);
+
+        translateCond( (Exp&)(*((InfixExp*)&exp)->rightSide), label_true, label_false );
+
+    }else if( ((PrefixExp*)&exp)->prefixOp == PREFIX_NOT){
+        translateCond((Exp&)(*((PrefixExp*)&exp)->exp), label_false, label_true );
+    }else{
+        string myPlace = this->place = newPlace();
+        exp.accept(*this);//code1
+
+        IRInstruction* irInstr = new IRInstruction(IR_IF_NE, myPlace, "#0", label_true);
+        this->irList->push_back(irInstr); // code2
+        irInstr = new IRInstruction(IR_GOTO, label_false);
+        this->irList->push_back(irInstr); // goto
+    }
+
+}
+
+//void IRBuilderVisitor::translateCond(InfixExp &infixExp, string label_true, string label_false) {
+//    //TODO
+//}
+//
+//void IRBuilderVisitor::translateCond(PrefixExp &prefixExp, string label_true, string label_false) {
+//    //TODO
+//}
+
 bool IRBuilderVisitor::visit(Declarator &declarator) {
 
     return VisitorTrue::visit(declarator);
@@ -135,6 +203,24 @@ bool IRBuilderVisitor::visit(InfixExp &infixExp) {
                    || infixExp.infixOp == INFIX_LE || infixExp.infixOp == INFIX_LT
                    || infixExp.infixOp == INFIX_NE || infixExp.infixOp == INFIX_EQ){
             //TODO
+            string label1 = newLabel();
+            string label2 = newLabel();
+            string placeTemp = this->place;
+
+
+            IRInstruction* irInstr = new IRInstruction(IR_ASSIGN_SINGLE, "#0", placeTemp);
+            this->irList->push_back(irInstr);//code0
+
+            translateCond(infixExp, label1, label2);//code1
+
+            //code2
+            irInstr = new IRInstruction(IR_LABEL, label1);
+            this->irList->push_back(irInstr);
+            irInstr = new IRInstruction(IR_ASSIGN_SINGLE, "#1", placeTemp );
+            this->irList->push_back(irInstr);
+            irInstr = new IRInstruction(IR_LABEL, label2);
+            this->irList->push_back(irInstr);
+
         }
     }
     return false;
@@ -152,7 +238,21 @@ bool IRBuilderVisitor::visit(PrefixExp &prefixExp) {
         IRInstruction* irInstr = new IRInstruction(IR_ASSIGN_MINUS, "#0", myPlace, placeTemp);
         this->irList->push_back(irInstr);
     }else if(prefixExp.prefixOp == PREFIX_NOT){
+        //TODO
+        string label1 = newLabel();
+        string label2 = newLabel();
+        IRInstruction* irInstr = new IRInstruction(IR_ASSIGN_SINGLE, "#0", this->place);
+        this->irList->push_back(irInstr);//code0
 
+        translateCond(prefixExp, label1, label2);//code1
+
+        //code2
+        irInstr = new IRInstruction(IR_LABEL, label1);
+        this->irList->push_back(irInstr);
+        irInstr = new IRInstruction(IR_ASSIGN_SINGLE, "#1", this->place);
+        this->irList->push_back(irInstr);
+        irInstr = new IRInstruction(IR_LABEL, label2);
+        this->irList->push_back(irInstr);
     }else{
         cerr << "Illegal operator at IRBuilderVisitor::PrefixExp" << endl;
     }
