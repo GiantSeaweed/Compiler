@@ -23,8 +23,8 @@ using namespace std;
 
 
 //  #define DEBUG
-#define SEMANTIC
-#define BUILD_IR
+// #define SEMANTIC
+// #define BUILD_IR
 Program *transToAST(MultiNode *root);
 
 #endif //AST_AST_H

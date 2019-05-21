@@ -15,16 +15,17 @@ extern struct MultiNode* root;
 
 extern void *yyin;
 
-
 extern void cppParser(YYSTYPE *root);
 extern int hasError;
+char outFilename[50];
+
 int main(int argc, char **argv)
 {
     if (argc < 1)
         return 1;
+    strcpy(outFilename, argv[2]);
     FILE *f = fopen(argv[1], "r");
-    if (!f)
-    {
+    if (!f){
         perror(argv[1]);
         return 1;
     }
@@ -35,6 +36,8 @@ int main(int argc, char **argv)
     if(!HAS_ERROR){
         cppParser(root);
     }
+
+
     return 0;
 }
 

@@ -15,17 +15,17 @@
 #include <vector>
 #include <map>
 using namespace std;
-// auto op = [](Symbol *s1, Symbol *s2) -> bool {
-//     return s1->id < s2->id;
-// };
 
 struct IRBuilderVisitor : VisitorTrue {
     set<Symbol *, decltype(op)> *symbolTable;
     set<Symbol *, decltype(op)> *funTable;
 
     vector<IRInstruction*> *irList;
+    vector<string>*argList;
     map<string,string> *irSymbolTable;
 
+    const string FUN_READ = "read";
+    const string FUN_WRITE = "write";
     // serve as parameters
     string place;
     string label_true;
@@ -38,23 +38,9 @@ struct IRBuilderVisitor : VisitorTrue {
         place = "t0";
         irList = new vector<IRInstruction*>();
         irSymbolTable = new map<string,string>();
-//        for(Symbol* sym: *symbolTable) {
-//            irSymbolTable->insert(pair<string,string>(sym->id, newPlace()));
-//        }
+
     }
 
-//    IRBuilderVisitor(set<Symbol *, bool (*)(Symbol *, Symbol *)> *symbolTable,
-//                     set<Symbol *, bool (*)(Symbol *, Symbol *)> *funTable);
-//    IRBuilderVisitor(set<Symbol *, bool (*)(Symbol *, Symbol *)> *symbolTable,
-//                                       set<Symbol *, bool (*)(Symbol *, Symbol *)> *funTable) : symbolTable(symbolTable),
-//                                                                                                funTable(funTable) {
-//        place = "t0";
-//        irList = new vector<IRInstruction*>();
-//        irSymbolTable = new map<string,string>();
-//        for(Symbol* sym: *symbolTable) {
-//            irSymbolTable->insert(pair<string,string>(sym->id, newPlace()));
-//        }
-//    }
 
     string newPlace() {
         return "t" + to_string(++tempCounter);

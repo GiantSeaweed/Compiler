@@ -6,6 +6,7 @@
 
 #ifndef TREE_H
 #define TREE_H
+extern char outFilename[50];
 extern int yylineno;
 
 typedef struct MultiNode{

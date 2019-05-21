@@ -127,7 +127,7 @@ test:
 	# ./parser ../Test_2_Super/single-errid-6-times-8.0.cmm
 	# ./parser ../Test_2_Super/single-errid-6-times-9.0.cmm
 	# ./parser ../Test_2_Super/single-errid-6.0.cmm
-	./parser ../Test/test1.cmm
+	./parser ../Test/test3.cmm ../Test/out3.ir
 
 debug: lexical syntax-c $(CFILES) $(CPPFILES)
 	gcc -DDEBUG -c -g main.c syntax.tab.c  -lfl -ly

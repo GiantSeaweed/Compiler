@@ -5,6 +5,7 @@
 #include "IRBuilderVisitor.h"
 #include <iostream>
 #include <string>
+#include <cstdlib>
 using namespace std;
 
 string IRBuilderVisitor::findInIRSymTable(string key){
@@ -12,6 +13,7 @@ string IRBuilderVisitor::findInIRSymTable(string key){
 }
 
 void IRBuilderVisitor::printIRList() {
+//    cout << outFilename << endl;
     for(IRInstruction* irInstr : *irList){
         cout<<irInstr->toString()<<endl;
     }
@@ -333,7 +335,42 @@ bool IRBuilderVisitor::visit(FloatExp &floatExp) {
 }
 
 bool IRBuilderVisitor::visit(FunExp &funExp) {
-    return VisitorTrue::visit(funExp);
+#ifdef BUILD_IR
+    cout << "Build IR FunExp : " << endl;
+#endif
+    IRInstruction* irInstr;
+    if(funExp.args->size() == 0){
+        if(funExp.funID->id == FUN_READ){
+            irInstr = new IRInstruction(IR_READ, this->place);
+        }else{
+            irInstr = new IRInstruction(IR_CALL,funExp.funID->id, this->place );
+        }
+        irList->push_back(irInstr);
+    }else{
+        this->argList = new vector<string>;
+        string placeTemp = this->place;
+        for(Exp* arg : *funExp.args){
+            string myPlace = this->place = newPlace();
+            arg->accept(*this);
+            this->argList->insert(this->argList->begin(), myPlace); // inverted!
+        }
+
+        if(funExp.funID->id == FUN_WRITE){
+            irInstr = new IRInstruction(IR_WRITE, this->argList->at(0));
+            this->irList->push_back(irInstr);
+        }else{
+            int length = this->argList->size();
+            for(int i = 0;i<length;i++){
+                irInstr = new IRInstruction(IR_ARG, this->argList->at(i));
+                this->irList->push_back(irInstr);
+            }
+        }
+
+        irInstr = new IRInstruction(IR_CALL,funExp.funID->id,placeTemp);
+        this->irList->push_back(irInstr);
+    }
+
+    return false;
 }
 
 bool IRBuilderVisitor::visit(Program &program) {
@@ -404,10 +441,63 @@ bool IRBuilderVisitor::visit(ReturnStmt &returnStmt) {
 }
 
 bool IRBuilderVisitor::visit(IfElseStmt &ifElseStmt) {
-    return VisitorTrue::visit(ifElseStmt);
+#ifdef BUILD_IR
+    cout <<"Build IR IfElseStmt"<<endl;
+#endif
+
+    string label1 = newLabel();
+    string label2 = newLabel();
+    string label3;
+    translateCond(*(ifElseStmt.condition), label1, label2);//code1
+
+    IRInstruction* irInstr = new IRInstruction(IR_LABEL, label1);
+    this->irList->push_back(irInstr);  //label1
+
+    ifElseStmt.thenBody->accept(*this);//code2
+
+    if(ifElseStmt.elseBody != nullptr){
+        label3 = newLabel();
+        irInstr = new IRInstruction(IR_GOTO, label3);
+        this->irList->push_back(irInstr);  //goto label3
+    }
+
+    irInstr = new IRInstruction(IR_LABEL, label2);
+    this->irList->push_back(irInstr);  //label2
+
+    if(ifElseStmt.elseBody != nullptr){
+        ifElseStmt.elseBody->accept(*this);//code3
+        irInstr = new IRInstruction(IR_LABEL, label3);
+        this->irList->push_back(irInstr);  // label3
+    }
+
+
+    return false;
 }
 
 bool IRBuilderVisitor::visit(WhileStmt &whileStmt) {
-    return VisitorTrue::visit(whileStmt);
+#ifdef BUILD_IR
+    cout <<"Build IR IfElseStmt"<<endl;
+#endif
+    string label1 = newLabel();
+    string label2 = newLabel();
+    string label3 = newLabel();
+
+    IRInstruction* irInstr = new IRInstruction(IR_LABEL, label1);
+    this->irList->push_back(irInstr);  //label1
+
+    translateCond(*(whileStmt.condition), label2, label3);//code1
+
+    irInstr = new IRInstruction(IR_LABEL, label2);
+    this->irList->push_back(irInstr);  //label2
+
+    whileStmt.body->accept(*this);     // code2
+
+    irInstr = new IRInstruction(IR_GOTO, label1);
+    this->irList->push_back(irInstr);  //label1
+
+    irInstr = new IRInstruction(IR_LABEL, label3);
+    this->irList->push_back(irInstr);  //label3
+
+    return false;
 }
 
