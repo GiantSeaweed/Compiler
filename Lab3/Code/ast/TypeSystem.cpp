@@ -47,17 +47,13 @@ bool ArrayType::operator==(const TypeSystem &typeSystem) const {
 //StructType
 string StructType::toString() {
     string ret = string("StructType: ") + " members: ";
-//    for (TypeSystem *typeSystem:*this->fields) {
-//        ret += typeSystem->toString();
-//        ret += ", ";
-//    }
+
     for (SymbolHead *symbol:*this->symbolTable) {
         ret += "{ ";
         ret += symbol->getId();
         ret += " : ";
         ret += symbol->getTypeSystem()->toString();
-        ret += " }";
-        ret += "\n";
+        ret += " }\n";
     }
     return ret;
 }
@@ -121,8 +117,8 @@ bool StructType::operator==(const TypeSystem &typeSystem) const {
 
 //FunctionType
 string FunctionType::toString() {
-    auto ret = string("\n\tFunctionType: ");
-    ret += string("\n\t\treturn Specifier: ") + this->retType->toString() + " ";
+    string ret = string("\n\tFunctionType: ");
+    ret += string("\n\t\tReturn Specifier: ") + this->retType->toString() + " ";
     ret += "\n\t\tParams: \n\t\t";
     for (TypeSystem *params:*this->args) {
         ret += params->toString();

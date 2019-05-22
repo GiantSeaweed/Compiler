@@ -47,13 +47,9 @@
       <change beforePath="$PROJECT_DIR$/../../../Lab2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab2/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab2/Code/ast/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab2/Code/ast/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Lab2/Test/test1.cmm" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Lab2/Test/test1.cmm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Transform.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Transform.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ast.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TypeSystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TypeSystem.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TypeSystem.h" beforeDir="false" afterPath="$PROJECT_DIR$/TypeSystem.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ir/IRBuilderVisitor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ir/IRBuilderVisitor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../core" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../main.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Test/test1.cmm" beforeDir="false" afterPath="$PROJECT_DIR$/../../Test/test1.cmm" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -72,18 +68,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ir/IRBuilderVisitor.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-              <folding>
-                <element signature="e#103#134#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Expression.h">
           <provider selected="true" editor-type-id="text-editor">
@@ -114,8 +98,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TypeSystem.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7">
-              <caret line="2" column="2" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+            <state relative-caret-position="323">
+              <caret line="120" column="26" selection-start-line="120" selection-start-column="26" selection-end-line="120" selection-end-column="26" />
               <folding>
                 <element signature="e#40#63#0" expanded="true" />
               </folding>
@@ -123,11 +107,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ir/IRBuilderVisitor.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="249" column="13" lean-forward="true" selection-start-line="249" selection-start-column="13" selection-end-line="249" selection-end-column="13" />
+            <state relative-caret-position="451">
+              <caret line="217" column="6" lean-forward="true" selection-start-line="217" selection-start-column="6" selection-end-line="217" selection-end-column="6" />
               <folding>
                 <element signature="e#0#2#0" />
                 <element signature="e#239#369#0" />
@@ -167,20 +151,21 @@
                 <element signature="e#7673#8008#0" />
                 <element signature="e#12980#13994#0" />
                 <element signature="e#8111#8207#0" />
-                <marker date="1558514099000" expanded="false" signature="3424:3623" ph="..." />
+                <marker date="1558516637000" expanded="false" signature="3424:3623" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TypeSystem.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
+            <state relative-caret-position="150">
+              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
               <folding>
-                <element signature="e#90#113#0" expanded="true" />
-                <element signature="e#1153#1684#1" />
+                <element signature="e#444#804#1" />
+                <element signature="e#807#1150#1" />
+                <element signature="e#1687#2178#1" />
               </folding>
             </state>
           </provider>
@@ -292,7 +277,6 @@
         <option value="$PROJECT_DIR$/VisitorExpression.h" />
         <option value="$PROJECT_DIR$/VisitorType.h" />
         <option value="$PROJECT_DIR$/ASTNode.h" />
-        <option value="$PROJECT_DIR$/TypeSystem.h" />
         <option value="$PROJECT_DIR$/VisitorType.cpp" />
         <option value="$PROJECT_DIR$/visitor/VisitorType.cpp" />
         <option value="$PROJECT_DIR$/visitor/VisitorType.h" />
@@ -310,7 +294,6 @@
         <option value="$PROJECT_DIR$/visitor/PrintVisitor.h" />
         <option value="$PROJECT_DIR$/type.h" />
         <option value="$PROJECT_DIR$/visitor/PrintVisitor.cpp" />
-        <option value="$PROJECT_DIR$/TypeSystem.cpp" />
         <option value="$PROJECT_DIR$/visitor/TypeVisitor.cpp" />
         <option value="$PROJECT_DIR$/Statement.h" />
         <option value="$PROJECT_DIR$/Expression.h" />
@@ -322,6 +305,8 @@
         <option value="$PROJECT_DIR$/ir/IRInstruction.h" />
         <option value="$PROJECT_DIR$/ir/IRBuilderVisitor.h" />
         <option value="$PROJECT_DIR$/ir/IRBuilderVisitor.cpp" />
+        <option value="$PROJECT_DIR$/TypeSystem.cpp" />
+        <option value="$PROJECT_DIR$/TypeSystem.h" />
       </list>
     </option>
   </component>
@@ -415,12 +400,12 @@
       <workItem from="1557644085146" duration="4525000" />
       <workItem from="1557814468141" duration="21706000" />
       <workItem from="1558055908263" duration="10156000" />
-      <workItem from="1558402710598" duration="33155000" />
+      <workItem from="1558402710598" duration="35007000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126696000" />
+    <option name="totallyTimeSpent" value="128548000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -540,13 +525,6 @@
             <element signature="e#40#60#0" expanded="true" />
             <element signature="e#5465#5517#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Symbol.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
@@ -790,31 +768,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TypeSystem.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="40" lean-forward="true" selection-start-line="40" selection-end-line="40" />
-          <folding>
-            <element signature="e#90#113#0" expanded="true" />
-            <element signature="e#1153#1684#1" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TypeSystem.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7">
-          <caret line="2" column="2" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
-          <folding>
-            <element signature="e#40#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ir/IRBuilderVisitor.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="249" column="13" lean-forward="true" selection-start-line="249" selection-start-column="13" selection-end-line="249" selection-end-column="13" />
+        <state relative-caret-position="451">
+          <caret line="217" column="6" lean-forward="true" selection-start-line="217" selection-start-column="6" selection-end-line="217" selection-end-column="6" />
           <folding>
             <element signature="e#0#2#0" />
             <element signature="e#239#369#0" />
@@ -854,7 +811,36 @@
             <element signature="e#7673#8008#0" />
             <element signature="e#12980#13994#0" />
             <element signature="e#8111#8207#0" />
-            <marker date="1558514099000" expanded="false" signature="3424:3623" ph="..." />
+            <marker date="1558516637000" expanded="false" signature="3424:3623" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Symbol.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeSystem.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="120" column="26" selection-start-line="120" selection-start-column="26" selection-end-line="120" selection-end-column="26" />
+          <folding>
+            <element signature="e#40#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeSystem.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding>
+            <element signature="e#444#804#1" />
+            <element signature="e#807#1150#1" />
+            <element signature="e#1687#2178#1" />
           </folding>
         </state>
       </provider>

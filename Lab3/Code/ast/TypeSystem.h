@@ -8,6 +8,7 @@
 #include <ostream>
 #include <vector>
 #include <set>
+#include <map>
 using namespace std;
 
 struct Symbol;
@@ -63,6 +64,8 @@ struct StructType : TypeSystem {
     vector<TypeSystem *> *fields;
 
     set<SymbolHead *, decltype(symbolIOp)> *symbolTable;
+
+    map<string, int> symbolOffset;
 
     StructType(BaseType type, const vector<TypeSystem *> &fields, string structName);
 
