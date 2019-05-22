@@ -23,7 +23,13 @@ int main(int argc, char **argv)
 {
     if (argc < 1)
         return 1;
-    strcpy(outFilename, argv[2]);
+    if(argc == 3){
+        strcpy(outFilename, argv[2]);
+    }
+    else{
+        outFilename[0] = 0;
+    }
+    
     FILE *f = fopen(argv[1], "r");
     if (!f){
         perror(argv[1]);

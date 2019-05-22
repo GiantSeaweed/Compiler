@@ -4,8 +4,10 @@
 
 #include "IRBuilderVisitor.h"
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <cstdlib>
+#include<typeinfo>
 using namespace std;
 
 string IRBuilderVisitor::findInIRSymTable(string key){
@@ -13,9 +15,18 @@ string IRBuilderVisitor::findInIRSymTable(string key){
 }
 
 void IRBuilderVisitor::printIRList() {
-//    cout << outFilename << endl;
-    for(IRInstruction* irInstr : *irList){
-        cout<<irInstr->toString()<<endl;
+    if(outFilename[0] != 0){
+        ofstream out(outFilename);
+        if (!out.is_open()){
+            cerr << outFilename << " open failed!" << endl;
+        }
+        for (IRInstruction *irInstr : *irList){
+            out << irInstr->toString()+"\n";
+        }
+        out.close();
+    }
+    for (IRInstruction *irInstr : *irList){
+        cout << irInstr->toString() << endl;
     }
 }
 
@@ -96,24 +107,24 @@ void IRBuilderVisitor::translateCond(Exp &exp, string label_true, string label_f
 
 }
 
-//void IRBuilderVisitor::translateCond(InfixExp &infixExp, string label_true, string label_false) {
-//    //TODO
-//}
-//
-//void IRBuilderVisitor::translateCond(PrefixExp &prefixExp, string label_true, string label_false) {
-//    //TODO
-//}
-
 bool IRBuilderVisitor::visit(Declarator &declarator) {
-
+#ifdef BUILD_IR
+    cout <<"Build IR Declarator"<<endl;
+#endif
     return VisitorTrue::visit(declarator);
 }
 
 bool IRBuilderVisitor::visit(VarDec &varDec) {
+#ifdef BUILD_IR
+    cout <<"Build IR VarDec"<<endl;
+#endif
     return VisitorTrue::visit(varDec);
 }
 
 bool IRBuilderVisitor::visit(NormalVarDec &normalVarDec) {
+#ifdef BUILD_IR
+    cout <<"Build IR NormalVarDec"<<endl;
+#endif
     return VisitorTrue::visit(normalVarDec);
 }
 
@@ -142,22 +153,54 @@ bool IRBuilderVisitor::visit(FunDec &funDec) {
 }
 
 bool IRBuilderVisitor::visit(ArrayDec &arrayDec) {
-    return VisitorTrue::visit(arrayDec);
+#ifdef BUILD_IR
+    cout <<"Build IR ArrayDec"<<endl;
+#endif
+    string arrayID = arrayDec.varDec->getID();
+    if(typeid(*arrayDec.varDec) == typeid(ArrayDec)){//TODO
+        cerr << "Cannot translate: Code contains variables of multi-dimensional array type or parameters of array type." <<endl;
+        exit(0);
+    }
+#ifdef BUILD_IR
+        cout <<"\tNo array " << arrayID << " before. Newly inserted in irSymTable!" <<endl;
+#endif
+
+
+    string myPlace = newPlace();
+    irSymbolTable->insert(pair<string, string>(arrayID, myPlace));
+
+    int size = arrayDec.size;
+    IRInstruction *newInstr = new IRInstruction(IR_DEC, to_string(size * 4), myPlace);
+    this->irList->push_back(newInstr);
+
+    return false;
 }
 
 bool IRBuilderVisitor::visit(Definition &definition) {
+#ifdef BUILD_IR
+    cout <<"Build IR Definition"<<endl;
+#endif
     return VisitorTrue::visit(definition);
 }
 
 bool IRBuilderVisitor::visit(Dec &Dec) {
+#ifdef BUILD_IR
+    cout <<"Build IR Dec"<<endl;
+#endif
     return VisitorTrue::visit(Dec);
 }
 
 bool IRBuilderVisitor::visit(NormalDec &normalDec) {
+#ifdef BUILD_IR
+    cout <<"Build IR NormalDec"<<endl;
+#endif
     return VisitorTrue::visit(normalDec);
 }
 
 bool IRBuilderVisitor::visit(InitializedDec &initializedDec) {
+#ifdef BUILD_IR
+    cout <<"Build IR InitializedDec"<<endl;
+#endif
     return VisitorTrue::visit(initializedDec);
 }
 
@@ -171,16 +214,46 @@ bool IRBuilderVisitor::visit(Exp &exp) {
 bool IRBuilderVisitor::visit(InfixExp &infixExp) {
 #ifdef BUILD_IR
     cout <<"Build IR InfixExp"<<endl;
+    cout <<"\tLeft:"<< infixExp.leftSide->typeSystem->type << endl;
 #endif
     if(infixExp.leftSide->typeSystem->type == BASE_STRUCT){
         cout << "LHS is struct" <<endl;
-    }else if(infixExp.leftSide->typeSystem->type == BASE_ARRAY){
-        cout << "RHS is array" <<endl;
+    }else if(infixExp.infixOp == INFIX_ASSIGN
+            && typeid(*infixExp.leftSide) == typeid(ArrayExp)){
+        //1-dimensional array
+        string arrayID = ((IDExp*)(((ArrayExp*)infixExp.leftSide)->arrayExp))->id;
+        string var = findInIRSymTable(arrayID);
+        string myPlace = newPlace();//indexPlace * 4
+        string addrPlace = newPlace(); //addr
+
+        string placeTemp = this->place;
+        string indexPlace = this->place = newPlace();
+        ((ArrayExp*)infixExp.leftSide)->arrayIndex->accept(*this);//stored in indexPlace
+
+        IRInstruction *newInstr = new IRInstruction(IR_ASSIGN_MUL, indexPlace, "#4", myPlace);
+        this->irList->push_back(newInstr);
+        newInstr = new IRInstruction(IR_ASSIGN_PLUS, "&"+var,  myPlace, addrPlace);
+        this->irList->push_back(newInstr);
+//        string placeTemp = this->place;
+//        string placeExp1 = this->place = newPlace();
+//        infixExp.leftSide->accept(*this);
+//
+        string placeExp2 = this->place = newPlace();
+        infixExp.rightSide->accept(*this);
+
+        IRInstruction* irInstr = new IRInstruction(IR_ASSIGN_SINGLE, placeExp2, "*"+addrPlace);
+        irList->push_back(irInstr);
+        irInstr = new IRInstruction(IR_ASSIGN_SINGLE,"*"+addrPlace, placeTemp);
+        irList->push_back(irInstr);
+
     }else {
         // ID
         if (infixExp.infixOp == INFIX_ASSIGN) {
-            string var = irSymbolTable->find(((IDExp *) infixExp.leftSide)->id)->second;
-
+            cout << "FSW: LHS is ID, assign" <<endl;
+            string id = ((IDExp *) infixExp.leftSide)->id;
+            string var = findInIRSymTable(id);
+//            string var = findInIRSymTable(((IDExp *) infixExp.leftSide)->id);
+            cout << var << endl;
             string placeTemp = this->place;
             string myPlace = this->place = newPlace();
             infixExp.rightSide->accept(*this);
@@ -193,6 +266,7 @@ bool IRBuilderVisitor::visit(InfixExp &infixExp) {
                    || infixExp.infixOp == INFIX_MINUS
                    || infixExp.infixOp == INFIX_STAR
                    || infixExp.infixOp == INFIX_DIV) {
+            cout << "FSW: LHS is ID, +-*/" <<endl;
             string placeTemp = this->place;
             string myPlace1 = this->place = newPlace();
             infixExp.leftSide->accept(*this);
@@ -218,13 +292,14 @@ bool IRBuilderVisitor::visit(InfixExp &infixExp) {
                     break;
             }
             IRInstruction *irInstr = new IRInstruction(op, myPlace1, myPlace2, placeTemp);
-
             this->irList->push_back(irInstr);
+
         } else if (infixExp.infixOp == INFIX_AND || infixExp.infixOp == INFIX_OR
                    || infixExp.infixOp == INFIX_GE || infixExp.infixOp == INFIX_GT
                    || infixExp.infixOp == INFIX_LE || infixExp.infixOp == INFIX_LT
                    || infixExp.infixOp == INFIX_NE || infixExp.infixOp == INFIX_EQ){
             //TODO
+            cout << "FSW: LHS is ID, relop" <<endl;
             string label1 = newLabel();
             string label2 = newLabel();
             string placeTemp = this->place;
@@ -287,11 +362,46 @@ bool IRBuilderVisitor::visit(PrefixExp &prefixExp) {
 }
 
 bool IRBuilderVisitor::visit(ParenthesizedExp &parenthesizedExp) {
+#ifdef BUILD_IR
+    cout <<"Build IR ParenthesizedExp"<<endl;
+#endif
+
     return VisitorTrue::visit(parenthesizedExp);
 }
 
 bool IRBuilderVisitor::visit(ArrayExp &arrayExp) {
-    return VisitorTrue::visit(arrayExp);
+#ifdef BUILD_IR
+    cout <<"Build IR Array : " << ((IDExp*)(arrayExp.arrayExp))->id <<endl;
+#endif
+    string arrayID = ((IDExp*)(arrayExp.arrayExp))->id;
+    map<string, string>::iterator it = irSymbolTable->find(arrayID);
+    if (it == irSymbolTable->end()) {
+        cerr << "Error in IRBuilderVisitor::ArrayExp"<<endl;
+    }
+    else{
+#ifdef BUILD_IR
+        cout <<"\tWe already have array " << arrayID << " in irSymTable." <<endl;
+#endif
+        string var = it->second;
+        string myPlace = newPlace();//indexPlace * 4
+        string addrPlace = newPlace(); //addr
+
+        string placeTemp = this->place;
+        string indexPlace = this->place = newPlace();
+
+        arrayExp.arrayIndex->accept(*this);//stored in indexPlace
+
+        IRInstruction *newInstr = new IRInstruction(IR_ASSIGN_MUL, indexPlace, "#4", myPlace);
+        this->irList->push_back(newInstr);
+
+        newInstr = new IRInstruction(IR_ASSIGN_PLUS, "&"+var,  myPlace, addrPlace);
+        this->irList->push_back(newInstr);
+
+        newInstr = new IRInstruction(IR_ASSIGN_SINGLE, "*"+addrPlace, placeTemp);
+        this->irList->push_back(newInstr);
+    }
+    return false;
+
 }
 
 bool IRBuilderVisitor::visit(IDExp &idExp) {
@@ -317,6 +427,9 @@ bool IRBuilderVisitor::visit(IDExp &idExp) {
 }
 
 bool IRBuilderVisitor::visit(StructExp &structExp) {
+#ifdef BUILD_IR
+    cout <<"Build IR StructExp "<<endl;
+#endif
     return VisitorTrue::visit(structExp);
 }
 
@@ -331,6 +444,9 @@ bool IRBuilderVisitor::visit(IntExp &intExp) {
 }
 
 bool IRBuilderVisitor::visit(FloatExp &floatExp) {
+#ifdef BUILD_IR
+    cout <<"Build IR FloatExp "<<endl;
+#endif
     return VisitorTrue::visit(floatExp);
 }
 
@@ -364,55 +480,83 @@ bool IRBuilderVisitor::visit(FunExp &funExp) {
                 irInstr = new IRInstruction(IR_ARG, this->argList->at(i));
                 this->irList->push_back(irInstr);
             }
+            irInstr = new IRInstruction(IR_CALL,funExp.funID->id,placeTemp);
+            this->irList->push_back(irInstr);
         }
 
-        irInstr = new IRInstruction(IR_CALL,funExp.funID->id,placeTemp);
-        this->irList->push_back(irInstr);
+
     }
 
     return false;
 }
 
 bool IRBuilderVisitor::visit(Program &program) {
-//    for(Symbol* sym: *symbolTable) {
-//        irSymbolTable->insert(pair<string,string>(sym->id, newPlace()));
-//    }
+#ifdef BUILD_IR
+    cout << "Build IR Program " << endl;
+#endif
     return VisitorTrue::visit(program);
 }
 
 bool IRBuilderVisitor::visit(ExtDef &extDef) {
+#ifdef BUILD_IR
+    cout << "Build IR ExtDef" << endl;
+#endif
     return VisitorTrue::visit(extDef);
 }
 
 bool IRBuilderVisitor::visit(DecDef &decDef) {
+#ifdef BUILD_IR
+    cout << "Build IR DecDef " << endl;
+#endif
     return VisitorTrue::visit(decDef);
 }
 
 bool IRBuilderVisitor::visit(TypeDef &typeDef) {
+#ifdef BUILD_IR
+    cout << "Build IR TypeDef " << endl;
+#endif
     return VisitorTrue::visit(typeDef);
 }
 
 bool IRBuilderVisitor::visit(FunDef &funDef) {
+#ifdef BUILD_IR
+    cout << "Build IR FunDef " << endl;
+#endif
     return VisitorTrue::visit(funDef);
 }
 
 bool IRBuilderVisitor::visit(Specifier &specifier) {
+#ifdef BUILD_IR
+    cout << "Build IR Specifier " << endl;
+#endif
     return VisitorTrue::visit(specifier);
 }
 
 bool IRBuilderVisitor::visit(BasicSpecifier &basicSpecifier) {
+#ifdef BUILD_IR
+    cout << "Build IR BasicSpecifier " << endl;
+#endif
     return VisitorTrue::visit(basicSpecifier);
 }
 
 bool IRBuilderVisitor::visit(StructSpecifier &structSpecifier) {
+#ifdef BUILD_IR
+    cout << "Build IR StructSpecifier " << endl;
+#endif
     return VisitorTrue::visit(structSpecifier);
 }
 
 bool IRBuilderVisitor::visit(NormalStructSpecifier &normalStructSpecifier) {
+#ifdef BUILD_IR
+    cout << "Build IR NormalStructSpecifier " << endl;
+#endif
     return VisitorTrue::visit(normalStructSpecifier);
 }
 
 bool IRBuilderVisitor::visit(DefStructSpecifier &defStructSpecifier) {
+#ifdef BUILD_IR
+    cout << "Build IR DefStructSpecifier " << endl;
+#endif
     return VisitorTrue::visit(defStructSpecifier);
 }
 
@@ -421,10 +565,16 @@ bool IRBuilderVisitor::visit(Stmt &stmt) {
 }
 
 bool IRBuilderVisitor::visit(CompSt &compSt) {
+#ifdef BUILD_IR
+    cout << "Build IR CompSt " << endl;
+#endif
     return VisitorTrue::visit(compSt);
 }
 
 bool IRBuilderVisitor::visit(ExpStmt &expStmt) {
+#ifdef BUILD_IR
+    cout << "Build IR ExpStmt " << endl;
+#endif
     return VisitorTrue::visit(expStmt);
 }
 

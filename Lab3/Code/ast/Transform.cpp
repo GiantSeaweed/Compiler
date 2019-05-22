@@ -40,20 +40,22 @@ Program *transToAST(MultiNode *root)
      TypeVisitor visitor;
      program->accept(visitor);
 #ifdef DEBUG
-    auto symbols = visitor.symbolTable;
-    for (Symbol *symbol:*symbols) {
-        cout << "Symbol: " << symbol->id << "\ttype: " << symbol->typeSystem->toString() << " lineno:"
-             << symbol->firstLine << endl;
-    }
-    symbols = visitor.funTable;
-    for (Symbol *symbol : *symbols)
-    {
-        cout << "Symbol: " << symbol->id << "\ttype: " << symbol->typeSystem->toString() << " lineno:"
-             << symbol->firstLine << endl;
-    }
-
-    cout << "******Finish TypeVisiting! Begin ExpVisiting!******" << endl;
 #endif
+     auto symbols = visitor.symbolTable;
+     for (Symbol *symbol : *symbols)
+     {
+         cout << "Symbol: " << symbol->id << "\ttype: " << symbol->typeSystem->toString() << " lineno:"
+              << symbol->firstLine << endl;
+     }
+     symbols = visitor.funTable;
+     for (Symbol *symbol : *symbols)
+     {
+         cout << "Symbol: " << symbol->id << "\ttype: " << symbol->typeSystem->toString() << " lineno:"
+              << symbol->firstLine << endl;
+     }
+
+     cout << "******Finish TypeVisiting! Begin ExpVisiting!******" << endl;
+
      ExpressionVisitor expressionVisitor;
      expressionVisitor.symTable = visitor.symbolTable;
      expressionVisitor.funTable = visitor.funTable;

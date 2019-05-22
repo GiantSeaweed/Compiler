@@ -127,7 +127,8 @@ test:
 	# ./parser ../Test_2_Super/single-errid-6-times-8.0.cmm
 	# ./parser ../Test_2_Super/single-errid-6-times-9.0.cmm
 	# ./parser ../Test_2_Super/single-errid-6.0.cmm
-	./parser ../Test/test3.cmm ../Test/out3.ir
+	# ./parser ../Test/test3.cmm ../Test/out3.ir
+	./parser ../Test/test1.cmm ../Test/out1.ir
 
 debug: lexical syntax-c $(CFILES) $(CPPFILES)
 	gcc -DDEBUG -c -g main.c syntax.tab.c  -lfl -ly
@@ -139,3 +140,4 @@ clean:
 	rm -f $(OBJS) $(OBJS:.o=.d)
 	rm -f $(LFC) $(YFC) $(YFC:.c=.h)
 	rm -f *~
+	rm core
