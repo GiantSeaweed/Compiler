@@ -4,6 +4,7 @@ struct BB{
 };
 struct AA{
     struct BB b[2];
+    int A1;
     int A2;
 };
 
@@ -12,7 +13,7 @@ struct Operands
     int o1;
     int o3[3];
     int o4[3];
-    struct AA a[4];
+    struct AA a;
     int o2;
 };
 
@@ -24,7 +25,7 @@ int add(struct Operands temp)
 int main()
 {
     struct Operands op;
-    int a = op.o1;
+    int temp = op.a.A2;
     int b = a = add(op);
     return 0;
 }

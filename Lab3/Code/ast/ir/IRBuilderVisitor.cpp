@@ -381,7 +381,7 @@ bool IRBuilderVisitor::visit(ParenthesizedExp &parenthesizedExp) {
 
 bool IRBuilderVisitor::visit(ArrayExp &arrayExp) {
 #ifdef BUILD_IR
-    cout <<"Build IR Array : " << ((IDExp*)(arrayExp.arrayExp))->id <<endl;
+    cout <<"Build IR Array : " << endl;// ((IDExp*)(arrayExp.arrayExp))->id <<endl;
 #endif
     string arrayID = ((IDExp*)(arrayExp.arrayExp))->id;
     map<string, string>::iterator it = irSymbolTable->find(arrayID);
@@ -458,7 +458,7 @@ bool IRBuilderVisitor::visit(StructExp &structExp) {
         structExp.structExp->accept(*this);
 
         int offset = ((StructType *) structExp.structExp->typeSystem)->getOffset(structID);
-        IRInstruction *irInstr = new IRInstruction(IR_ASSIGN_PLUS, "&" + baseAddr, to_string(offset),
+        IRInstruction *irInstr = new IRInstruction(IR_ASSIGN_PLUS, baseAddr, "#"+to_string(offset),
                                                    myPlace);
         irList->push_back(irInstr);
         irInstr = new IRInstruction(IR_ASSIGN_SINGLE, "*" + myPlace, placeTemp);
@@ -472,8 +472,16 @@ bool IRBuilderVisitor::visit(StructExp &structExp) {
         structExp.structExp->accept(*this);
 
         int offset = ((StructType *) structExp.structExp->typeSystem)->getOffset(structExp.structID->id);
-        IRInstruction *irInstr = new IRInstruction(IR_ASSIGN_PLUS, "&" + baseAddr, to_string(offset),
-                                                   myPlace);
+
+        IRInstruction *irInstr;
+        if(typeid(*structExp.structExp) == typeid(IDExp)){
+            irInstr = new IRInstruction(IR_ASSIGN_PLUS, "&" +baseAddr, "#"+to_string(offset),
+                                                       myPlace);
+        } else{
+            irInstr = new IRInstruction(IR_ASSIGN_PLUS, baseAddr, "#"+to_string(offset),
+                                        myPlace);
+        }
+
         irList->push_back(irInstr);
         irInstr = new IRInstruction(IR_ASSIGN_SINGLE, myPlace, placeTemp);
         irList->push_back(irInstr);
