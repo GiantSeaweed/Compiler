@@ -30,6 +30,10 @@ struct TypeSystem {
 
     explicit TypeSystem(BaseType type);
 
+    virtual int getBufLength(){
+        return 4;
+    }
+
     virtual string toString();
 
     virtual bool operator!=(const TypeSystem &typeSystem) const {
@@ -50,6 +54,10 @@ struct ArrayType : TypeSystem {
 
     ArrayType(TypeSystem *base, int width);
 
+    int getBufLength() override {
+        return base->getBufLength() * width;
+    }
+
     string toString() override;
 
     bool operator!=(const TypeSystem &typeSystem) const override;
@@ -67,6 +75,16 @@ struct StructType : TypeSystem {
 
     map<string, int> symbolOffset;
 
+    int getBufLength() override{
+        int length = 0;
+        for(SymbolHead* symbol: *symbolTable){
+            length += symbol->getTypeSystem()->getBufLength();
+        }
+        return length;
+    }
+
+    int getOffset(string id);
+
     StructType(BaseType type, const vector<TypeSystem *> &fields, string structName);
 
     StructType(const StructType &structType);
@@ -79,7 +97,6 @@ struct StructType : TypeSystem {
     bool operator!=(const TypeSystem &typeSystem) const override;
 
     bool operator==(const TypeSystem &typeSystem) const override;
-
 
     ~StructType();
 };

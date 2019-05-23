@@ -201,7 +201,22 @@ bool IRBuilderVisitor::visit(InitializedDec &initializedDec) {
 #ifdef BUILD_IR
     cout <<"Build IR InitializedDec"<<endl;
 #endif
-    return VisitorTrue::visit(initializedDec);
+
+    string id = ((NormalVarDec *) initializedDec.varDec)->getID();
+
+//    string var = findInIRSymTable(id);
+    string var = newPlace();
+    irSymbolTable->insert(pair<string, string>(id, var));
+
+    string placeTemp = this->place;
+    string myPlace = this->place = newPlace();
+    initializedDec.initialValue->accept(*this);
+
+    IRInstruction *irInstruction = new IRInstruction(IR_ASSIGN_SINGLE, myPlace, var);
+    irList->push_back(irInstruction);
+//    irInstruction = new IRInstruction(IR_ASSIGN_SINGLE, var, placeTemp);
+//    irList->push_back(irInstruction);
+    return false;
 }
 
 bool IRBuilderVisitor::visit(Exp &exp) {
@@ -217,9 +232,14 @@ bool IRBuilderVisitor::visit(InfixExp &infixExp) {
 //    cout <<"\tLeft:"<< infixExp.leftSide->typeSystem->type << endl;
 #endif
     if(infixExp.leftSide->typeSystem->type == BASE_STRUCT){
-        cout << "LHS is struct" <<endl;
+#ifdef BUILD_IR
+        cout <<"\tLHS is struct"<<endl;
+#endif
     }else if(infixExp.infixOp == INFIX_ASSIGN
             && typeid(*infixExp.leftSide) == typeid(ArrayExp)){
+#ifdef BUILD_IR
+        cout <<"\tLHS is array"<<endl;
+#endif
         //1-dimensional array
         string arrayID = ((IDExp*)(((ArrayExp*)infixExp.leftSide)->arrayExp))->id;
         string var = findInIRSymTable(arrayID);
@@ -249,19 +269,23 @@ bool IRBuilderVisitor::visit(InfixExp &infixExp) {
     }else {
         // ID
         if (infixExp.infixOp == INFIX_ASSIGN) {
+#ifdef BUILD_IR
+            cout <<"\tLHS is ID,assign"<<endl;
+#endif
             string id = ((IDExp *) infixExp.leftSide)->id;
             string var = findInIRSymTable(id);
             string placeTemp = this->place;
             string myPlace = this->place = newPlace();
             infixExp.rightSide->accept(*this);
-
             IRInstruction *irInstruction = new IRInstruction(IR_ASSIGN_SINGLE, myPlace, var);
             irList->push_back(irInstruction);
             irInstruction = new IRInstruction(IR_ASSIGN_SINGLE, var, placeTemp);
             irList->push_back(irInstruction);
         } else if (infixExp.infixOp == INFIX_PLUS || infixExp.infixOp == INFIX_MINUS
                    || infixExp.infixOp == INFIX_STAR|| infixExp.infixOp == INFIX_DIV) {
-//            cout << "FSW: LHS is ID, +-*/" <<endl;
+#ifdef BUILD_IR
+            cout <<"\tLHS is ID, +-*/"<<endl;
+#endif
             string placeTemp = this->place;
             string myPlace1 = this->place = newPlace();
             infixExp.leftSide->accept(*this);
@@ -283,6 +307,9 @@ bool IRBuilderVisitor::visit(InfixExp &infixExp) {
                    || infixExp.infixOp == INFIX_GE || infixExp.infixOp == INFIX_GT
                    || infixExp.infixOp == INFIX_LE || infixExp.infixOp == INFIX_LT
                    || infixExp.infixOp == INFIX_NE || infixExp.infixOp == INFIX_EQ){
+#ifdef BUILD_IR
+            cout <<"\tLHS is ID, relop"<<endl;
+#endif
             string label1 = newLabel();
             string label2 = newLabel();
             string placeTemp = this->place;
@@ -409,11 +436,49 @@ bool IRBuilderVisitor::visit(IDExp &idExp) {
     return false;
 }
 
+bool topLevel = true;
+bool topLevelTemp = true;
 bool IRBuilderVisitor::visit(StructExp &structExp) {
 #ifdef BUILD_IR
     cout <<"Build IR StructExp "<<endl;
 #endif
-    return VisitorTrue::visit(structExp);
+    string structID = structExp.structID->id;
+////    map<string, string>::iterator it = irSymbolTable->find(structID);
+//    if (it == irSymbolTable->end()) {
+//        cerr << "Error in IRBuilderVisitor::structExp"<<endl;
+//        exit(0);
+//    }
+
+    if(topLevel) {
+        topLevel = false;
+
+        string placeTemp = this->place;
+        string myPlace = newPlace(); //exp.id
+        string baseAddr = this->place = newPlace();
+        structExp.structExp->accept(*this);
+
+        int offset = ((StructType *) structExp.structExp->typeSystem)->getOffset(structID);
+        IRInstruction *irInstr = new IRInstruction(IR_ASSIGN_PLUS, "&" + baseAddr, to_string(offset),
+                                                   myPlace);
+        irList->push_back(irInstr);
+        irInstr = new IRInstruction(IR_ASSIGN_SINGLE, "*" + myPlace, placeTemp);
+        irList->push_back(irInstr);
+
+        topLevel = true;
+    }else{
+        string placeTemp = this->place;
+        string myPlace = newPlace();
+        string baseAddr = this->place = newPlace();
+        structExp.structExp->accept(*this);
+
+        int offset = ((StructType *) structExp.structExp->typeSystem)->getOffset(structExp.structID->id);
+        IRInstruction *irInstr = new IRInstruction(IR_ASSIGN_PLUS, "&" + baseAddr, to_string(offset),
+                                                   myPlace);
+        irList->push_back(irInstr);
+        irInstr = new IRInstruction(IR_ASSIGN_SINGLE, myPlace, placeTemp);
+        irList->push_back(irInstr);
+    }
+    return false;
 }
 
 bool IRBuilderVisitor::visit(IntExp &intExp) {
@@ -491,14 +556,14 @@ bool IRBuilderVisitor::visit(DecDef &decDef) {
 #ifdef BUILD_IR
     cout << "Build IR DecDef " << endl;
 #endif
-    return VisitorTrue::visit(decDef);
+    return false;//TODO
 }
 
 bool IRBuilderVisitor::visit(TypeDef &typeDef) {
 #ifdef BUILD_IR
     cout << "Build IR TypeDef " << endl;
 #endif
-    return VisitorTrue::visit(typeDef);
+    return false;//TODO
 }
 
 bool IRBuilderVisitor::visit(FunDef &funDef) {
@@ -533,13 +598,20 @@ bool IRBuilderVisitor::visit(NormalStructSpecifier &normalStructSpecifier) {
 #ifdef BUILD_IR
     cout << "Build IR NormalStructSpecifier " << endl;
 #endif
-    return VisitorTrue::visit(normalStructSpecifier);
+    string structID = normalStructSpecifier.tag->id;
+    string myPlace = this->place;
+    irSymbolTable->insert(pair<string,string>(structID, myPlace));
+    int bufLength = normalStructSpecifier.typeSystem->getBufLength();
+    IRInstruction* irInstr = new IRInstruction(IR_DEC, to_string(bufLength),myPlace);
+    irList->push_back(irInstr);
+    return false;
 }
 
 bool IRBuilderVisitor::visit(DefStructSpecifier &defStructSpecifier) {
 #ifdef BUILD_IR
     cout << "Build IR DefStructSpecifier " << endl;
 #endif
+
     return VisitorTrue::visit(defStructSpecifier);
 }
 

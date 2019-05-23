@@ -1,0 +1,30 @@
+struct BB{
+    int B1[2];
+    int B2;
+};
+struct AA{
+    struct BB b[2];
+    int A2;
+};
+
+struct Operands
+{
+    int o1;
+    int o3[3];
+    int o4[3];
+    struct AA a[4];
+    int o2;
+};
+
+int add(struct Operands temp)
+{
+    return (temp.o1 + temp.o2);
+}
+
+int main()
+{
+    struct Operands op;
+    int a = op.o1;
+    int b = a = add(op);
+    return 0;
+}

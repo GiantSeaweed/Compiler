@@ -4,6 +4,7 @@
 
 #include "TypeSystem.h"
 #include <algorithm>
+#include<iostream>
 
 using namespace std;
 
@@ -46,18 +47,33 @@ bool ArrayType::operator==(const TypeSystem &typeSystem) const {
 
 //StructType
 string StructType::toString() {
-    string ret = string("StructType: ") + " members: ";
+    string ret = string("StructType: ") + " members: \n";
 
     for (SymbolHead *symbol:*this->symbolTable) {
         ret += "{ ";
         ret += symbol->getId();
         ret += " : ";
         ret += symbol->getTypeSystem()->toString();
+        ret += ", offset: ";
+        ret += to_string(this->getOffset(symbol->getId()));
         ret += " }\n";
     }
     return ret;
 }
 
+int StructType::getOffset(string id){
+    int offset = 0;
+    string symbolID;
+    for(SymbolHead* symbol :*symbolTable){
+        symbolID = symbol->getId();
+//        cout << symbolID << ", "<<id<<endl;
+        if(symbolID == id) {
+            break;
+        }
+        offset += symbol->getTypeSystem()->getBufLength();
+    }
+    return offset;
+}
 
 StructType::StructType(BaseType type, const vector<TypeSystem *> &fields, string structName)
         : TypeSystem(type), structName(structName) {
