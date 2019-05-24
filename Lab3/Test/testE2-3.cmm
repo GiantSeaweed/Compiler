@@ -1,6 +1,4 @@
 
-//TEST E2-3
-
 int display(int chess[10], int number[1], int sum)
 {
 

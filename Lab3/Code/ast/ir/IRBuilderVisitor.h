@@ -21,7 +21,7 @@ struct IRBuilderVisitor : VisitorTrue {
     set<Symbol *, decltype(op)> *funTable;
 
     vector<IRInstruction*> *irList;
-    vector<string>*argList;
+//    vector<string>*argList;
     map<string,string> *irSymbolTable;
 
     const string FUN_READ = "read";
@@ -59,7 +59,11 @@ struct IRBuilderVisitor : VisitorTrue {
 //    void translateCond(InfixExp &infixExp, string label_true, string label_false);
 //
 //    void translateCond(PrefixExp &prefixExp, string label_true, string label_false);
-
+    Symbol *findInSymTable(const string &id) {
+        Symbol tmp(id);
+        auto sym = this->symbolTable->find(&tmp);
+        return sym != this->symbolTable->end() ? *sym : nullptr;
+    }
     // Declarator.h 6
     virtual bool visit(Declarator &declarator) override ;
 

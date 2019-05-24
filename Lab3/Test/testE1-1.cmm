@@ -1,7 +1,12 @@
+struct A{
+  int a;
+};
+
 struct Product
 {
   int type;
   int name;
+  struct A aa;
 };
 
 int main()
@@ -10,6 +15,6 @@ int main()
   struct Product cola;
   cola.type = read();
   cola.name = 3;
-  write(cola.type + cola.name);
+  write(cola.aa.a + cola.type + cola.name);
   return 0;
 }

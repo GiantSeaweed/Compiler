@@ -132,6 +132,7 @@ bool IRBuilderVisitor::visit(ParamDec &paramDec) {
 #ifdef BUILD_IR
     cout <<"Build IR ParamDec"<<endl;
 #endif
+
     string myPlace = newPlace();
     IRInstruction *newInstr = new IRInstruction(IR_PARAM, myPlace);
     this->irList->push_back(newInstr);
@@ -146,8 +147,13 @@ bool IRBuilderVisitor::visit(FunDec &funDec) {
     IRInstruction* newInstr = new IRInstruction(IR_FUN, (funDec.id)->id);
     this->irList->push_back(newInstr);
     for(ParamDec *paramDec : *funDec.paramList){
+        if(typeid(*paramDec->varDec) == typeid(ArrayDec)){
+            cerr << "Cannot translate: Code contains variables of multi-dimensional array type or parameters of array type." <<endl;
+            exit(0);
+        }
         paramDec->accept(*this);
     }
+
 //    cout<< irList->size() <<endl;
     return false;
 }
@@ -208,6 +214,10 @@ bool IRBuilderVisitor::visit(NormalDec &normalDec) {
     string var = newPlace();
     irSymbolTable->insert(pair<string, string>(id, var));
     if(typeid(*normalDec.varDec) == typeid(ArrayDec)) {
+        if(typeid(*((ArrayDec*)(normalDec.varDec))->varDec) == typeid(ArrayDec)){
+            cerr << "Cannot translate: Code contains variables of multi-dimensional array type or parameters of array type." <<endl;
+            exit(0);
+        }
         int length = normalDec.varDec->typeSystem->getBufLength();
         IRInstruction *irInstruction = new IRInstruction(IR_DEC, to_string(length), var);
         irList->push_back(irInstruction);
@@ -254,6 +264,36 @@ bool IRBuilderVisitor::visit(InfixExp &infixExp) {
 #ifdef BUILD_IR
         cout <<"\tLHS is struct"<<endl;
 #endif
+        StructExp* structExp = (StructExp*)(infixExp.leftSide);
+        string placeTemp = this->place;
+        string myPlace = newPlace(); //exp.id
+        string baseAddr = this->place = newPlace();
+        structExp->structExp->accept(*this);
+
+
+        string structID = structExp->structID->id;
+#ifdef BUILD_IR
+        cout <<"\t\tLHS is struct "<< structID <<endl;
+#endif
+        int offset = ((StructType *) structExp->structExp->typeSystem)->getOffset(structID);
+        IRInstruction *irInstr ;
+//        if(typeid(*structExp->structExp) == typeid(IDExp)){
+//            irInstr = new IRInstruction(IR_ASSIGN_PLUS, "&" +baseAddr, "#"+to_string(offset),
+//                                        myPlace);
+//        } else{
+            irInstr = new IRInstruction(IR_ASSIGN_PLUS, baseAddr, "#"+to_string(offset),
+                                        myPlace);
+//        }
+        irList->push_back(irInstr);
+
+        string placeExp2 = this->place = newPlace();
+        infixExp.rightSide->accept(*this);
+
+        irInstr = new IRInstruction(IR_ASSIGN_SINGLE, placeExp2, "*"+baseAddr);
+        irList->push_back(irInstr);
+        irInstr = new IRInstruction(IR_ASSIGN_SINGLE,"*"+baseAddr, placeTemp);
+        irList->push_back(irInstr);
+
     }else if(infixExp.infixOp == INFIX_ASSIGN
             && typeid(*infixExp.leftSide) == typeid(ArrayExp)){
 #ifdef BUILD_IR
@@ -273,10 +313,7 @@ bool IRBuilderVisitor::visit(InfixExp &infixExp) {
         this->irList->push_back(newInstr);
         newInstr = new IRInstruction(IR_ASSIGN_PLUS, "&"+var,  myPlace, addrPlace);
         this->irList->push_back(newInstr);
-//        string placeTemp = this->place;
-//        string placeExp1 = this->place = newPlace();
-//        infixExp.leftSide->accept(*this);
-//
+
         string placeExp2 = this->place = newPlace();
         infixExp.rightSide->accept(*this);
 
@@ -467,14 +504,42 @@ bool IRBuilderVisitor::visit(StructExp &structExp) {
     string structID = structExp.structID->id;
 
 
-
         string placeTemp = this->place;
         string myPlace = newPlace(); //exp.id
         string baseAddr = this->place = newPlace();
         structExp.structExp->accept(*this);
 
-        int offset = ((StructType *) structExp.structExp->typeSystem)->getOffset(structID);
+//        for(Symbol* symbol: *(structExp.structExp->symbolTable){
+//            cout << symbol->id<<endl;
+//        }
+        SymbolHead* symbolHead;
+        if(typeid(*structExp.structExp) == typeid(StructExp)){
+            cout <<"\t\tFSW:"<<endl;
+            for(SymbolHead* symbolTemp: (*((StructType *) structExp.structExp->typeSystem)->symbolTable)){
+                cout <<"\t\tFSW:" << symbolTemp->getId()<<endl;
+                if(symbolTemp->getId() == structID){
+                    symbolHead = symbolTemp;
+                    break;
+                }
+            }
+            structExp.typeSystem = symbolHead->getTypeSystem();//findInSymTable(structID)->typeSystem;
+        }
+        else {
+
+        }
+
+#ifdef BUILD_IR
+    cout <<"\tIR StructID : "<<structID<<endl;
+//    cout << ((StructType *) structExp.typeSystem)->toString()<<endl;
+    cout <<( typeid(*structExp.structExp) == typeid(IDExp) )<<endl;
+
+#endif
+//        Symbol* symbol = findInSymTable(structID);
+//        if(symbol == nullptr) exit(0);
+        int offset = ((StructType *) structExp.structExp->typeSystem)->getOffset(structID);//((StructType *) structExp.typeSystem)->getOffset(structID);
+        cout <<offset<<endl;
         IRInstruction *irInstr ;
+
         if(typeid(*structExp.structExp) == typeid(IDExp)){
             irInstr = new IRInstruction(IR_ASSIGN_PLUS, "&" +baseAddr, "#"+to_string(offset),
                                         myPlace);
@@ -483,7 +548,7 @@ bool IRBuilderVisitor::visit(StructExp &structExp) {
                                         myPlace);
         }
         irList->push_back(irInstr);
-
+    cout <<"FSW"<<endl;
     if(topLevel) {
         topLevel = false;
         irInstr = new IRInstruction(IR_ASSIGN_SINGLE, "*" + myPlace, placeTemp);
@@ -557,11 +622,7 @@ bool IRBuilderVisitor::visit(FunExp &funExp) {
             this->irList->push_back(irInstr);
         }else{
             int length = argList->size();
-            cout << "___________"<<length<<endl;
             for(int i = 0;i<length;i++){
-//                if(typeid(*(funExp.args->at(length-1-i))) == typeid(FunExp)){
-//                    continue;
-//                }
                 irInstr = new IRInstruction(IR_ARG, argList->at(i));
                 this->irList->push_back(irInstr);
             }

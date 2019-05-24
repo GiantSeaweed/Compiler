@@ -40,7 +40,7 @@ Program *transToAST(MultiNode *root)
      TypeVisitor visitor;
      program->accept(visitor);
 #ifdef DEBUG
-#endif
+
      auto symbols = visitor.symbolTable;
      for (Symbol *symbol : *symbols)
      {
@@ -60,6 +60,7 @@ Program *transToAST(MultiNode *root)
      expressionVisitor.symTable = visitor.symbolTable;
      expressionVisitor.funTable = visitor.funTable;
      program->accept(expressionVisitor);
+#endif
 #ifdef DEBUG
     cout << "******Finish ExpVisiting! Begin FunVisiting!********" << endl;
 #endif

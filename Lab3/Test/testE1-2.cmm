@@ -6,7 +6,6 @@ struct Product
 
 int main()
 {
-
   struct Product cola[10];
   int i, j, add, N = 10;
   i = 0;
