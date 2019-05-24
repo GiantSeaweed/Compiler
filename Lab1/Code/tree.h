@@ -7,7 +7,7 @@
 extern int yylineno;
 
 typedef struct MultiNode{
-    char name[20];
+    char name[30];
     char attr[32];
     int bufSize;
     int numChild;

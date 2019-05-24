@@ -514,9 +514,9 @@ bool IRBuilderVisitor::visit(StructExp &structExp) {
 //        }
         SymbolHead* symbolHead;
         if(typeid(*structExp.structExp) == typeid(StructExp)){
-            cout <<"\t\tFSW:"<<endl;
+            // cout <<"\t\tFSW:"<<endl;
             for(SymbolHead* symbolTemp: (*((StructType *) structExp.structExp->typeSystem)->symbolTable)){
-                cout <<"\t\tFSW:" << symbolTemp->getId()<<endl;
+                // cout <<"\t\tFSW:" << symbolTemp->getId()<<endl;
                 if(symbolTemp->getId() == structID){
                     symbolHead = symbolTemp;
                     break;

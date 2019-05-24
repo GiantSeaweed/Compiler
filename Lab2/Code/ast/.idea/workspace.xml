@@ -45,21 +45,6 @@
       <change beforePath="$PROJECT_DIR$/../../.idea/Lab2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/Lab2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Expression.h" beforeDir="false" afterPath="$PROJECT_DIR$/Expression.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Statement.h" beforeDir="false" afterPath="$PROJECT_DIR$/Statement.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Transform.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Transform.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TypeSystem.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TypeSystem.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ast.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visitor/ExpressionVisitor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/ExpressionVisitor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visitor/FunReturnVisitor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/FunReturnVisitor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visitor/PrintVisitor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/PrintVisitor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visitor/TypeVisitor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/visitor/TypeVisitor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../error.c" beforeDir="false" afterPath="$PROJECT_DIR$/../error.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../error.h" beforeDir="false" afterPath="$PROJECT_DIR$/../error.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../syntax.y" beforeDir="false" afterPath="$PROJECT_DIR$/../syntax.y" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test_fsw.output" beforeDir="false" afterPath="$PROJECT_DIR$/../test_fsw.output" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Test/test1.cmm" beforeDir="false" afterPath="$PROJECT_DIR$/../../Test/test1.cmm" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -78,8 +63,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Transform.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="41" column="61" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
+            <state relative-caret-position="109">
+              <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
               <folding>
                 <element signature="e#300#565#0" />
                 <element signature="e#2455#3469#0" />
@@ -428,12 +413,12 @@
       <workItem from="1556538437542" duration="13007000" />
       <workItem from="1557644085146" duration="4525000" />
       <workItem from="1557814468141" duration="21706000" />
-      <workItem from="1558055908263" duration="10156000" />
+      <workItem from="1558055908263" duration="10479000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78008000" />
+    <option name="totallyTimeSpent" value="78331000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -822,8 +807,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Transform.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="41" column="61" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
+        <state relative-caret-position="109">
+          <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
           <folding>
             <element signature="e#300#565#0" />
             <element signature="e#2455#3469#0" />
