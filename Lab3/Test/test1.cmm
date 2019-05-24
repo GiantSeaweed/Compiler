@@ -12,7 +12,7 @@ struct Operands
     int o1;
     int o3[3];
     int o4[3];
-    struct AA a[4];
+    struct AA a;
     int o2;
 };
 
@@ -21,13 +21,12 @@ int add(struct Operands temp)
     return (temp.o1 + temp.o2);
 }
 
+int self(int selfParam){
+    return selfParam;
+}
 int main()
 {
-    int n;
     struct Operands op;
-    op.o1 = 1;
-    op.o2 = 2;
-    n = add(op);
-    write(n);
-    return 0;
+    int a = self(op.o2+99+op.a.A2);
+    return a + 7;
 }

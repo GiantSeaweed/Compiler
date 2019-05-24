@@ -127,8 +127,27 @@ test:
 	# ./parser ../Test_2_Super/single-errid-6-times-8.0.cmm
 	# ./parser ../Test_2_Super/single-errid-6-times-9.0.cmm
 	# ./parser ../Test_2_Super/single-errid-6.0.cmm
-	# ./parser ../Test/test3.cmm ../Test/out3.ir
-	./parser ../Test/testStruct.cmm ../Test/outStruct.ir
+	
+	# ./parser ../Test/testStruct.cmm ../Test/outStruct.ir
+	# ./parser ../Test/testE1-1.cmm ../Test/outE1-1.ir
+	./parser ../Test/testA1.cmm ../Test/outA1.ir
+	./parser ../Test/testA2.cmm ../Test/outA2.ir
+	./parser ../Test/testA3.cmm ../Test/outA3.ir
+	./parser ../Test/testA4.cmm ../Test/outA4.ir
+	./parser ../Test/testA5.cmm ../Test/outA5.ir
+	./parser ../Test/testB1.cmm ../Test/outB1.ir
+	./parser ../Test/testB2.cmm ../Test/outB2.ir
+	./parser ../Test/testB3.cmm ../Test/outB3.ir
+	./parser ../Test/testC1.cmm ../Test/outC1.ir
+	./parser ../Test/testC2.cmm ../Test/outC2.ir
+	./parser ../Test/testD1.cmm ../Test/outD1.ir
+	# ./parser ../Test/testE1-1.cmm ../Test/outE1-1.ir
+	# ./parser ../Test/testE1-2.cmm ../Test/outE1-2.ir
+	# ./parser ../Test/testE1-3.cmm ../Test/outE1-3.ir
+	# ./parser ../Test/testE2-1.cmm ../Test/outE2-1.ir
+	# ./parser ../Test/testE2-2.cmm ../Test/outE2-2.ir
+	# ./parser ../Test/testE2-3.cmm ../Test/outE2-3.ir
+
 
 debug: lexical syntax-c $(CFILES) $(CPPFILES)
 	gcc -DDEBUG -c -g main.c syntax.tab.c  -lfl -ly

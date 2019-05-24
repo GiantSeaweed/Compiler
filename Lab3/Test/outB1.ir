@@ -1,0 +1,85 @@
+FUNCTION myPow :
+PARAM t1
+PARAM t2
+t4 := t2
+t5 := #0
+IF t4 == t5 GOTO label1
+GOTO label2
+LABEL label1 :
+t6 := #1
+RETURN t6
+LABEL label2 :
+t7 := t2
+t8 := #1
+IF t7 == t8 GOTO label3
+GOTO label4
+LABEL label3 :
+t9 := t1
+RETURN t9
+LABEL label4 :
+t10 := t2
+t11 := #2
+IF t10 == t11 GOTO label5
+GOTO label6
+LABEL label5 :
+t13 := t1
+t14 := t1
+t12 := t13 * t14
+RETURN t12
+LABEL label6 :
+t15 := t2
+t18 := t2
+t19 := #2
+t17 := t18 / t19
+t20 := #2
+t16 := t17 * t20
+IF t15 == t16 GOTO label7
+GOTO label8
+LABEL label7 :
+t23 := t1
+t25 := t2
+t26 := #2
+t24 := t25 / t26
+ARG t24
+ARG t23
+t22 := CALL myPow
+t27 := #2
+ARG t27
+ARG t22
+t21 := CALL myPow
+RETURN t21
+GOTO label9
+LABEL label8 :
+t30 := t1
+t32 := t2
+t33 := #2
+t31 := t32 / t33
+ARG t31
+ARG t30
+t29 := CALL myPow
+t34 := #2
+ARG t34
+ARG t29
+t28 := CALL myPow
+t3 := t28
+t27 := t3
+t36 := t1
+t37 := t3
+t35 := t36 * t37
+RETURN t35
+LABEL label9 :
+FUNCTION main :
+READ t40
+t38 := t40
+t37 := t38
+READ t41
+t39 := t41
+t40 := t39
+t43 := t38
+t44 := t39
+ARG t44
+ARG t43
+t42 := CALL myPow
+WRITE t42
+t45 := #0
+RETURN t45

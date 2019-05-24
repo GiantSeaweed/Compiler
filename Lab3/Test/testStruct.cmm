@@ -19,13 +19,13 @@ struct Operands
 
 int add(struct Operands temp)
 {
-    return (temp.o1 + temp.o2);
+    return (temp.a.A2 + temp.o2);
 }
 
 int main()
 {
     struct Operands op;
     int temp = op.a.A2;
-    int b = a = add(op);
+    int b = temp = add(op);
     return 0;
 }

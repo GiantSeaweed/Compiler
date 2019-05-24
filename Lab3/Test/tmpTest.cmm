@@ -1,0 +1,974 @@
+// int main()
+// {
+//   int x, y, z;
+//   int a, b, c;
+//   int t = 3;
+//   x = 12;
+//   b = x * x + 13;
+//   y = b / 13 + 1;
+//   z = x / b + b * y;
+//   write(z);
+//   c = t + z * 2;
+//   write(c);
+//   t = x + b + y + x / c + t;
+//   write(t);
+//   return 0;
+// }
+
+// TEST 2
+
+// int main()
+// {
+
+//   int dollar, rmb;
+//   dollar = read();
+//   rmb = read();
+//   if (dollar > 100)
+//   {
+//     if (rmb < 50)
+//     {
+//       write(rmb + dollar);
+//     }
+//     else
+//     {
+//       write(rmb - dollar);
+//     }
+//   }
+//   else if (dollar == 100)
+//   {
+
+//     if (rmb < 100)
+//     {
+//       write(rmb);
+//     }
+//     else
+//     {
+//       write(rmb - 100);
+//     }
+//   }
+//   else if (dollar < 100)
+//   {
+
+//     if (rmb + dollar > 100)
+//     {
+//       write(dollar + 100);
+//     }
+//     else
+//     {
+//       write(100);
+//     }
+//   }
+//   write(dollar + rmb);
+//   return 0;
+// }
+
+//TEST 3
+// int main()
+// {
+//   int x, n, result;
+//   x = read();
+//   n = read();
+//   if (n == (n / 2 * 2))
+//   {
+
+//     result = 1;
+//   }
+//   else
+//   {
+
+//     result = x;
+//   }
+//   n = n / 2;
+//   while (n > 0)
+//   {
+
+//     x = x * x;
+
+//     if (n != (n / 2 * 2))
+//     {
+//       result = result * x;
+//     }
+
+//     n = n / 2;
+//   }
+//   write(result);
+//   return 0;
+// }
+
+//TEST 4
+
+// int main()
+// {
+
+//   int x[5], tem, i, j;
+//   i = 0;
+//   while (i < 5)
+//   {
+//     x[i] = read();
+//     i = i + 1;
+//   }
+//   i = 1;
+//   while (i < 5)
+//   {
+
+//     j = i;
+//     while (j > 0 && x[j - 1] > x[j])
+//     {
+//       tem = x[j];
+//       x[j] = x[j - 1];
+//       x[j - 1] = tem;
+//       j = j - 1;
+//     }
+//     i = i + 1;
+//   }
+//   i = 0;
+//   while (i < 5)
+//   {
+
+//     write(x[i]);
+
+//     i = i + 1;
+//   }
+//   return 0;
+// }
+
+//TEST 5
+
+// int swap(int a, int b)
+// {
+//   int tem = a;
+//   a = b;
+//   b = tem;
+//   write(a);
+//   write(b);
+//   return a;
+// }
+
+// int main()
+// {
+
+//   int x[5];
+//   int i = 0;
+//   while (i < 5)
+//   {
+
+//     x[i] = read();
+
+//     if (i > 0)
+//     {
+//       swap(x[i - 1], x[i]);
+//     }
+
+//     i = i + 1;
+//   }
+//   return 0;
+// }
+
+//TEST B1
+
+// int myPow(int x, int n)
+// {
+
+//   int value;
+//   if (n == 0)
+//   {
+//     return 1;
+//   }
+//   if (n == 1)
+//   {
+//     return x;
+//   }
+//   if (n == 2)
+//   {
+//     return x * x;
+//   }
+//   if (n == (n / 2 * 2))
+//   {
+//     return myPow(myPow(x, n / 2), 2);
+//   }
+//   else
+//   {
+//     value = myPow(myPow(x, n / 2), 2);
+//     return x * value;
+//   }
+// }
+
+// int main()
+// {
+
+//   int x1, n1;
+//   x1 = read();
+//   n1 = read();
+//   write(myPow(x1, n1));
+//   return 0;
+// }
+
+//TEST B2
+
+// int countSort()
+// {
+
+//   int x[5], count[10], sorted[5], i;
+//   i = 0;
+//   while (i < 10)
+//   {
+
+//     count[i] = 0;
+
+//     i = i + 1;
+//   }
+//   i = 0;
+//   while (i < 5)
+//   {
+
+//     x[i] = read();
+
+//     count[x[i]] = count[x[i]] + 1;
+
+//     i = i + 1;
+//   }
+//   i = 1;
+//   while (i < 10)
+//   {
+//     count[i] = count[i] + count[i - 1];
+//     i = i + 1;
+//   }
+//   i = 0;
+//   while (i < 5)
+//   {
+
+//     sorted[count[x[i]] - 1] = x[i];
+
+//     count[x[i]] = count[x[i]] - 1;
+
+//     i = i + 1;
+//   }
+//   i = 0;
+//   while (i < 5)
+//   {
+
+//     write(sorted[i]);
+
+//     i = i + 1;
+//   }
+//   return 0;
+// }
+
+// int bubbleSort()
+// {
+
+//   int a[5], b, c, tem;
+//   b = 0;
+//   while (b < 5)
+//   {
+
+//     a[b] = read();
+
+//     b = b + 1;
+//   }
+//   c = 1;
+//   while (c == 1)
+//   {
+
+//     c = 0;
+
+//     b = 1;
+
+//     while (b < 5)
+//     {
+//       if (a[b] < a[b - 1])
+//       {
+//         c = 1;
+//         tem = a[b - 1];
+//         a[b - 1] = a[b];
+//         a[b] = tem;
+//       }
+//       b = b + 1;
+//     }
+//   }
+//   b = 0;
+//   while (b < 5)
+//   {
+
+//     write(a[b]);
+
+//     b = b + 1;
+//   }
+//   return 0;
+// }
+
+// int main()
+// {
+//   countSort();
+//   bubbleSort();
+//   return 0;
+// }
+
+//TEST B3
+
+// int search(int target)
+// {
+
+//   int x[5], left, right, index, middle;
+//   int i = 0;
+//   while (i < 5)
+//   {
+
+//     x[i] = read();
+
+//     i = i + 1;
+//   }
+//   left = 0;
+//   right = 4;
+//   while (left <= right)
+//   {
+
+//     index = (left + right) / 2;
+//     middle = x[index];
+//     if (middle == target)
+//     {
+//       return index;
+//     }
+//     if ((middle > x[left] && target >= x[left] && target
+
+//                                                       < middle) ||
+//         (middle < x[left] && (target >= x[
+
+//                                             left] ||
+//                               target < middle)))
+//     {
+
+//       right = index - 1;
+//     }
+//     else
+//     {
+
+//       left = index + 1;
+//     }
+//   }
+//   return -1;
+// }
+
+// int main()
+// {
+
+//   int n;
+//   n = read();
+//   write(search(n));
+//   return 0;
+// }
+
+//TEST C1
+
+// int main()
+// {
+
+//   int count, i, valid, j, k, cont, n;
+//   int place[8];
+//   int row[8];
+//   int ldiag[8];
+//   int rdiag[8];
+//   count = 0;
+//   i = 0;
+//   n = read();
+//   while (i < n)
+//   {
+
+//     place[i] = -1;
+
+//     i = i + 1;
+//   }
+//   i = 0;
+//   cont = 1;
+//   while (cont == 1)
+//   {
+
+//     if (i == n)
+//     {
+//       valid = 1;
+//       j = 0;
+//       while (j < n)
+//       {
+//         row[j] = 1;
+//         ldiag[j] = 1;
+//         rdiag[j] = 1;
+//         j = j + 1;
+//       }
+//       j = 0;
+//       while (j < n)
+//       {
+
+//         if (row[place[j]] != 1 || ldiag[place[j]] != 1 || rdiag[place[j]] != 1)
+//         {
+//           valid = 0;
+//           j = n;
+//         }
+//         else
+//         {
+
+//           row[place[j]] = 0;
+//           k = 0;
+//           while (k < n - 1)
+//           {
+
+//             ldiag[k] = ldiag[k + 1];
+//             k = k + 1;
+//           }
+//           ldiag[n - 1] = 1;
+//           if (place[j] != 0)
+//           {
+//             ldiag[place[j] - 1] = 0;
+//           }
+//           k = n - 1;
+//           while (k > 0)
+//           {
+
+//             rdiag[k] = rdiag[k - 1];
+//             k = k - 1;
+//           }
+//           rdiag[0] = 1;
+//           if (place[j] != n - 1)
+//           {
+//             rdiag[place[j] + 1] = 0;
+//           }
+//           j = j + 1;
+//         }
+//       }
+//       if (valid == 1)
+//       {
+//         count = count + 1;
+//       }
+//       i = i - 1;
+//     }
+//     else
+//     {
+
+//       while (i >= 0 && place[i] >= n - 1)
+//       {
+//         place[i] = -1;
+//         i = i - 1;
+//       }
+
+//       if (i == -1)
+//       {
+//         cont = 0;
+//       }
+//       else
+//       {
+//         place[i] = place[i] + 1;
+//         i = i + 1;
+//       }
+//     }
+//   }
+//   write(count);
+//   return 0;
+// }
+
+// MY TEST
+// int main()
+// {
+//   // int a[5];
+//   // a[0] = 1;
+//   // a[1] = 2;
+//   // a[2] = 3;
+//   // a[3] = 4;
+//   // a[4] = 5;
+
+//   // write(a[a[a[0]]]);
+
+//   // if (a[0] != 1 || a[1] != 1 || a[2] != 1)
+//   // {
+//   //   write(0);
+//   //   if(a[0]==1 && a[1] ==3 || a[a[2]]==4){
+//   //     write(1);
+//   //   }else{
+//   //     write(5);
+//   //   }
+//   // }
+//   if(1||2||0){
+//     write(0);
+//   }
+//   if(1||2||3){
+//     write(1);
+//   }
+//   return 0;
+// }
+
+//TEST c2
+
+// int trap()
+// {
+
+//   int lh = 0, lIndex = 0, i = 0, count = 0, thisPool = 0;
+//   int n = 12;
+//   int rh = 0;
+//   int height[12];
+//   while (i < n)
+//   {
+
+//     height[i] = read();
+
+//     i = i + 1;
+//   }
+//   i = 0;
+//   while (i < n && height[i] == 0)
+//   {
+
+//     i = i + 1;
+//   }
+//   if (i >= n)
+//   {
+
+//     return 0;
+//   }
+//   lh = height[i];
+//   lIndex = i;
+//   thisPool = 0;
+//   i = i + 1;
+//   while (i < n)
+//   {
+
+//     if (height[i] < lh)
+//     {
+//       thisPool = thisPool + (lh - height[i]);
+//     }
+//     else
+//     {
+//       count = count + thisPool;
+//       lh = height[i];
+//       lIndex = i;
+//       thisPool = 0;
+//     }
+//     i = i + 1;
+//   }
+//   thisPool = 0;
+//   rh = 0;
+//   i = n - 1;
+//   while (i > lIndex && height[i] == 0)
+//   {
+//     i = i - 1;
+//   }
+//   rh = height[i];
+//   i = i - 1;
+//   while (i > lIndex)
+//   {
+//     if (height[i] < rh)
+//     {
+//       thisPool = thisPool + (rh - height[i]);
+//     }
+//     else
+//     {
+
+//       count = count + thisPool;
+
+//       rh = height[i];
+
+//       thisPool = 0;
+//     }
+//     i = i - 1;
+//   }
+//   return count + thisPool;
+// }
+
+// int main()
+// {
+//   int result = trap();
+//   write(result);
+//   return 0;
+// }
+
+//TEST OPTIMIZE
+
+// int process(int x)
+// {
+
+//   int y = 3;
+//   y = 11 * 3 - 2 + 5;
+//   y = x * 321 * 2 + x * y - x + y * x + y * y + x + x - 23 + 45;
+//   y = y / 3 + 14 * 24 - x * 12 / 4 * 3 + 3 / 2;
+//   y = x + 4 * 6 + 3 / 2;
+//   return y;
+// }
+
+// int main()
+// {
+
+//   int a = 5 / 2 + 14 - 3, b = 7 * 5 / 2 + 3, c = 4 + 5 + 6 - 1 / 2;
+//   int d = a + b + c;
+//   int e = a * b + c / 2;
+//   int f = a - b - c;
+//   int g1 = 42, i = 0;
+//   int g, h;
+//   f = a + b + c + 1000 * 2 - f;
+//   while (a + b < f)
+//   {
+//     g1 = g1 + i * 12 + 4 + 5 + 7 / 3;
+//     g = process(f) + 2 * a - f + c * d;
+//     i = i + i;
+//     i = i + i;
+//     i = i + i;
+//     i = i + i;
+//     i = i + i;
+//     h = i + 3;
+//     h = h - 1;
+//     h = h + 3;
+//     h = h - 3 * 2;
+//     if (process(a) == process(a + 3 - 2 - 1))
+//     {
+//       f = f - 2 + 1;
+//     }
+//     a = a + 2 + 1;
+//   }
+//   h = g1 - 3 * 4;
+//   while (h < g1)
+//   {
+
+//     f = 15 * 4 - 2 + a;
+//     g = g1 - 12;
+//     h = h + 1;
+//     g = g1;
+//     i = a + b;
+//     c = a + b;
+//   }
+//   write(f);
+//   a = a + b;
+//   b = a + b;
+//   c = a + b;
+//   f = a + b;
+//   g = a + b;
+//   write(c + f + g);
+//   return 0;
+// }
+
+//TEST E
+
+// struct Product
+// {
+//   int type;
+//   int name;
+// };
+
+// int main()
+// {
+
+//   struct Product cola;
+//   cola.type = read();
+//   cola.name = 3;
+//   write(cola.type + cola.name);
+//   return 0;
+// }
+
+// TEST E2
+
+// struct Product
+// {
+//   int type;
+//   int name;
+// };
+
+// int main()
+// {
+
+//   struct Product cola[10];
+//   int i, j, add, N = 10;
+//   i = 0;
+//   while (i < N)
+//   {
+
+//     cola[i].type = 10;
+
+//     cola[i].name = i;
+
+//     i = i + 1;
+//   }
+//   i = 0;
+//   add = 0;
+//   while (i < N)
+//   {
+
+//     j = 0;
+//     add = add + cola[i].name;
+//     while (j < N)
+//     {
+
+//       cola[i].type = cola[i].type + add * cola[j].
+
+//                                           name;
+
+//       j = j + 1;
+//     }
+//     i = i + 1;
+//   }
+//   write(cola[N - 1].type);
+//   return 0;
+// }
+
+//TEST E3
+// struct Student
+// {
+//   int name;
+//   int grade;
+// };
+
+// struct Class
+// {
+//   struct Student students[50];
+//   int average;
+// };
+
+// int calculate(struct Class class)
+// {
+//   int sum = 0, i = 0, N = 50;
+//   while (i < N)
+//   {
+//     sum = sum + class.students[i].grade;
+//     i = i + 1;
+//   }
+//   class.average = sum / N;
+//   return sum / N;
+// }
+
+// int main()
+// {
+
+//   struct Class school[10];
+//   int i1 = 0, j1 = 0, N1 = 50, N2 = 10;
+//   while (i1 < N2)
+//   {
+
+//     j1 = 0;
+
+//     while (j1 < N1)
+//     {
+//       school[i1].students[j1].grade = i1 + j1 * 5;
+//       j1 = j1 + 1;
+//     }
+
+//     i1 = i1 + 1;
+//   }
+//   j1 = 0;
+//   i1 = 0;
+//   while (i1 < N2)
+//   {
+
+//     j1 = j1 + calculate(school[i1]);
+
+//     i1 = i1 + 1;
+//   }
+//   write(j1);
+//   return 0;
+// }
+
+//TEST E2-1
+// int main()
+// {
+
+//   int dis[10][5][3];
+//   int d1 = 10, d2 = 5, d3 = 3;
+//   int i = 0, j = 0, k = 0, sum = 0;
+//   while (i < d1)
+//   {
+
+//     j = 0;
+
+//     while (j < d2)
+//     {
+//       k = 0;
+//       while (k < d3)
+//       {
+//         dis[i][j][k] = i * d1 + j * d2 + d3 / (k + 1);
+//         k = k + 1;
+//       }
+//       j = j + 1;
+//     }
+//     i = i + 1;
+//   }
+//   i = 0;
+//   j = 0;
+//   k = 0;
+//   while (i < d1)
+//   {
+
+//     j = 0;
+//     while (j < d2)
+//     {
+
+//       k = 0;
+
+//       while (k < d3)
+//       {
+//         if (dis[i][j][k] > dis[0][0][0])
+//         {
+//           sum = sum + dis[i][j][k];
+//         }
+//         k = k + 1;
+//       }
+//       j = j + 1;
+//     }
+//     i = i + 1;
+//   }
+//   write(sum);
+//   return 0;
+// }
+
+//TEST E2-2
+
+// int qsort(int array[10], int l, int r)
+// {
+
+//   int x = array[l], a = l, b = r;
+//   if (a < b)
+//   {
+//     while (a < b)
+//     {
+//       while (a < b && array[b] > x)
+//       {
+//         b = b - 1;
+//       }
+//       if (a < b)
+//       {
+//         array[a] = array[b];
+//         a = a + 1;
+//       }
+//       while (a < b && array[a] < x)
+//       {
+//         a = a + 1;
+//       }
+//       if (a < b)
+//       {
+//         array[b] = array[a];
+//         b = b - 1;
+//       }
+//     }
+//     array[a] = x;
+//     qsort(array, l, a - 1);
+//     qsort(array, a + 1, r);
+//   }
+//   return 0;
+// }
+
+// int main()
+// {
+//   int number[10], N = 10, i = 0;
+//   while (i < N)
+//   {
+//     number[i] = read();
+//     i = i + 1;
+//   }
+//   qsort(number, 0, N - 1);
+//   i = 0;
+//   while (i < N)
+//   {
+
+//     write(number[i]);
+
+//     i = i + 1;
+//   }
+//   return 0;
+// }
+
+//TEST E2-3
+
+int display(int chess[10], int number[1], int sum)
+{
+
+  int board[10][10], i1 = 0, j1 = 0, tem = 1;
+  if (number[0] == 1)
+  {
+    while (i1 < sum)
+    {
+      j1 = 0;
+      tem = 1;
+      while (j1 < sum)
+      {
+        if (j1 == chess[i1])
+        {
+          board[i1][j1] = 1;
+          tem = tem * 10 + 1;
+        }
+        else
+        {
+          board[i1][j1] = 0;
+          tem = tem * 10;
+        }
+        j1 = j1 + 1;
+      }
+      write(tem);
+      i1 = i1 + 1;
+    }
+  }
+  return 0;
+}
+
+int dfs(int p[10], int r[10], int ld[10], int rd[10], int current, int target, int c[1])
+{
+  int j = 0, nld[10], nrd[10], k;
+  if (current == target)
+  {
+    c[0] = c[0] + 1;
+    display(p, c, target);
+    return 0;
+  }
+  while (j < target)
+  {
+    if (r[j] == 1 && ld[j] == 1 && rd[j] == 1)
+    {
+      p[current] = j;
+      r[j] = 0;
+      k = 0;
+      while (k < target - 1)
+      {
+        nld[k] = ld[k + 1];
+        k = k + 1;
+      }
+      nld[target - 1] = 1;
+      if (j != 0)
+      {
+        nld[j - 1] = 0;
+      }
+      k = target - 1;
+      while (k > 0)
+      {
+        nrd[k] = rd[k - 1];
+        k = k - 1;
+      }
+      nrd[0] = 1;
+      if (j != target - 1)
+      {
+        nrd[j + 1] = 0;
+      }
+      dfs(p, r, nld, nrd, current + 1, target, c);
+      r[j] = 1;
+    }
+    j =
+
+        j + 1;
+  }
+  return 0;
+}
+int main()
+{
+
+  int place[10], N, count[1];
+  int row[10], ldiag[10], rdiag[10], i = 0;
+  N = read();
+  if (N == 0 || N > 10)
+  {
+    return 0;
+  }
+  while (i < N)
+  {
+
+    row[i] = 1;
+
+    ldiag[i] = 1;
+
+    rdiag[i] = 1;
+
+    i = i + 1;
+  }
+  count[0] = 0;
+  dfs(place, row, ldiag, rdiag, 0, N, count);
+  write(count[0]);
+  return 0;
+}
