@@ -1,0 +1,3 @@
+load ../Test/outA_3.ir
+please input a number: please input a number: 650
+ret with 0, reason 0

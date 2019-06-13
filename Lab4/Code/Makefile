@@ -43,25 +43,57 @@ syntax-c: $(YFILE)
 # 定义的一些伪目标
 .PHONY: clean test
 test:
-	./parser ../Test/testA1.cmm ../Test/outA1.ir
-	./parser ../Test/testA2.cmm ../Test/outA2.ir
-	./parser ../Test/testA3.cmm ../Test/outA3.ir
-	./parser ../Test/testA4.cmm ../Test/outA4.ir
-	./parser ../Test/testA5.cmm ../Test/outA5.ir
-	./parser ../Test/testB1.cmm ../Test/outB1.ir
-	./parser ../Test/testB2.cmm ../Test/outB2.ir
-	./parser ../Test/testB3.cmm ../Test/outB3.ir
-	./parser ../Test/testC1.cmm ../Test/outC1.ir
-	./parser ../Test/testC2.cmm ../Test/outC2.ir
-	./parser ../Test/testD1.cmm ../Test/outD1.ir
-	# ./parser ../Test/testE1-1.cmm ../Test/outE1-1.ir
-	# ./parser ../Test/testE1-2.cmm ../Test/outE1-2.ir
-	# ./parser ../Test/testE1-3.cmm ../Test/outE1-3.ir
-	./parser ../Test/testE2-1.cmm ../Test/outE2-1.ir
-	./parser ../Test/testE2-2.cmm ../Test/outE2-2.ir
-	./parser ../Test/testE2-3.cmm ../Test/outE2-3.ir
-
-
+	./parser ../Test_Super/13Lab3WithArray.0.cmm ../Test_Super/13Lab3WithArray.0.ir
+	./parser ../Test_Super/13Lab3WithArray.1.cmm ../Test_Super/13Lab3WithArray.1.ir
+	./parser ../Test_Super/13Lab3WithArray.2.cmm ../Test_Super/13Lab3WithArray.2.ir
+	./parser ../Test_Super/13Lab3WithArray.3.cmm ../Test_Super/13Lab3WithArray.3.ir
+	./parser ../Test_Super/13Lab3WithArray.4.cmm ../Test_Super/13Lab3WithArray.4.ir
+	./parser ../Test_Super/13Lab3WithArray.5.cmm ../Test_Super/13Lab3WithArray.5.ir
+	./parser ../Test_Super/13Lab3WithArray.6.cmm ../Test_Super/13Lab3WithArray.6.ir
+	./parser ../Test_Super/13Lab3WithArray.7.cmm ../Test_Super/13Lab3WithArray.7.ir
+	./parser ../Test_Super/13Lab3WithArray.8.cmm ../Test_Super/13Lab3WithArray.8.ir
+	./parser ../Test_Super/13Lab3WithArray.9.cmm ../Test_Super/13Lab3WithArray.9.ir
+	./parser ../Test_Super/13Lab3WithArray.10.cmm ../Test_Super/13Lab3WithArray.10.ir
+	./parser ../Test_Super/13Lab3WithArray.11.cmm ../Test_Super/13Lab3WithArray.11.ir
+	./parser ../Test_Super/13Lab3WithArray.12.cmm ../Test_Super/13Lab3WithArray.12.ir
+	./parser ../Test_Super/13Lab3WithArray.13.cmm ../Test_Super/13Lab3WithArray.13.ir
+	./parser ../Test_Super/13Lab3WithArray.14.cmm ../Test_Super/13Lab3WithArray.14.ir
+	./parser ../Test_Super/13Lab3WithArray.15.cmm ../Test_Super/13Lab3WithArray.15.ir
+	./parser ../Test_Super/13Lab3WithArray.16.cmm ../Test_Super/13Lab3WithArray.16.ir
+	./parser ../Test_Super/13Lab3WithArray.17.cmm ../Test_Super/13Lab3WithArray.17.ir
+	./parser ../Test_Super/13Lab3WithArray.18.cmm ../Test_Super/13Lab3WithArray.18.ir
+	./parser ../Test_Super/13Lab3WithArray.19.cmm ../Test_Super/13Lab3WithArray.19.ir
+	./parser ../Test_Super/13Lab3WithArray.20.cmm ../Test_Super/13Lab3WithArray.20.ir
+	./parser ../Test_Super/13Lab3WithArray.21.cmm ../Test_Super/13Lab3WithArray.21.ir
+	./parser ../Test_Super/13Lab3WithArray.22.cmm ../Test_Super/13Lab3WithArray.22.ir
+	./parser ../Test_Super/13Lab3WithArray.23.cmm ../Test_Super/13Lab3WithArray.23.ir
+	./parser ../Test_Super/13Lab3WithArray.24.cmm ../Test_Super/13Lab3WithArray.24.ir
+	./parser ../Test_Super/13Lab3WithArray.25.cmm ../Test_Super/13Lab3WithArray.25.ir
+	./parser ../Test_Super/13Lab3WithArray.26.cmm ../Test_Super/13Lab3WithArray.26.ir
+	./parser ../Test_Super/13Lab3WithArray.27.cmm ../Test_Super/13Lab3WithArray.27.ir
+	./parser ../Test_Super/13Lab3WithArray.28.cmm ../Test_Super/13Lab3WithArray.28.ir
+	./parser ../Test_Super/13Lab3WithArray.29.cmm ../Test_Super/13Lab3WithArray.29.ir
+	./parser ../Test_Super/13Lab3WithArray.30.cmm ../Test_Super/13Lab3WithArray.30.ir
+	./parser ../Test_Super/13Lab3WithArray.31.cmm ../Test_Super/13Lab3WithArray.31.ir
+	./parser ../Test_Super/13Lab3WithArray.32.cmm ../Test_Super/13Lab3WithArray.32.ir
+	./parser ../Test_Super/13Lab3WithArray.33.cmm ../Test_Super/13Lab3WithArray.33.ir
+	./parser ../Test_Super/13Lab3WithArray.34.cmm ../Test_Super/13Lab3WithArray.34.ir
+	./parser ../Test_Super/13Lab3WithArray.35.cmm ../Test_Super/13Lab3WithArray.35.ir
+	./parser ../Test_Super/13Lab3WithArray.36.cmm ../Test_Super/13Lab3WithArray.36.ir
+	./parser ../Test_Super/13Lab3WithArray.37.cmm ../Test_Super/13Lab3WithArray.37.ir
+	./parser ../Test_Super/13Lab3WithArray.38.cmm ../Test_Super/13Lab3WithArray.38.ir
+	./parser ../Test_Super/13Lab3WithArray.39.cmm ../Test_Super/13Lab3WithArray.39.ir
+	./parser ../Test_Super/13Lab3WithArray.40.cmm ../Test_Super/13Lab3WithArray.40.ir
+	./parser ../Test_Super/13Lab3WithArray.41.cmm ../Test_Super/13Lab3WithArray.41.ir
+	./parser ../Test_Super/13Lab3WithArray.42.cmm ../Test_Super/13Lab3WithArray.42.ir
+	./parser ../Test_Super/13Lab3WithArray.43.cmm ../Test_Super/13Lab3WithArray.43.ir
+	./parser ../Test_Super/13Lab3WithArray.44.cmm ../Test_Super/13Lab3WithArray.44.ir
+	./parser ../Test_Super/13Lab3WithArray.45.cmm ../Test_Super/13Lab3WithArray.45.ir
+	./parser ../Test_Super/13Lab3WithArray.46.cmm ../Test_Super/13Lab3WithArray.46.ir
+	./parser ../Test_Super/13Lab3WithArray.47.cmm ../Test_Super/13Lab3WithArray.47.ir
+	./parser ../Test_Super/13Lab3WithArray.48.cmm ../Test_Super/13Lab3WithArray.48.ir
+	./parser ../Test_Super/13Lab3WithArray.49.cmm ../Test_Super/13Lab3WithArray.49.ir
+	
 debug: lexical syntax-c $(CFILES) $(CPPFILES)
 	gcc -DDEBUG -c -g main.c syntax.tab.c  -lfl -ly
 	g++ -g $(CPPFILES) main.o syntax.tab.o -lfl -ly -o parser

@@ -1,0 +1,7 @@
+load ../Test/outA_4.ir
+please input a number: please input a number: please input a number: please input a number: please input a number: 0
+0
+0
+0
+0
+ret with 0, reason 0

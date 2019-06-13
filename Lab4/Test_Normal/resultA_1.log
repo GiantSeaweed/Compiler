@@ -1,0 +1,5 @@
+load ../Test/outA_1.ir
+244
+946
+1043
+ret with 0, reason 0

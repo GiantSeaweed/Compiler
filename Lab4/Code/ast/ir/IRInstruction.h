@@ -24,8 +24,6 @@ enum IROperator{
     IR_IF_NE, IR_IF_EQ
 };
 
-
-
 struct IRInstruction{
     IROperator op;
     string src1;
@@ -45,9 +43,5 @@ struct IRInstruction{
 
     virtual ~IRInstruction() {}
 };
-
-
-
-
 
 #endif //AST_IRINSTRUCTION_H

@@ -1,0 +1,167 @@
+FUNCTION main :
+t2 := #10
+t1 := t2
+DEC t3 40
+t5 := #0
+t4 := t5
+t12 := #0
+t11 := t12
+LABEL label1 :
+t13 := t4
+t14 := #10
+IF t13 < t14 GOTO label2
+GOTO label3
+LABEL label2 :
+t17 := t4
+t15 := t17 * #4
+t16 := &t3 + t15
+READ t18
+*t16 := t18
+t14 := *t16
+t20 := t4
+t21 := #1
+t19 := t20 + t21
+t4 := t19
+t18 := t4
+GOTO label1
+LABEL label3 :
+t23 := t1
+t24 := #2
+t22 := t23 / t24
+t6 := t22
+t21 := t6
+LABEL label4 :
+t25 := t6
+t26 := #0
+IF t25 >= t26 GOTO label5
+GOTO label6
+LABEL label5 :
+t27 := #0
+t11 := t27
+t26 := t11
+t28 := t6
+t4 := t28
+t27 := t4
+LABEL label7 :
+t29 := t11
+t30 := #0
+IF t29 == t30 GOTO label8
+GOTO label9
+LABEL label8 :
+t31 := #1
+t11 := t31
+t30 := t11
+t34 := t4
+t35 := #2
+t33 := t34 * t35
+t36 := #1
+t32 := t33 + t36
+t7 := t32
+t31 := t7
+t39 := t4
+t40 := #2
+t38 := t39 * t40
+t41 := #2
+t37 := t38 + t41
+t9 := t37
+t36 := t9
+t42 := t7
+t43 := t1
+IF t42 < t43 GOTO label10
+GOTO label11
+LABEL label10 :
+t47 := t7
+t45 := t47 * #4
+t46 := &t3 + t45
+t44 := *t46
+t8 := t44
+t43 := t8
+t48 := t9
+t49 := t1
+IF t48 < t49 GOTO label14
+GOTO label13
+LABEL label14 :
+t53 := t9
+t51 := t53 * #4
+t52 := &t3 + t51
+t50 := *t52
+t57 := t7
+t55 := t57 * #4
+t56 := &t3 + t55
+t54 := *t56
+IF t50 < t54 GOTO label12
+GOTO label13
+LABEL label12 :
+t61 := t9
+t59 := t61 * #4
+t60 := &t3 + t59
+t58 := *t60
+t8 := t58
+t57 := t8
+t62 := t9
+t7 := t62
+t61 := t7
+LABEL label13 :
+t66 := t4
+t64 := t66 * #4
+t65 := &t3 + t64
+t63 := *t65
+t67 := t8
+IF t63 > t67 GOTO label15
+GOTO label16
+LABEL label15 :
+t68 := #0
+t11 := t68
+t67 := t11
+t71 := t7
+t69 := t71 * #4
+t70 := &t3 + t69
+t75 := t4
+t73 := t75 * #4
+t74 := &t3 + t73
+t72 := *t74
+*t70 := t72
+t68 := *t70
+t78 := t4
+t76 := t78 * #4
+t77 := &t3 + t76
+t79 := t8
+*t77 := t79
+t75 := *t77
+t80 := t7
+t4 := t80
+t79 := t4
+LABEL label16 :
+LABEL label11 :
+GOTO label7
+LABEL label9 :
+t82 := t6
+t83 := #1
+t81 := t82 - t83
+t6 := t81
+t80 := t6
+GOTO label4
+LABEL label6 :
+t84 := #0
+t4 := t84
+t83 := t4
+LABEL label17 :
+t85 := t4
+t86 := t1
+IF t85 < t86 GOTO label18
+GOTO label19
+LABEL label18 :
+t90 := t4
+t88 := t90 * #4
+t89 := &t3 + t88
+t87 := *t89
+WRITE t87
+t92 := t4
+t93 := #1
+t91 := t92 + t93
+t4 := t91
+t90 := t4
+GOTO label17
+LABEL label19 :
+t94 := #0
+RETURN t94
