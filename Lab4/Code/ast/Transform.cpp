@@ -12,7 +12,7 @@
 
 #include "ir/IRBuilderVisitor.h"
 #include "ir/IRInstruction.h"
-
+#include "../mips/MipsBuilder.h"
 using namespace std;
 
 void printNode(MultiNode* node){
@@ -64,7 +64,6 @@ Program *transToAST(MultiNode *root)
 #ifdef DEBUG
     cout << "******Finish ExpVisiting! Begin FunVisiting!********" << endl;
 #endif
-
     FunReturnVisitor funReturnVisitor;
     program->accept(funReturnVisitor);
 
@@ -72,11 +71,10 @@ Program *transToAST(MultiNode *root)
     irBuilderVisitor.symbolTable = visitor.symbolTable;
     irBuilderVisitor.funTable = visitor.funTable;
     program->accept(irBuilderVisitor);
-    // cout<<irBuilderVisitor.irList->size()<<endl;
-    irBuilderVisitor.printIRList();
+    irBuilderVisitor.printIRList(); //lab3 : print the intermediate code
 
-    // PrintVisitor printVisitor;
-    // program->accept(printVisitor);
+    mipsBuilder(irBuilderVisitor.irList);
+    printMipsList();
     return program;
 }
 

@@ -15,16 +15,16 @@ string IRBuilderVisitor::findInIRSymTable(string key){
 }
 
 void IRBuilderVisitor::printIRList() {
-    if(outFilename[0] != 0){
-        ofstream out(outFilename);
-        if (!out.is_open()){
-            cerr << outFilename << " open failed!" << endl;
-        }
-        for (IRInstruction *irInstr : *irList){
-            out << irInstr->toString()+"\n";
-        }
-        out.close();
-    }
+    // if(outFilename[0] != 0){
+    //     ofstream out(outFilename);
+    //     if (!out.is_open()){
+    //         cerr << outFilename << " open failed!" << endl;
+    //     }
+    //     for (IRInstruction *irInstr : *irList){
+    //         out << irInstr->toString()+"\n";
+    //     }
+    //     out.close();
+    // }
     for (IRInstruction *irInstr : *irList){
         cout << irInstr->toString() << endl;
     }

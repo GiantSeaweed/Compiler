@@ -1,5 +1,0 @@
-load ../Test/outB_1.ir
-please input a number: 1000000002
-1000000003
-2000000003
-ret with 0, reason 0

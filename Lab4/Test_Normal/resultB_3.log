@@ -1,7 +1,0 @@
-load ../Test/outB_3.ir
-101
--101
-103
-107
-109
-ret with 0, reason 0

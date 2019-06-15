@@ -44,6 +44,7 @@ struct NormalVarDec : VarDec{
     void accept(Visitor &visitor) override {
         if(visitor.visit(*this)){
             ((ASTNode*)id)->accept(visitor);
+            
         }
     }
 
